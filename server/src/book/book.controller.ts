@@ -3,18 +3,17 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
   HttpStatus,
   Param,
   Post,
   Put, Res,
 } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { ProductService } from './product.service';
+import { CreateBookDto } from './dto/create-book.dto';
+import { BookService } from './book.service';
 
 @Controller('product')
-export class ProductController {
-  constructor(private product: ProductService) {}
+export class BookController {
+  constructor(private product: BookService) {}
 
   @Get()
   getProducts() {
@@ -27,8 +26,8 @@ export class ProductController {
   }
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto,@Res() res){
-    this.product.create(createProductDto);
+  create(@Body() createBookDto: CreateBookDto, @Res() res){
+    this.product.create(createBookDto);
     res.sendStatus(HttpStatus.CREATED);
   }
 
@@ -38,7 +37,7 @@ export class ProductController {
   }
 
   @Put(':id')
-  update(@Param('id') id,@Body() body:CreateProductDto) {
+  update(@Param('id') id,@Body() body:CreateBookDto) {
     return this.update(id,body);
   }
 }
