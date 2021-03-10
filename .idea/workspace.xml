@@ -20,15 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7149d318-d003-49d7-811a-37c5bb854190" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/pages/main/MainPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/BookCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/book/additional/BookCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/main/MainPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/mainStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/mainStyles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useHttp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useHttp.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/types/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +39,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="tsconfig.json" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -58,7 +60,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../JS-Pizza-master" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -68,9 +70,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\store\user" />
+      <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\components\pages\book\additional" />
+      <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\components\pages" />
       <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\components" />
       <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\types" />
-      <recent name="C:\Users\User\WebstormProjects\booksharing\client\src\components\navbar" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -87,7 +91,7 @@
       <workItem from="1614338189902" duration="1732000" />
       <workItem from="1614339957908" duration="8260000" />
       <workItem from="1614690891171" duration="40000" />
-      <workItem from="1615228630394" duration="5852000" />
+      <workItem from="1615228630394" duration="25817000" />
     </task>
     <servers />
   </component>
@@ -115,10 +119,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="310" y="139" key="EditFileWatcherDialog/0.0.1280.720@0.0.1280.720" timestamp="1615238381664" />
-    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1614690929651">
+    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1615322339014">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1614690929651" />
+    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1615322339014" />
     <state width="1259" height="176" key="GridCell.Tab.0.bottom" timestamp="1614107288357">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -139,13 +143,13 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="142" y="6" key="SettingsEditor/0.0.1280.720@0.0.1280.720" timestamp="1614105185581" />
-    <state x="297" y="161" key="run.anything.popup" timestamp="1614259093903">
+    <state x="297" y="161" width="672" height="677" key="run.anything.popup" timestamp="1615307073455">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="297" y="161" key="run.anything.popup/0.0.1280.720@0.0.1280.720" timestamp="1614259093903" />
-    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1614177427291">
+    <state x="297" y="161" width="672" height="677" key="run.anything.popup/0.0.1280.720@0.0.1280.720" timestamp="1615307073455" />
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1615289752061">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1614177427291" />
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1615289752061" />
   </component>
 </project>

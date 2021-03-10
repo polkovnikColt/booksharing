@@ -1,6 +1,11 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
+axios.interceptors.request.use(config => {
+    config.headers.Authenticate = localStorage.getItem("token");
+    return config;
+})
+
 export const useHttp =
     (url: string, METHOD: string | any = "get", options?: any ): [boolean, any] => {
         const [response, setResponse] = useState({});

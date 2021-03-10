@@ -1,13 +1,16 @@
-
-
 export interface LinkInterface {
-    title:string,
-    href:string,
-    icon?:any
+    title: string,
+    href: string,
+    icon?: any
 }
 
-export interface CardProps{
-    title:string,
-    body:string,
-    avatar?:any
+export interface CardInterface {
+    title: string,
+    body: string,
+    avatar?: any
+}
+
+export interface UserInfoProps {
+    name:string,
+    bookName:string
 }

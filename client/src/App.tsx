@@ -1,25 +1,26 @@
 import React from 'react';
 import {Navigationbar} from "./components/navbar/Navigationbar";
-import {Sidebar} from "./components/sidebar/Sidebar";
 import {HashRouter, Route, Switch} from 'react-router-dom';
-import {Col, Row} from "antd";
-import {MainPage} from "./components/main/MainPage";
+import {Row} from "antd";
+import {store} from "./store/store";
+import {Provider} from 'react-redux';
+import {MainPage} from "./components/pages/main/MainPage";
+import {BookPage} from "./components/pages/book/BookPage";
+import {UserPage} from "./components/pages/user/UserPage";
 
 const App: React.FC = () => {
     return (
         <HashRouter>
+            <Provider store = {store}>
             <Navigationbar/>
             <Row>
-                {/*<Col span = {8}>*/}
-                {/*<Sidebar/>*/}
-                {/*</Col>*/}
-                {/*<Col span = {16}>*/}
                 <Switch>
                     <Route path="/" component={MainPage} exact={true}/>
-                    <Route path="/news" component={null}/>
+                    <Route path="/books" component={BookPage}/>
+                    <Route path="/user" component={UserPage}/>
                 </Switch>
-                {/*</Col>*/}
             </Row>
+            </Provider>
         </HashRouter>
 
     );

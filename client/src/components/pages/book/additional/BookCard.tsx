@@ -1,29 +1,35 @@
-import React, {useState} from 'react';
-import {Skeleton, Switch, Card, Avatar} from 'antd';
+import React from 'react';
+import {Skeleton, Switch, Card, Avatar, Tooltip} from 'antd';
 import {EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
-import {CardProps} from '../../types/types';
-import {useHttp} from "../../hooks/useHttp";
+import {CardInterface} from '../../../../types/types';
+import {useHttp} from "../../../../hooks/useHttp";
 
 const {Meta} = Card;
 
 type BookCardProps = {
-    props: CardProps
+    props: CardInterface
 }
 
 export const BookCard:React.FC<BookCardProps> = ({props}) => {
 
     // const [loading,response] = useHttp();
 
-    let loading = true;
+    let loading = false;
 
     return (
         <>
             <Card
-                style={{width: 280, marginTop: 16}}
+                style={{width: 300, marginTop: 16}}
                 actions={[
-                    <SettingOutlined key="setting"/>,
-                    <EditOutlined key="edit"/>,
-                    <EllipsisOutlined key="ellipsis"/>,
+                    <Tooltip placement="top" title={"text"}>
+                        <SettingOutlined key="setting"/>,
+                    </Tooltip>,
+                    <Tooltip placement="top" title={"text"}>
+                        <EditOutlined key="edit"/>,
+                    </Tooltip>,
+                    <Tooltip placement="top" title={"text"}>
+                        <EllipsisOutlined key="ellipsis"/>,
+                    </Tooltip>,
                 ]}
             >
                 <Skeleton loading={loading} avatar active>
