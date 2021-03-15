@@ -1,19 +1,18 @@
 import React from 'react';
 import {Col, Divider, Layout, Row} from "antd";
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import {BookCard} from "./additional/BookCard";
 import {AddBook} from "./additional/AddBook";
+import {addBook} from "../../../store/user/userActions";
+import {a} from './additional/service'
 
-// let mockCards: CardProps[] = [
-//     {title: "Title 1", body: "Body 1"},
-//     {title: "Title 2", body: "Body 2"},
-//     {title: "Title 3", body: "Body 3"},
-//     {title: "Title 4", body: "Body 4"},
-// ];
-
-export const BookPage:React.FC = () => {
-
+export const BookPage: React.FC = () => {
+    const dispatch = useDispatch();
     const books = useSelector(item => item.book.books);
+
+    const appendBook = (book: {}): void => {
+        dispatch(addBook(book));
+    }
 
     const {Content} = Layout;
 
@@ -22,7 +21,7 @@ export const BookPage:React.FC = () => {
             <Content style={{minHeight: window.innerHeight + "px"}}>
                 <Divider orientation="left">Книги</Divider>
                 <AddBook/>
-                <Row style ={{marginLeft:0,marginRight:0}}
+                <Row style={{marginLeft: 0, marginRight: 0}}
                      gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     {books.map((item, index) =>
                         <Col style={{margin: "0 auto"}}

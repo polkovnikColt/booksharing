@@ -12,5 +12,10 @@ export interface CardInterface {
 
 export interface UserInfoProps {
     name:string,
-    bookName:string
+    bookName:string,
+    profileInfo:{
+        city:string,
+        toBeReturn: boolean,
+        date:Date
+    }
 }

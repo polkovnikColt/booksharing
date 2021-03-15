@@ -22,8 +22,8 @@ export const AddBook:React.FC = () =>  {
                     <PlusOutlined/> Додати книгу
                 </Button>
                 <Drawer
-                    title="Create a new account"
-                    width={720}
+                    title="Додати книгу"
+                    width={65 + "%"}
                     onClose={onClose}
                     visible={visible}
                     bodyStyle={{paddingBottom: 80}}
@@ -34,17 +34,17 @@ export const AddBook:React.FC = () =>  {
                             }}
                         >
                             <Button onClick={onClose} style={{marginRight: 8}}>
-                                Cancel
+                                Закрити
                             </Button>
                             <Button onClick={onClose} type="primary">
-                                Submit
+                                Додати
                             </Button>
                         </div>
                     }
                 >
                     <Form layout="vertical" hideRequiredMark>
                         <Row gutter={16}>
-                            <Col span={12}>
+                            <Col span={24}>
                                 <Form.Item
                                     name="name"
                                     label="Name"
@@ -53,23 +53,9 @@ export const AddBook:React.FC = () =>  {
                                     <Input placeholder="Please enter user name"/>
                                 </Form.Item>
                             </Col>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="url"
-                                    label="Url"
-                                    rules={[{required: true, message: 'Please enter url'}]}
-                                >
-                                    <Input
-                                        style={{width: '100%'}}
-                                        addonBefore="http://"
-                                        addonAfter=".com"
-                                        placeholder="Please enter url"
-                                    />
-                                </Form.Item>
-                            </Col>
                         </Row>
                         <Row gutter={16}>
-                            <Col span={12}>
+                            <Col span={24}>
                                 <Form.Item
                                     name="owner"
                                     label="Owner"
@@ -81,21 +67,9 @@ export const AddBook:React.FC = () =>  {
                                     </Select>
                                 </Form.Item>
                             </Col>
-                            <Col span={12}>
-                                <Form.Item
-                                    name="type"
-                                    label="Type"
-                                    rules={[{required: true, message: 'Please choose the type'}]}
-                                >
-                                    <Select placeholder="Please choose the type">
-                                        <Option value="private">Private</Option>
-                                        <Option value="public">Public</Option>
-                                    </Select>
-                                </Form.Item>
-                            </Col>
                         </Row>
                         <Row gutter={16}>
-                            <Col span={12}>
+                            <Col span={24}>
                                 <Form.Item
                                     name="approver"
                                     label="Approver"
@@ -107,7 +81,7 @@ export const AddBook:React.FC = () =>  {
                                     </Select>
                                 </Form.Item>
                             </Col>
-                            <Col span={12}>
+                            <Col span={24}>
                                 <Form.Item
                                     name="dateTime"
                                     label="DateTime"
