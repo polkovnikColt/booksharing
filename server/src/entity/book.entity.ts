@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm/index";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm/index";
+import {CommonUser} from "./user.entity";
 
 @Entity()
 export class Book {
@@ -7,19 +8,22 @@ export class Book {
     id: number
 
     @Column()
-    name:string
+    name: string
 
     @Column()
-    author:string
+    author: string
 
     @Column()
-    genre:string
+    genre: string
 
     @Column()
-    description:string
+    description: string
 
     @Column()
-    views:number
+    views: number
+
+    @ManyToOne(type => CommonUser, user => user.books)
+    user: CommonUser
 
 
 }

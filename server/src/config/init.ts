@@ -1,5 +1,5 @@
 import {Connection, createConnection} from "typeorm/index";
-import {User} from "../entity/user.entity";
+import {CommonUser} from "../entity/user.entity";
 import {Book} from "../entity/book.entity";
 import {Admin} from "../entity/admin.entity";
 
@@ -13,7 +13,7 @@ export const init = async ():Promise<void> => {
             username: "postgres",
             password: "root",
             database: "booksharing",
-            entities: [User, Book,Admin],
+            entities: [CommonUser, Book,Admin],
             synchronize: true,
         });
 
