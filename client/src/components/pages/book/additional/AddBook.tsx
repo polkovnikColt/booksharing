@@ -18,7 +18,9 @@ export const AddBook:React.FC = () =>  {
 
         return (
             <>
-                <Button type="primary" onClick={showDrawer}>
+                <Button
+                    onClick={showDrawer}
+                >
                     <PlusOutlined/> Додати книгу
                 </Button>
                 <Drawer
@@ -106,7 +108,9 @@ export const AddBook:React.FC = () =>  {
                                         },
                                     ]}
                                 >
-                                    <Input.TextArea rows={4} placeholder="please enter url description"/>
+                                    <Input.TextArea
+                                        rows={4}
+                                        placeholder="please enter url description"/>
                                 </Form.Item>
                             </Col>
                         </Row>

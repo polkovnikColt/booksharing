@@ -1,33 +1,46 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Col, Divider, Layout, Row} from "antd";
-import {useSelector,useDispatch} from 'react-redux';
-import {BookCard} from "./additional/BookCard";
+import {useDispatch, useSelector} from 'react-redux';
 import {AddBook} from "./additional/AddBook";
-import {addBook} from "../../../store/user/userActions";
-import {a} from './additional/service'
+import {RootState} from "../../../store/store";
+import {loadAllBooks} from "../../../store/user/userActions";
+import {getUserByID, mockBooks} from "./additional/service";
+import {BookCard} from "../../additionalComponents/books/BookCard";
+
+const {Content} = Layout;
 
 export const BookPage: React.FC = () => {
+
     const dispatch = useDispatch();
-    const books = useSelector(item => item.book.books);
+    const user = useSelector((store: RootState) => store.user);
 
-    const appendBook = (book: {}): void => {
-        dispatch(addBook(book));
-    }
-
-    const {Content} = Layout;
+    useEffect(() => {
+        dispatch(loadAllBooks(mockBooks));
+    }, [])
 
     return (
         <Layout>
             <Content style={{minHeight: window.innerHeight + "px"}}>
                 <Divider orientation="left">Книги</Divider>
-                <AddBook/>
+                {user.credentials && <AddBook/>}
                 <Row style={{marginLeft: 0, marginRight: 0}}
                      gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
-                    {books.map((item, index) =>
-                        <Col style={{margin: "0 auto"}}
-                             span={31}>
-                            <BookCard props={item} key={index}/>
-                        </Col>)}
+                    {user.allBooks.map((book) =>
+                        <Col
+                            className="mx-auto my-3"
+                            span={7}>
+                            <BookCard
+                                isLoading={false}
+                                avatar={null}
+                                user={getUserByID(book.user, user.allUsers)}
+                                name={book.name}
+                                author={book.author}
+                                genre={book.genre}
+                                description={book.description}
+                                views={book.views}
+                            />
+                        </Col>
+                    )}
                 </Row>
             </Content>
         </Layout>

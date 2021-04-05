@@ -2,31 +2,30 @@ import React, {createElement, useState} from 'react';
 import {Comment, Tooltip, Avatar} from 'antd';
 import moment from 'moment';
 import {DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled} from '@ant-design/icons';
-import {UserInfoProps} from "../../../../types/types";
+import {UserInterface} from "../../../types/types";
 
 type BookCommentType = {
-    props: UserInfoProps,
+
     remove?: (name: string) => void,
     approve?:(name:string,user) => void,
-    user?:{}
+    user?:UserInterface
 }
 
-export const BookComment: React.FC<BookCommentType> =
-    ({props,
+export const BookComment: React.FC<BookCommentType> = ({
          remove,
          approve,
-         user}) => {
+         user
+}) => {
     const [action, setAction] = useState(null);
 
     const like = () => {
         setAction('liked');
-        approve(props.name,user);
+
 
     };
 
     const dislike = () => {
         setAction('disliked');
-        remove(props.name);
     };
 
     const actions = [
@@ -46,7 +45,7 @@ export const BookComment: React.FC<BookCommentType> =
         <Comment
             style={{backgroundColor: "#ffffff", margin: 13}}
             actions={remove || approve ? actions : null}
-            author={<a>{props.name}</a>}
+            author={<a>{}</a>}
             avatar={
                 <Avatar
                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -54,10 +53,9 @@ export const BookComment: React.FC<BookCommentType> =
             }
             content={
                 <>
-                    <p>{props.bookName}</p>
-                    <p>{props.profileInfo.city}</p>
-                    <p>{props.profileInfo.toBeReturn ? `Згоден повернути ${props.profileInfo.date}`
-                        : `Прошу без повернення` }</p>
+                    <p>{}</p>
+                    <p>{}</p>
+                    <p>{}</p>
                 </>
             }
             datetime={

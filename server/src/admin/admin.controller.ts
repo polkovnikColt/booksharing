@@ -23,7 +23,7 @@ export class AdminController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post('create')
-    createAdmin(@Param('id') id, @Req() req): Promise<AdminInterface> {
+    createAdmin(@Req() req): Promise<AdminInterface> {
         return this.adminService.createAdmin(req.body);
     }
 }
