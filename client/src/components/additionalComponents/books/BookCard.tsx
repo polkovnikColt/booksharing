@@ -1,15 +1,14 @@
 import React from 'react';
-import {Skeleton, Switch, Card, Avatar, Tooltip, Space} from 'antd';
-import {EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
-import {CardInterface, UserInterface} from '../../../types/types';
+import {Skeleton, Card, Avatar, Tooltip, } from 'antd';
+import {CheckCircleOutlined} from '@ant-design/icons';
+import {UserInterface} from '../../../types/types';
 import './books.styles.scss';
-import {useSelector} from "react-redux";
-import {RootState} from "../../../store/store";
 
 const {Meta} = Card;
 
 type BookCardProps = {
     avatar: null,
+    isLogged:boolean,
     user:UserInterface,
     name:string,
     author:string,
@@ -27,31 +26,29 @@ export const BookCard:React.FC<BookCardProps> = ({
     views,
     avatar,
     user,
-    isLoading
+    isLoading,
+    isLogged
 }) => {
-    console.log(user)
     return (
         <>
             <Card
-                className="book-card-size"
+                className="book-card-size mx-2"
                 actions={[
-                    <Tooltip placement="top" title={"text"}>
-                        <SettingOutlined key="setting"/>,
-                    </Tooltip>,
-                    <Tooltip placement="top" title={"text"}>
-                        <EditOutlined key="edit"/>,
-                    </Tooltip>,
-                    <Tooltip placement="top" title={"text"}>
-                        <EllipsisOutlined key="ellipsis"/>,
-                    </Tooltip>,
-                ]}
-            >
-                :<Skeleton loading={isLoading} avatar active>
+                    <Tooltip placement="bottom" title={"Хочу отримати!"}>
+                        {isLogged && <CheckCircleOutlined/>}
+                    </Tooltip>
+                ]}>
+                <Skeleton loading={isLoading} avatar active>
                     <Meta
-                        avatar={avatar ? <Avatar src={avatar}/> : null}
+                        avatar={ <Avatar src={avatar}/> }
                         title={user.email}
                     />
-                {}
+                    <div className="book-description">
+                    <h2>Назва: {name}</h2>
+                    <h3>Автор: {author}</h3>
+                    <h3>Жанр: {genre}</h3>
+                        <h5>Бажаючі отримати: {views}</h5>
+                    </div>
                 </Skeleton>
             </Card>
         </>

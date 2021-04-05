@@ -6,6 +6,7 @@ import {RootState} from "../../../store/store";
 import {loadAllBooks} from "../../../store/user/userActions";
 import {getUserByID, mockBooks} from "./additional/service";
 import {BookCard} from "../../additionalComponents/books/BookCard";
+import {useWidth} from "../../../hooks/useDimension";
 
 const {Content} = Layout;
 
@@ -13,23 +14,27 @@ export const BookPage: React.FC = () => {
 
     const dispatch = useDispatch();
     const user = useSelector((store: RootState) => store.user);
+    const width = useWidth(window.innerWidth);
 
     useEffect(() => {
         dispatch(loadAllBooks(mockBooks));
-    }, [])
+    }, []);
+
+
 
     return (
         <Layout>
             <Content style={{minHeight: window.innerHeight + "px"}}>
                 <Divider orientation="left">Книги</Divider>
                 {user.credentials && <AddBook/>}
-                <Row style={{marginLeft: 0, marginRight: 0}}
-                     gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
+                <Row className ="m-0"
+                    gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     {user.allBooks.map((book) =>
                         <Col
                             className="mx-auto my-3"
-                            span={7}>
+                            span={width < 500 ? 24 : 8}>
                             <BookCard
+                                isLogged={!!user.credentials}
                                 isLoading={false}
                                 avatar={null}
                                 user={getUserByID(book.user, user.allUsers)}

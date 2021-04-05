@@ -21,30 +21,24 @@
   <component name="ChangeListManager">
     <list default="true" id="7149d318-d003-49d7-811a-37c5bb854190" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/AlertMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/alert/AlertMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/alert/AlertMessage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/alert/AlertMessage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/books/books.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/books.styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/GeneralForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/GeneralForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/form.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/form.styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/LabelItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/LabelItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/routes/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/routes/ProtectedRoute.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/mainStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/mainStyles.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/navbar/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navbar/additional/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/pages/book/BookPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/book/BookPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/pages/book/additional/AddBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/book/additional/AddBook.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/pages/book/additional/BookCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/pages/book/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/book/additional/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/pages/main/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/main/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/pages/user/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/user/UserPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/pages/user/additional/BookComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookComment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/books/bookActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/books/booksReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/pages/main/mainPage.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/pages/main/mainPage.styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/user/userActionTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userActionTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/user/userActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/user/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +69,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../api-site-project" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -123,7 +117,7 @@
       <workItem from="1617039136081" duration="4174000" />
       <workItem from="1617089778145" duration="136000" />
       <workItem from="1617537956374" duration="9435000" />
-      <workItem from="1617561606197" duration="12057000" />
+      <workItem from="1617561606197" duration="27097000" />
     </task>
     <servers />
   </component>
@@ -159,10 +153,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="310" y="139" key="EditFileWatcherDialog/0.0.1280.720@0.0.1280.720" timestamp="1615238381664" />
-    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1617552520273">
+    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1617626947083">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1617552520273" />
+    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1617626947083" />
     <state width="1259" height="176" key="GridCell.Tab.0.bottom" timestamp="1614107288357">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
@@ -187,9 +181,9 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="297" y="161" width="672" height="677" key="run.anything.popup/0.0.1280.720@0.0.1280.720" timestamp="1617540225510" />
-    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1616952282218">
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup" timestamp="1617632827920">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1616952282218" />
+    <state x="303" y="41" width="672" height="678" key="search.everywhere.popup/0.0.1280.720@0.0.1280.720" timestamp="1617632827920" />
   </component>
 </project>

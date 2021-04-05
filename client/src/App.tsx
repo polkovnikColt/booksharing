@@ -10,6 +10,7 @@ import {UserPage} from "./components/pages/user/UserPage";
 import {Layout} from "antd";
 import {ProtectedRoute} from "./components/additionalComponents/routes/ProtectedRoute";
 import {AdminPage} from "./components/pages/admin/AdminPage";
+import {RulesPage} from "./components/pages/rules/RulesPage";
 
 const App: React.FC = () => {
 
@@ -23,6 +24,7 @@ const App: React.FC = () => {
                     <Switch>
                         <Route path="/" component={MainPage} exact={true}/>
                         <Route path="/books" component={BookPage}/>
+                        <Route path="/rules" component={RulesPage}/>
                         <ProtectedRoute
                             component={UserPage}
                             path={'/user'}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Alert, Button, Space} from 'antd';
+import './alert.styles.scss';
 
 type AlertProps = {
     type:"success" | "info" | "warning" | "error",
@@ -8,6 +9,7 @@ type AlertProps = {
 
 export const MessageAlert:React.FC<AlertProps> = ({type,message}) => (
     <Alert
+        className="alert-message"
         message={message}
         type={type}
         showIcon

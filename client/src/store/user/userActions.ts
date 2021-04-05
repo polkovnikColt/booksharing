@@ -6,6 +6,7 @@ export const DELETE_BOOK = "DELETE_BOOK";
 export const LOAD_BOOKS = "LOAD_BOOKS";
 export const LOAD_ALL_BOOKS = "LOAD_ALL_BOOKS";
 export const LOAD_ALL_USERS = "LOAD_ALL_USERS";
+export const ORDER_BOOK = "ORDER_BOOK";
 
 export const deleteBook = (id: number) => {
     return {type: DELETE_BOOK, payload: id};
@@ -29,4 +30,8 @@ export const loadAllBooks = (books: BookInterface[]) => {
 
 export const loadAllUsers = (users: UserInterface[]) => {
     return {type: LOAD_ALL_USERS, payload: users};
+}
+
+export const orderBook = (bookId:number) => {
+    return {type: ORDER_BOOK, payload: bookId}
 }

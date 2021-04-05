@@ -40,7 +40,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
     }
 ) => {
     return (
-        <div className="w-100">
+        <>
             {hasSelector &&
             <Selector
                 name={selectorName}
@@ -69,6 +69,6 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
             >
                 {buttonText}
             </Button>
-        </div>
+        </>
     )
 }

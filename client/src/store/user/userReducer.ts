@@ -1,4 +1,13 @@
-import {DELETE_BOOK, LOAD_ALL_BOOKS, LOAD_ALL_USERS, LOAD_BOOKS, LOGIN, UNLOG} from "./userActions";
+import {
+    DELETE_BOOK,
+    LOAD_ALL_BOOKS,
+    LOAD_ALL_USERS,
+    LOAD_BOOKS,
+    LOGIN,
+    ORDER_BOOK,
+    orderBook,
+    UNLOG
+} from "./userActions";
 import {ActionsType} from "./userActionTypes";
 import {BookInterface, UserInterface} from "../../types/types";
 import {UserState} from "../../types/types";
@@ -7,7 +16,7 @@ const initState: UserState = {
     credentials: null,
     books: [] as BookInterface[],
     allBooks: [] as BookInterface[],
-    allUsers: [] as UserInterface[]
+    allUsers: [] as UserInterface[],
 }
 
 export const userReducer = (state = initState, action: ActionsType) => {
@@ -43,7 +52,10 @@ export const userReducer = (state = initState, action: ActionsType) => {
                 ...state,
                 allUsers: action.payload
             }
-
+        case ORDER_BOOK:
+            return {
+                ...state,
+            }
         default:
             return state;
     }
