@@ -1,10 +1,10 @@
 import React from 'react';
 import {Badge, Col, Divider, Layout, Row, Space} from "antd";
-import {BookComment} from "../../additionalComponents/books/BookComment";
+import {BookComment} from "../../components/additionalComponents/books/BookComment";
 import {useDispatch, useSelector} from 'react-redux';
 import {a} from './additional/service';
-import '../../mainStyles.scss';
-import {useWidth} from "../../../hooks/useDimension";
+import '../../components/mainStyles.scss';
+import {useWidth} from "../../hooks/useDimension";
 
 export const UserPage: React.FC = () => {
     const dispatch = useDispatch();

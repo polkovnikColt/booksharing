@@ -1,25 +1,29 @@
-import React from 'react';
-import {Col, Row, Input, Button} from 'antd';
+import React, {ChangeEvent} from 'react';
+import {Col, Row, Input, Button, Form} from 'antd';
 import {FormDataInterface} from "../../../types/types";
 import {FormItem} from "./FormItem";
 import './form.styles.scss'
 import {Selector} from "../selector/Selector";
 import {Key} from "antd/es/table/interface";
 import {CheckboxItem} from "./CheckboxItem";
+import {UploaderItem} from "../uploader/UploadeItem";
 
 type GeneralFormProps = {
     buttonText: string
     formData: FormDataInterface[]
-    inputHandler:(name:string,value:string) => void
-    submitHandler:() => void
+    inputHandler: (name: string, value: string) => void
+    submitHandler: () => void
     selectorHandler?: () => void
     checkboxHandler?: () => void
+    uploaderHandler?: (e: ChangeEvent<HTMLInputElement>) => void
+    file?: string
     values?: Key[]
     selectorName?: string
-    actionName?:string
+    actionName?: string
     isLoading?: boolean
-    hasSelector:boolean
-    hasCheckbox:boolean
+    hasSelector: boolean
+    hasCheckbox: boolean
+    hasUploader: boolean
 }
 
 export const GeneralForm: React.FC<GeneralFormProps> = (
@@ -35,7 +39,10 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
         checkboxHandler,
         values,
         actionName,
-        selectorName
+        selectorName,
+        file,
+        uploaderHandler,
+        hasUploader
 
     }
 ) => {
@@ -47,7 +54,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
                 values={values}
                 changeHandler={selectorHandler}
             />}
-            {formData.map((formItem:FormDataInterface) =>
+            {formData.map((formItem: FormDataInterface) =>
                 <FormItem
                     name={formItem.name}
                     label={formItem.label}
@@ -55,20 +62,26 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
                     InputComponent={formItem.inputComponent}
                     changeHandler={inputHandler}
                 />
-                )}
+            )}
             {hasCheckbox &&
             <CheckboxItem
                 actionName={actionName}
                 handler={checkboxHandler}
             />
             }
-            <Button
+            {hasUploader &&
+            <UploaderItem
+                file={file}
+                uploadHandler={uploaderHandler}
+            />
+            }
+            {buttonText && <Button
                 loading={isLoading}
                 onClick={submitHandler}
                 type='primary'
             >
                 {buttonText}
-            </Button>
+            </Button>}
         </>
     )
 }

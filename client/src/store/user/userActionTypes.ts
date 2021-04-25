@@ -1,4 +1,13 @@
-import {DELETE_BOOK, LOAD_ALL_BOOKS, LOAD_ALL_USERS, LOAD_BOOKS, LOGIN, ORDER_BOOK, UNLOG} from "./userActions";
+import {
+    ADD_BOOK,
+    DELETE_BOOK,
+    LOAD_ALL_BOOKS,
+    LOAD_ALL_USERS,
+    LOAD_BOOKS,
+    LOGIN,
+    ORDER_BOOK,
+    UNLOG
+} from "./userActions";
 import {BookInterface, UserInterface} from "../../types/types";
 
 
@@ -37,7 +46,12 @@ export type OrderBookType = {
     payload: number
 }
 
+export type AddBookType = {
+    type: typeof ADD_BOOK
+    payload: BookInterface
+}
+
 export type ActionsType = DeleteBookType | LoginType
     | UnlogType | LoadBooksType
     | LoadAllBooksType | LoadingAllUsersType
-    | OrderBookType;
+    | OrderBookType | AddBookType;

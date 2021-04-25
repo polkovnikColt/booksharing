@@ -1,5 +1,5 @@
 import React from 'react';
-import {Rules} from "../../additionalComponents/labels/Rules";
+import {Rules} from "../../components/additionalComponents/labels/Rules";
 import {rules} from "./additional/service";
 import {Layout} from "antd";
 

@@ -1,24 +1,29 @@
-import React, {useState} from 'react';
-import {Button, Upload,} from "antd";
-import {UploadOutlined} from "@ant-design/icons";
+import React, {ChangeEvent, useState} from 'react';
+import {UploadChangeParam} from "antd/es/upload";
+import {UploadFile} from "antd/es/upload/interface";
+import {ImageItem} from "../images/ImageItem";
 
+type UploaderItemProps = {
+    file: string
+    uploadHandler: (e: ChangeEvent<HTMLInputElement>) => void
+}
 
-export const UploaderItem:React.FC = () => {
+export const UploaderItem: React.FC<UploaderItemProps> = (
+    {
+        file,
+        uploadHandler
+    }
+) => {
 
-    const [fileList,setFileList] = useState([
-
-    ]);
-
-    return(
-        <Upload
-            onChange={() => {}}
-            multiple={true}
-            fileList={fileList}
-        >
-            <Button
-                icon={<UploadOutlined />}>
-                Upload
-            </Button>
-        </Upload>
+    return (
+        <div>
+            <input type="file"
+                   className="custom-file-input"
+                   onChange={uploadHandler}
+            />
+            <ImageItem
+                widthInPer={50}
+                base64={file}/>
+        </div>
     )
 }

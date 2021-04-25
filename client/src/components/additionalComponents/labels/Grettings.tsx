@@ -28,7 +28,9 @@ export const Greetings: React.FC<GreetingsPops> = ({isLogged}) => {
                         </LabelItem>
                         нашого порталу
                     </h4>
-                    <h4>Ще не маете аккаунту? Саме час його створити!</h4>
+                    <h4>Ще не маете аккаунту? Саме час його
+                        <LabelItem isLink={true} path={'/registration'}>створити!</LabelItem>
+                        </h4>
                 </>
                 : <Divider
                     orientation="center">

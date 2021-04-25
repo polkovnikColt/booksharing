@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import {Col, Divider, Layout, Row} from "antd";
 import {useDispatch, useSelector} from 'react-redux';
 import {AddBook} from "./additional/AddBook";
-import {RootState} from "../../../store/store";
-import {loadAllBooks} from "../../../store/user/userActions";
+import {RootState} from "../../store/store";
+import {loadAllBooks} from "../../store/user/userActions";
 import {getUserByID, mockBooks} from "./additional/service";
-import {BookCard} from "../../additionalComponents/books/BookCard";
-import {useWidth} from "../../../hooks/useDimension";
+import {BookCard} from "../../components/additionalComponents/books/BookCard";
+import {useWidth} from "../../hooks/useDimension";
 
 const {Content} = Layout;
 
@@ -16,9 +16,9 @@ export const BookPage: React.FC = () => {
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
 
-    useEffect(() => {
-        dispatch(loadAllBooks(mockBooks));
-    }, []);
+    // useEffect(() => {
+    //     dispatch(loadAllBooks(mockBooks));
+    // }, []);
 
 
 
@@ -32,8 +32,9 @@ export const BookPage: React.FC = () => {
                     {user.allBooks.map((book) =>
                         <Col
                             className="mx-auto my-3"
-                            span={width < 500 ? 24 : 8}>
+                            span={width > 500 ? 10 : 22}>
                             <BookCard
+                                photo={book.photo}
                                 isLogged={!!user.credentials}
                                 isLoading={false}
                                 avatar={null}

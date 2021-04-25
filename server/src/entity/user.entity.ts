@@ -13,6 +13,9 @@ export class CommonUser{
     @Column()
     password:string
 
+    @Column()
+    name:string
+
     @Column("int", { array: true,default: ()=>'array[]::integer[]'})
     booksToGetId:number[]
 

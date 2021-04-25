@@ -1,16 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Divider, Layout, Col, Row, Spin} from "antd";
-import {GeneralForm} from "../../additionalComponents/forms/GeneralForm";
+import {GeneralForm} from "../../components/additionalComponents/forms/GeneralForm";
 import {formData, mockUsers} from "./additional/service";
-import {UserInterface} from "../../../types/types";
+import {UserInterface} from "../../types/types";
 import {useDispatch, useSelector} from "react-redux";
-import {loadAllUsers, login} from "../../../store/user/userActions";
-import {RootState} from "../../../store/store";
+import {loadAllUsers, login} from "../../store/user/userActions";
+import {RootState} from "../../store/store";
 import './mainPage.styles.scss';
-import {useWidth} from "../../../hooks/useDimension";
-import {LabelItem} from "../../additionalComponents/labels/LabelItem";
-import {Greetings} from "../../additionalComponents/labels/Grettings";
-
+import {useWidth} from "../../hooks/useDimension";
+import {LabelItem} from "../../components/additionalComponents/labels/LabelItem";
+import {Greetings} from "../../components/additionalComponents/labels/Grettings";
 
 const {Content} = Layout;
 
@@ -60,9 +59,10 @@ export const MainPage: React.FC = () => {
                         {!user.credentials &&
                         <Col
                             className ="mx-auto"
-                            span={width < 500 ?22:12}>
+                            span={width < 500 ? 22:12}>
                             <GeneralForm
                                 actionName="Адміністратор?"
+                                hasUploader={false}
                                 hasSelector={false}
                                 hasCheckbox={true}
                                 checkboxHandler={

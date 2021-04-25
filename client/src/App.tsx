@@ -4,17 +4,18 @@ import {HashRouter, Route, Switch} from 'react-router-dom';
 import {Row} from "antd";
 import {RootState, store} from "./store/store";
 import {Provider, useSelector} from 'react-redux';
-import {MainPage} from "./components/pages/main/MainPage";
-import {BookPage} from "./components/pages/book/BookPage";
-import {UserPage} from "./components/pages/user/UserPage";
+import {MainPage} from "./pages/main/MainPage";
+import {BookPage} from "./pages/book/BookPage";
+import {UserPage} from "./pages/user/UserPage";
 import {Layout} from "antd";
 import {ProtectedRoute} from "./components/additionalComponents/routes/ProtectedRoute";
-import {AdminPage} from "./components/pages/admin/AdminPage";
-import {RulesPage} from "./components/pages/rules/RulesPage";
+import {AdminPage} from "./pages/admin/AdminPage";
+import {RulesPage} from "./pages/rules/RulesPage";
+import {RegistrationPage} from "./pages/registration/RegistrationPage";
 
 const App: React.FC = () => {
 
-    const user = useSelector((store:RootState) => store.user);
+    const user = useSelector((store: RootState) => store.user);
 
     return (
         <HashRouter>
@@ -23,6 +24,7 @@ const App: React.FC = () => {
                 <Row>
                     <Switch>
                         <Route path="/" component={MainPage} exact={true}/>
+                        <Route path="/registration" component={RegistrationPage}/>
                         <Route path="/books" component={BookPage}/>
                         <Route path="/rules" component={RulesPage}/>
                         <ProtectedRoute
@@ -34,7 +36,7 @@ const App: React.FC = () => {
                             component={AdminPage}
                             path={'/admin'}
                             isAuth={user.credentials?.role === 'admin'}
-                            />
+                        />
                     </Switch>
                 </Row>
             </Layout>

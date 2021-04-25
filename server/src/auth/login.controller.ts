@@ -25,4 +25,5 @@ export class LoginController {
     registration(@Req() req): Promise<LoginResponseType> {
         return this.loginService.registration(req.body);
     }
+
 }

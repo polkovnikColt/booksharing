@@ -1,5 +1,6 @@
-import {BookInterface, FormDataInterface, UserInterface} from "../../../../types/types";
+import {BookInterface, FormDataInterface, UserInterface} from "../../../types/types";
 import {Input} from "antd";
+import {UploadFile} from "antd/es/upload/interface";
 
 export const mockBooks: BookInterface[] = [
     {
@@ -31,7 +32,7 @@ export const mockBooks: BookInterface[] = [
     },
     {
         id: 0,
-        user: 0,
+        user:0,
         name: 'book',
         author: 'author',
         genre: 'genre',
@@ -62,7 +63,18 @@ export const formData: FormDataInterface[] = [
         inputComponent: Input.TextArea
     },
 
-]
+];
+
+export const fileEncodeBase64 = (file) => {
+    const fr = new FileReader();
+    let result = "";
+    fr.onload = () => {
+        result = fr.result.toString();
+    }
+    fr.readAsDataURL(file)
+    console.log(result);
+    return result;
+}
 
 export const getUserByID = (id: number, allUsers: UserInterface[]) => {
     return allUsers.find((user) => user.id === id);

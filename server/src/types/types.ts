@@ -3,6 +3,8 @@ export interface UserInterface {
     id:number,
     email:string,
     password:string,
+    userName:string,
+    photo:string,
     booksToGetId:number[],
     booksToSendId:number[]
 }

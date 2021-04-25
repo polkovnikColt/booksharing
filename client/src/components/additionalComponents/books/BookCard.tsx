@@ -3,14 +3,16 @@ import {Skeleton, Card, Avatar, Tooltip, } from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons';
 import {UserInterface} from '../../../types/types';
 import './books.styles.scss';
+import {ImageItem} from "../images/ImageItem";
 
 const {Meta} = Card;
 
 type BookCardProps = {
     avatar: null,
     isLogged:boolean,
-    user:UserInterface,
+    user: UserInterface,
     name:string,
+    photo:string,
     author:string,
     genre:string
     description:string,
@@ -22,6 +24,7 @@ export const BookCard:React.FC<BookCardProps> = ({
     name,
     author,
     description,
+    photo,
     genre,
     views,
     avatar,
@@ -41,7 +44,11 @@ export const BookCard:React.FC<BookCardProps> = ({
                 <Skeleton loading={isLoading} avatar active>
                     <Meta
                         avatar={ <Avatar src={avatar}/> }
-                        title={user.email}
+                        title={user.userName}
+                    />
+                    <ImageItem
+                        widthInPer={100}
+                        base64={photo}
                     />
                     <div className="book-description">
                     <h2>Назва: {name}</h2>
