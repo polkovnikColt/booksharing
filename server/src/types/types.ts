@@ -3,8 +3,8 @@ export interface UserInterface {
     id:number,
     email:string,
     password:string,
-    userName:string,
-    photo:string,
+    name:string,
+    avatar:string,
     booksToGetId:number[],
     booksToSendId:number[]
 }
@@ -17,8 +17,11 @@ export interface AdminInterface {
 
 export interface BookInterface{
     id:number
+    commonUser:number
     name:string
     author:string
+    preview:string
+    ownerName:string
     description:string
     views:number
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './image.styles.scss';
+import {Spin} from "antd";
 
 type ImageItemProps = {
     base64: string

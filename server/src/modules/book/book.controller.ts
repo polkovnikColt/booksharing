@@ -1,6 +1,6 @@
 import {Controller, Delete, Get, Param, Post, Put, Req, UseGuards} from '@nestjs/common';
-import {BookService} from "../book/book.service";
-import {BookInterface} from "../types/types";
+import {BookService} from "./book.service";
+import {BookInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
 
 

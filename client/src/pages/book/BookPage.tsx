@@ -1,44 +1,49 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Col, Divider, Layout, Row} from "antd";
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import {AddBook} from "./additional/AddBook";
 import {RootState} from "../../store/store";
 import {loadAllBooks} from "../../store/user/userActions";
-import {getUserByID, mockBooks} from "./additional/service";
+import {ReadOutlined} from "@ant-design/icons";
+import {getUserByID} from "./additional/service";
 import {BookCard} from "../../components/additionalComponents/books/BookCard";
 import {useWidth} from "../../hooks/useDimension";
+import {usePreload} from "../../hooks/usePreload";
+import "../../components/mainStyles.scss";
 
 const {Content} = Layout;
 
 export const BookPage: React.FC = () => {
 
-    const dispatch = useDispatch();
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
 
-    // useEffect(() => {
-    //     dispatch(loadAllBooks(mockBooks));
-    // }, []);
-
-
+    usePreload(loadAllBooks);
 
     return (
         <Layout>
             <Content style={{minHeight: window.innerHeight + "px"}}>
-                <Divider orientation="left">Книги</Divider>
+                <Divider
+                    orientation="left">
+                    Книги
+                    <span
+                        className="mx-1">
+                        <ReadOutlined />
+                    </span>
+                </Divider>
                 {user.credentials && <AddBook/>}
                 <Row className ="m-0"
                     gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     {user.allBooks.map((book) =>
                         <Col
                             className="mx-auto my-3"
-                            span={width > 500 ? 10 : 22}>
+                            span={width > 500 ? 10 : 21}>
                             <BookCard
-                                photo={book.photo}
+                                isMine={user.credentials?.id === book.user}
+                                photo={book.preview}
                                 isLogged={!!user.credentials}
-                                isLoading={false}
-                                avatar={null}
-                                user={getUserByID(book.user, user.allUsers)}
+                                avatar={user.credentials?.avatar}
+                                owner={book.ownerName}
                                 name={book.name}
                                 author={book.author}
                                 genre={book.genre}

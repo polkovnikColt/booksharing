@@ -1,5 +1,5 @@
-import {CommonUser} from "../entity/user.entity";
-import {LoginResponseType, UserInterface} from "../types/types";
+import {CommonUser} from "../../entity/user.entity";
+import {LoginResponseType, UserInterface} from "../../types/types";
 import {getManager} from "typeorm/index";
 import {JwtService} from "@nestjs/jwt";
 import {ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";

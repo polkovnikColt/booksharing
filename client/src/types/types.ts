@@ -22,8 +22,9 @@ export interface CardInterface {
 export interface BookInterface{
     id:number,
     user:number,
-    photo?:string,
+    preview?:string,
     name:string,
+    ownerName:string
     author:string,
     genre:string,
     description:string,
@@ -32,10 +33,12 @@ export interface BookInterface{
 
 export interface UserInterface {
     id:number,
-    userName: string,
-    photo: string,
+    name: string,
+    avatar?: string,
     email:string,
     password:string,
+    booksToGetId?:number[],
+    booksToSendId?:number[],
     role:string
 }
 

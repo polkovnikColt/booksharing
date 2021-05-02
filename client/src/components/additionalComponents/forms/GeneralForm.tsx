@@ -47,7 +47,7 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
     }
 ) => {
     return (
-        <>
+        <div className ="form-padding">
             {hasSelector &&
             <Selector
                 name={selectorName}
@@ -82,6 +82,6 @@ export const GeneralForm: React.FC<GeneralFormProps> = (
             >
                 {buttonText}
             </Button>}
-        </>
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
-import {UserInterface} from "../types/types";
+import {UserInterface} from "../../types/types";
 import {getManager} from "typeorm";
-import {CommonUser} from "../entity/user.entity";
+import {CommonUser} from "../../entity/user.entity";
 
 @Injectable()
 export class UserService {

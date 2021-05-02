@@ -1,42 +1,38 @@
 import React, {ChangeEvent, useState} from 'react';
-import {Drawer, Form, Button, Col, Row, Input, Select, DatePicker} from 'antd';
+import {Drawer, Form, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {GeneralForm} from "../../../components/additionalComponents/forms/GeneralForm";
-import {fileEncodeBase64, formData} from "./service";
-import {UploaderItem} from "../../../components/additionalComponents/uploader/UploadeItem";
-import {UploadChangeParam} from "antd/es/upload";
+import {compressImage, formData} from "./service";
 import {useDispatch, useSelector} from "react-redux";
 import {addBook} from "../../../store/user/userActions";
-import {UploadFile} from "antd/es/upload/interface";
 import {BookInterface} from "../../../types/types";
 import {RootState} from "../../../store/store";
-
-const {Option} = Select;
 
 export const AddBook: React.FC = () => {
 
     const dispatch = useDispatch();
     const user = useSelector((store:RootState) => store.user);
     const [visible, setVisible] = useState(false);
-    const [file, setFile] = useState('');
     const [book, setBook] = useState({
         name: '',
         user: user.credentials.id,
+        ownerName: user.credentials.name,
         author: '',
         genre: '',
-        photo: '',
+        preview: '',
         description: '',
         views: 0
     } as BookInterface);
 
 
-    const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const uploadHandler = async (e: ChangeEvent<HTMLInputElement>) => {
         const fileUploaded = e.target.files && e.target.files[0];
         const fr = new FileReader();
         fr.onload = () => {
-            setBook({...book, ['photo']: fr.result.toString()});
+            setBook({...book, ['preview']: fr.result.toString()});
         }
-        fr.readAsDataURL(fileUploaded);
+        const compressedFile = await compressImage(fileUploaded);
+        fr.readAsDataURL(compressedFile);
     }
 
     const changeHandler = (name: string, value: string): void => {
@@ -79,7 +75,7 @@ export const AddBook: React.FC = () => {
                         inputHandler={changeHandler}
                         submitHandler={submitHandler}
                         uploaderHandler={uploadHandler}
-                        file={book.photo}
+                        file={book.preview}
                         hasSelector={false}
                         hasCheckbox={false}
                         hasUploader={true}

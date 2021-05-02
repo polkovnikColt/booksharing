@@ -6,6 +6,6 @@ export const usePreload = (dispatchFunction):void => {
 
     useEffect(() => {
         dispatch(dispatchFunction());
-    })
+    },[])
 
 }

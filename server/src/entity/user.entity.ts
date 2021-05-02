@@ -1,4 +1,4 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm/index";
+import {Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from "typeorm/index";
 import {Book} from "./book.entity";
 
 
@@ -16,13 +16,17 @@ export class CommonUser{
     @Column()
     name:string
 
+    @Column({default:""})
+    avatar:string
+
     @Column("int", { array: true,default: ()=>'array[]::integer[]'})
     booksToGetId:number[]
 
     @Column("int", { array: true,default: ()=>'array[]::integer[]'})
     booksToSendId:number[]
 
-    @OneToMany(type => Book,book => book.user)
+    @OneToMany(type => Book,book => book.commonUser,
+        {cascade:true})
     books:Book[]
 
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import {BookInterface} from "../types/types";
+import {BookInterface} from "../../types/types";
 import {getManager} from "typeorm/index";
-import {Book} from "../entity/book.entity";
+import {Book} from "../../entity/book.entity";
+import {CommonUser} from "../../entity/user.entity";
 
 @Injectable()
 export class BookService {
@@ -17,6 +18,7 @@ export class BookService {
             .createQueryBuilder()
             .select('book')
             .from(Book,'book')
+            // .innerJoin(CommonUser, 'user')
             .getMany()
     }
 

@@ -3,14 +3,14 @@ import {Link} from "react-router-dom";
 import './labels.styles.scss'
 
 type LabelItemProps = {
-    // text:string
     isLink: boolean
+    color?:string
     path?: string
 
 }
 
 export const LabelItem: React.FC<LabelItemProps> = ({
-// text,
+color,
 isLink,
 path,
 children
@@ -20,7 +20,9 @@ children
             {isLink ?
             <Link
                 className="mx-2 link"
-                to={path}>
+                to={path}
+                style={{color: color + ""}}
+            >
                 {children}
             </Link>
             :

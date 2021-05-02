@@ -1,7 +1,7 @@
 import {MiddlewareConsumer, Module, NestModule} from "@nestjs/common";
 import {AdminService} from "./admin.service";
 import {AdminController} from "./admin.controller";
-import {AdminMiddleware} from "../middleware/admin.middleware";
+import {AdminMiddleware} from "../../middleware/admin.middleware";
 
 import {JwtShared} from "../auth/jwt/jwt.module";
 

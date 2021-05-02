@@ -26,20 +26,30 @@ $primary-color: #1890ff;
   margin: 0 !important;
 }
 
+.mx-1 {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
 .mx-auto {
   margin: 0 auto;
 }
 
-.bold{
+.bold {
   font-size: 1.1rem;
   font-weight: bold;
+}
+
+.form-padding{
+  padding: 10%;
 }
 
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
+
 .custom-file-input::before {
-  width:auto;
+  width: auto;
   text-align: center;
   content: 'Виберіть фото';
   display: inline-block;
@@ -54,11 +64,18 @@ $primary-color: #1890ff;
   text-shadow: 1px 1px #fff;
   font-size: 10pt;
 
-  &:hover{
+  &:hover {
     border-color: $primary-color;
     color: $primary-color;
   }
-  &:active::before{
+
+  &:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  }
+}
+
+.ant-form-item-label{
+  label{
+    width: 100px;
   }
 }

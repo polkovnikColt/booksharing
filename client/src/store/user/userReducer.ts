@@ -6,7 +6,9 @@ import {
     LOAD_BOOKS,
     LOGIN,
     ORDER_BOOK,
-    UNLOG
+    UNLOG,
+    UPDATE_BOOK,
+    UPDATE_USER
 } from "./userActions";
 import {ActionsType} from "./userActionTypes";
 import {BookInterface, UserInterface, UserState} from "../../types/types";
@@ -59,6 +61,21 @@ export const userReducer = (state = initState, action: ActionsType) => {
             return {
                 ...state,
                 allBooks: [...state.allBooks, action.payload]
+            }
+        case UPDATE_BOOK:
+            return {
+                ...state,
+                books: state.books.map(book => {
+                    if(book.id === action.payload.id){
+                        return {...book, ...action.payload};
+                    }
+                    return book;
+                })
+            }
+        case UPDATE_USER:
+            return {
+                ...state,
+                credentials: {...state.credentials, ...action.payload}
             }
         default:
             return state;

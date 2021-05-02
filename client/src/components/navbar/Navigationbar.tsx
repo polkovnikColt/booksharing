@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Menu, Button, Row, Col, Skeleton, Avatar} from 'antd';
+import {Layout, Menu, Button, Row, Col, Avatar} from 'antd';
 import {getLinks} from "./additional/service";
 import {useWidth} from "../../hooks/useDimension";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {unlog} from "../../store/user/userActions";
+import {UserOutlined} from "@ant-design/icons";
 
 const {Header} = Layout;
 
@@ -50,11 +51,14 @@ export const Navigationbar: React.FunctionComponent = () => {
                         <div
                             onClick={handleUnlog}
                         >
-                            <Skeleton.Avatar
-                                style={{margin: "18px 45%"}}
-                                active={true}
-                                size={30}
-                                shape={"circle"}/>
+                            {!!user?.credentials || user?.credentials?.avatar ?
+                                <Avatar
+                                    src={user.credentials.avatar}/>
+                                    :
+                                <Avatar
+                                size="large"
+                                icon={<UserOutlined/>}
+                            />}
                         </div>
                     </Col>
                 </Row>

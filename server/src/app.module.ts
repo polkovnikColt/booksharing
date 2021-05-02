@@ -1,8 +1,8 @@
 import {Module} from '@nestjs/common';
-import {BookModule} from "./book/book.module";
-import {UserModule} from "./user/user.module";
-import {LoginModule} from "./auth/login.module";
-import {AdminModule} from "./admin/admin.module";
+import {BookModule} from "./modules/book/book.module";
+import {UserModule} from "./modules/user/user.module";
+import {LoginModule} from "./modules/auth/login.module";
+import {AdminModule} from "./modules/admin/admin.module";
 
 
 @Module({

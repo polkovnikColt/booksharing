@@ -19,7 +19,7 @@ export const formData:FormDataInterface[] = [
     },
     {
         label:"Ім'я користувача",
-        name:"userName",
+        name:"name",
         inputComponent: Input
     }
 ]

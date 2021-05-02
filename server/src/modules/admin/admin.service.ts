@@ -1,9 +1,8 @@
 import {Injectable, UnprocessableEntityException} from "@nestjs/common";
 import { getManager} from "typeorm/index";
-import {AdminInterface, BookInterface, UserInterface} from "../types/types";
-import {CommonUser} from "../entity/user.entity";
-import {Book} from "../entity/book.entity";
-import {Admin} from "../entity/admin.entity";
+import {AdminInterface, BookInterface, UserInterface} from "../../types/types";
+import {CommonUser} from "../../entity/user.entity";
+import {Book} from "../../entity/book.entity";
 
 @Injectable()
 export class AdminService {
@@ -14,7 +13,7 @@ export class AdminService {
     }
 
     async getAdminById(id:number):Promise<AdminInterface>{
-        return await this.manager.findOne(Admin,{id:id});
+        return await this.manager.findOne(CommonUser,{id:id});
     }
 
     async deleteUser(id: number): Promise<UserInterface> {
@@ -26,9 +25,9 @@ export class AdminService {
     }
 
     async createAdmin(body:AdminInterface):Promise<AdminInterface>{
-        const candidate:AdminInterface = await this.manager.findOne(Admin,{email:body.email});
+        const candidate:AdminInterface = await this.manager.findOne(CommonUser,{email:body.email});
         if(!candidate){
-            await this.manager.insert(Admin,body);
+            await this.manager.insert(CommonUser,body);
             return body;
         }
         else{

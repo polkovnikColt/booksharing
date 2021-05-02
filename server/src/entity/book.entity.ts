@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm/index";
+import {Column, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn} from "typeorm/index";
 import {CommonUser} from "./user.entity";
 
 @Entity()
@@ -17,13 +17,21 @@ export class Book {
     genre: string
 
     @Column()
+    ownerName:string
+
+    @Column({default:""})
+    preview:string
+
+    @Column()
     description: string
 
     @Column()
     views: number
 
-    @ManyToOne(type => CommonUser, user => user.books)
-    user: CommonUser
+    @ManyToOne(type => CommonUser, user => user.books,
+        {onDelete:"CASCADE"})
+    // @JoinColumn({ referencedColumnName: "user_id" })
+    commonUser: CommonUser
 
 
 }

@@ -8,52 +8,58 @@ import {ImageItem} from "../images/ImageItem";
 const {Meta} = Card;
 
 type BookCardProps = {
-    avatar: null,
+    avatar: string,
     isLogged:boolean,
-    user: UserInterface,
+    isMine: boolean,
+    widthInPx?:number,
+    owner: string,
     name:string,
     photo:string,
     author:string,
     genre:string
     description:string,
     views:number
-    isLoading:boolean
 }
 
 export const BookCard:React.FC<BookCardProps> = ({
     name,
     author,
     description,
+    isMine,
     photo,
+    widthInPx,
     genre,
     views,
     avatar,
-    user,
-    isLoading,
+    owner,
     isLogged
 }) => {
     return (
         <>
             <Card
-                className="book-card-size mx-2"
+                style ={{maxWidth: widthInPx}}
+                className="book-card-size m-0"
                 actions={[
                     <Tooltip placement="bottom" title={"Хочу отримати!"}>
-                        {isLogged && <CheckCircleOutlined/>}
+                        {isLogged && !isMine &&
+                             <CheckCircleOutlined/>
+                        }
                     </Tooltip>
                 ]}>
-                <Skeleton loading={isLoading} avatar active>
+                <Skeleton loading={false} avatar active>
                     <Meta
                         avatar={ <Avatar src={avatar}/> }
-                        title={user.userName}
+                        title={owner}
                     />
                     <ImageItem
                         widthInPer={100}
                         base64={photo}
                     />
                     <div className="book-description">
-                    <h2>Назва: {name}</h2>
+                    <h2>{name}</h2>
                     <h3>Автор: {author}</h3>
                     <h3>Жанр: {genre}</h3>
+                    <h3>{description}</h3>
                         <h5>Бажаючі отримати: {views}</h5>
                     </div>
                 </Skeleton>

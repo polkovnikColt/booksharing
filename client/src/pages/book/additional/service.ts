@@ -1,45 +1,6 @@
-import {BookInterface, FormDataInterface, UserInterface} from "../../../types/types";
+import {FormDataInterface, UserInterface} from "../../../types/types";
 import {Input} from "antd";
-import {UploadFile} from "antd/es/upload/interface";
-
-export const mockBooks: BookInterface[] = [
-    {
-        id: 0,
-        user: 0,
-        name: 'book',
-        author: 'author',
-        genre: 'genre',
-        description: 'description',
-        views: 0
-    },
-    {
-        id: 0,
-        user: 0,
-        name: 'book',
-        author: 'author',
-        genre: 'genre',
-        description: 'description',
-        views: 0
-    },
-    {
-        id: 0,
-        user: 0,
-        name: 'book',
-        author: 'author',
-        genre: 'genre',
-        description: 'description',
-        views: 0
-    },
-    {
-        id: 0,
-        user:0,
-        name: 'book',
-        author: 'author',
-        genre: 'genre',
-        description: 'description',
-        views: 0
-    }
-]
+import imageCompression from "browser-image-compression";
 
 export const formData: FormDataInterface[] = [
     {
@@ -65,17 +26,16 @@ export const formData: FormDataInterface[] = [
 
 ];
 
-export const fileEncodeBase64 = (file) => {
-    const fr = new FileReader();
-    let result = "";
-    fr.onload = () => {
-        result = fr.result.toString();
+export const compressImage = async (file:File):Promise<File> => {
+    const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 300,
+        useWebWorker: true
     }
-    fr.readAsDataURL(file)
-    console.log(result);
-    return result;
+
+    return await imageCompression(file, options);
 }
 
 export const getUserByID = (id: number, allUsers: UserInterface[]) => {
-    return allUsers.find((user) => user.id === id);
+    return allUsers.filter((user:UserInterface) => user.id === id)[0];
 }

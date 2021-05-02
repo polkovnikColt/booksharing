@@ -16,12 +16,11 @@ export const BookComment: React.FC<BookCommentType> = ({
          approve,
          user
 }) => {
+
     const [action, setAction] = useState(null);
 
     const like = () => {
         setAction('liked');
-
-
     };
 
     const dislike = () => {

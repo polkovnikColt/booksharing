@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Navigationbar} from "./components/navbar/Navigationbar";
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import {Row} from "antd";
 import {RootState, store} from "./store/store";
-import {Provider, useSelector} from 'react-redux';
+import {Provider, useDispatch, useSelector} from 'react-redux';
 import {MainPage} from "./pages/main/MainPage";
 import {BookPage} from "./pages/book/BookPage";
 import {UserPage} from "./pages/user/UserPage";
@@ -12,10 +12,18 @@ import {ProtectedRoute} from "./components/additionalComponents/routes/Protected
 import {AdminPage} from "./pages/admin/AdminPage";
 import {RulesPage} from "./pages/rules/RulesPage";
 import {RegistrationPage} from "./pages/registration/RegistrationPage";
+import {loginOnLoad} from "./store/user/userActions";
 
 const App: React.FC = () => {
 
     const user = useSelector((store: RootState) => store.user);
+    const dispatch = useDispatch();
+
+    // console.log(user);
+
+    useEffect(() => {
+        dispatch(loginOnLoad())
+    },[])
 
     return (
         <HashRouter>

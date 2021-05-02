@@ -1,4 +1,4 @@
-import { LinkInterface} from "../../../types/types";
+import {LinkInterface} from "../../../types/types";
 import {UserState} from "../../../types/types";
 
 

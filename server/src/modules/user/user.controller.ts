@@ -1,6 +1,6 @@
 import {Controller, Delete, Get, Param, Post, Put, Req, UseGuards} from '@nestjs/common';
 import {UserService} from "./user.service";
-import {UserInterface} from "../types/types";
+import {UserInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
 
 

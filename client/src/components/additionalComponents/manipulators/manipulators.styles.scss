@@ -1,0 +1,38 @@
+$delete-color: red;
+$update-color: green;
+
+@mixin btn-mixin {
+  margin: 1% auto;
+}
+
+.btn-delete {
+  color: $delete-color !important;
+  border-color: $delete-color !important;
+  @include btn-mixin;
+
+  &:hover {
+    color: $delete-color;
+    border-color: $delete-color;
+  }
+
+  &:active {
+    color: $delete-color;
+    border-color: $delete-color;
+  }
+}
+
+.btn-update {
+  color: $update-color !important;
+  border-color: $update-color !important;
+  @include btn-mixin;
+
+  &:hover {
+    color: $update-color;
+    border-color: $update-color;
+  }
+
+  &:active {
+    color: $update-color;
+    border-color: $update-color;
+  }
+}

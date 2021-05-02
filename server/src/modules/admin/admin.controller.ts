@@ -1,6 +1,6 @@
 import {Controller, Delete, Param, Post, Req, UseGuards} from "@nestjs/common";
 import {AdminService} from "./admin.service";
-import {AdminInterface, BookInterface, UserInterface} from "../types/types";
+import {AdminInterface, BookInterface, UserInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
 
 @Controller('admin')

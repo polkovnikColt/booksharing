@@ -13,14 +13,3 @@ export const formData:FormDataInterface[] = [
         inputComponent: Input.Password
     }
 ];
-
-export const mockUsers:UserInterface[] = [
-    {
-        id:0,
-        email:'email',
-        password:'password',
-        userName:'user',
-        photo:"",
-        role:'user'
-    }
-]

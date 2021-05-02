@@ -1,5 +1,5 @@
-import {Controller, Get, HttpCode, HttpStatus, Post, Req} from "@nestjs/common";
-import {LoginResponseType} from "../types/types";
+import {Controller, Get, HttpCode, HttpStatus, Post, Redirect, Req} from "@nestjs/common";
+import {LoginResponseType} from "../../types/types";
 import {LoginService} from "./login.service";
 
 @Controller('login')
@@ -22,6 +22,7 @@ export class LoginController {
 
     @Post('registration')
     @HttpCode(HttpStatus.CREATED)
+    @Redirect('http://localhost:3000/',301)
     registration(@Req() req): Promise<LoginResponseType> {
         return this.loginService.registration(req.body);
     }
