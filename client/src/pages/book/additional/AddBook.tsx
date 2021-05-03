@@ -1,46 +1,31 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import {Drawer, Form, Button} from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {GeneralForm} from "../../../components/additionalComponents/forms/GeneralForm";
-import {compressImage, formData} from "./service";
-import {useDispatch, useSelector} from "react-redux";
+import {formData} from "./service";
+import { useSelector} from "react-redux";
 import {addBook} from "../../../store/user/userActions";
-import {BookInterface} from "../../../types/types";
 import {RootState} from "../../../store/store";
+import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
+import {useFormHandler} from "../../../hooks/useFormHandler";
 
 export const AddBook: React.FC = () => {
 
-    const dispatch = useDispatch();
-    const user = useSelector((store:RootState) => store.user);
+    const handleAddBook = useDispatchFunc(addBook);
+    const user = useSelector((store: RootState) => store.user);
     const [visible, setVisible] = useState(false);
-    const [book, setBook] = useState({
-        name: '',
-        user: user.credentials.id,
+    const {
+        object,
+        changeHandler,
+        uploadHandler
+    } = useFormHandler({
         ownerName: user.credentials.name,
-        author: '',
-        genre: '',
-        preview: '',
-        description: '',
+        user: user.credentials.id,
         views: 0
-    } as BookInterface);
-
-
-    const uploadHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-        const fileUploaded = e.target.files && e.target.files[0];
-        const fr = new FileReader();
-        fr.onload = () => {
-            setBook({...book, ['preview']: fr.result.toString()});
-        }
-        const compressedFile = await compressImage(fileUploaded);
-        fr.readAsDataURL(compressedFile);
-    }
-
-    const changeHandler = (name: string, value: string): void => {
-        setBook({...book, [name]: value});
-    }
+    }, 'preview');
 
     const submitHandler = () => {
-        dispatch(addBook(book));
+        handleAddBook(object)();
         setVisible(false);
     }
 
@@ -75,7 +60,7 @@ export const AddBook: React.FC = () => {
                         inputHandler={changeHandler}
                         submitHandler={submitHandler}
                         uploaderHandler={uploadHandler}
-                        file={book.preview}
+                        file={object.preview}
                         hasSelector={false}
                         hasCheckbox={false}
                         hasUploader={true}

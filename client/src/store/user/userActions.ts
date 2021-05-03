@@ -22,12 +22,17 @@ export const ADD_BOOK = "ADD_BOOK";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const UPDATE_USER = "UPDATE_USER";
 
-export const deleteBook = (book:BookInterface) => {
+export const deleteBook = (book: BookInterface) => {
     return async (dispatch: Dispatch<DeleteBookType>) => {
-        dispatch({
-            type: DELETE_BOOK,
-            payload: book.id
-        })
+        try {
+            const res = axios.delete(`book/${book.id}`)
+            dispatch({
+                type: DELETE_BOOK,
+                payload: book.id
+            });
+        } catch (e) {
+
+        }
     };
 }
 
@@ -116,6 +121,7 @@ export const loadAllUsers = () => {
 }
 
 export const orderBook = (bookId: number) => {
+    console.log(bookId)
     return async (dispatch: Dispatch<OrderBookType>) => {
         dispatch({
             type: ORDER_BOOK,
@@ -141,7 +147,7 @@ export const updateBook = (book: BookInterface) => {
 export const updateUser = (user: UserInterface) => {
     return async (dispatch: Dispatch<UpdateUserType>) => {
         try {
-            const res = axios.put(`user/${user.id}`,user);
+            const res = axios.put(`user/${user.id}`, user);
             dispatch({
                 type: UPDATE_USER,
                 payload: user
@@ -152,8 +158,3 @@ export const updateUser = (user: UserInterface) => {
     }
 }
 
-export const loginOnLoad = () => {
-    return async (dispatch) => {
-        const res = axios.get('loginOnLoad')
-    }
-}

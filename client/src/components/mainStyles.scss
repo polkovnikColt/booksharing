@@ -44,6 +44,7 @@ $primary-color: #1890ff;
   padding: 10%;
 }
 
+
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
@@ -77,5 +78,14 @@ $primary-color: #1890ff;
 .ant-form-item-label{
   label{
     width: 100px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .form-padding{
+    padding: 1%;
+  }
+  .ant-drawer-body{
+    padding: 3%;
   }
 }

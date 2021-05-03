@@ -5,24 +5,17 @@ import {formData} from './additional/service'
 import {useDispatch} from "react-redux";
 import {registration} from "../../store/user/userActions";
 import {LabelItem} from "../../components/additionalComponents/labels/LabelItem";
+import {useFormHandler} from "../../hooks/useFormHandler";
 
 const {Content} = Layout;
 
 export const RegistrationPage:React.FC = () => {
 
     const dispatch = useDispatch();
-    const [user,setUser] = useState({
-        email:"",
-        password:"",
-        name:"",
-    });
-
-    const changeHandler = (name:string, value:string):void => {
-        setUser({...user, [name]: value});
-    }
+    const {object, changeHandler} = useFormHandler({});
 
     const submitHandler = ():void => {
-        dispatch(registration(user));
+        dispatch(registration(object));
     }
 
     return(

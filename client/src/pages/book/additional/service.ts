@@ -26,16 +26,6 @@ export const formData: FormDataInterface[] = [
 
 ];
 
-export const compressImage = async (file:File):Promise<File> => {
-    const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 300,
-        useWebWorker: true
-    }
-
-    return await imageCompression(file, options);
-}
-
 export const getUserByID = (id: number, allUsers: UserInterface[]) => {
     return allUsers.filter((user:UserInterface) => user.id === id)[0];
 }

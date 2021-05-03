@@ -9,6 +9,7 @@ import './mainPage.styles.scss';
 import {useWidth} from "../../hooks/useDimension";
 import {GlobalOutlined} from "@ant-design/icons";
 import {Greetings} from "../../components/additionalComponents/labels/Grettings";
+import {useFormHandler} from "../../hooks/useFormHandler";
 
 const {Content} = Layout;
 
@@ -19,18 +20,11 @@ export const MainPage: React.FC = () => {
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
     const [isLoading, setLoading] = useState(false);
-    const [cred, setCred] = useState({
-        email: '',
-        password: '',
-    });
-
-    const handleChange = (name: string, value: string): void => {
-        setCred({...cred, [name]: value});
-    }
+    const {object, changeHandler} = useFormHandler({})
 
     const handleSubmit = (): void => {
         setLoading(prevState => !prevState)
-        dispatch(login(cred));
+        dispatch(login(object));
         dispatch(loadAllUsers())
         setLoading(prevState => !prevState)
     }
@@ -65,7 +59,7 @@ export const MainPage: React.FC = () => {
                                 hasCheckbox={false}
                                 buttonText='Увійти'
                                 formData={formData}
-                                inputHandler={handleChange}
+                                inputHandler={changeHandler}
                                 submitHandler={handleSubmit}
                                 isLoading={isLoading}
                             />

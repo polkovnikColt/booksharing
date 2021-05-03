@@ -3,6 +3,7 @@ import {Button, Modal} from "antd";
 import {useDispatch} from "react-redux";
 import {BookInterface, FormDataInterface} from "../../../types/types";
 import {GeneralForm} from "../forms/GeneralForm";
+import {useFormHandler} from "../../../hooks/useFormHandler";
 
 type ModalItemProps = {
     buttonText: string,
@@ -24,27 +25,14 @@ export const ModalUpdate: React.FC<ModalItemProps> = (
 ) => {
     const dispatch = useDispatch();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [bookChange,seTBookChange] = useState(book);
-
-    const changeHandler = (name:string,value:string) => {
-        seTBookChange({...book, [name]: value});
-    }
-
-    const uploadHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0];
-        const fr = new FileReader();
-        fr.onload = () => {
-            seTBookChange({...book, ['preview']: fr.result.toString()});
-        }
-        fr.readAsDataURL(file);
-    }
+    const {object,changeHandler, uploadHandler} = useFormHandler(book,'preview');
 
     const showModal = () => {
         setIsModalVisible(true);
     };
 
     const handleOk = () => {
-        dispatch(dispatchFunction(bookChange));
+        dispatch(dispatchFunction(object));
         setIsModalVisible(false);
     };
 
@@ -57,6 +45,7 @@ export const ModalUpdate: React.FC<ModalItemProps> = (
                 title={title}
                 visible={isModalVisible}
                 onCancel = {handleOk}
+                footer={[]}
             >
                 <GeneralForm
                     buttonText={buttonText}

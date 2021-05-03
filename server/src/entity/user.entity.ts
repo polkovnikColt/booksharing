@@ -25,7 +25,7 @@ export class CommonUser{
     @Column("int", { array: true,default: ()=>'array[]::integer[]'})
     booksToSendId:number[]
 
-    @OneToMany(type => Book,book => book.commonUser,
+    @OneToMany(type => Book,book => book.user,
         {cascade:true})
     books:Book[]
 

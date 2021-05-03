@@ -21,58 +21,25 @@
   <component name="ChangeListManager">
     <list default="true" id="7149d318-d003-49d7-811a-37c5bb854190" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/BookComment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/books/books.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/books/books.styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/GeneralForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/forms/GeneralForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/images/ImageItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/images/ImageItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/images/image.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/images/image.styles.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/Grettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/Grettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/LabelItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/labels/LabelItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/uploader/UploadeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/uploader/UploadeItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/additionalComponents/modal/ModalUpdate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/additionalComponents/modal/ModalUpdate.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/mainStyles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/mainStyles.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navbar/Navigationbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/navbar/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/navbar/additional/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/sidebar/Sidebar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/sidebar/additional/service.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/hooks/usePreload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/usePreload.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/admin/AdminPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/admin/AdminPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/book/BookPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/book/BookPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/book/additional/AddBook.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/book/additional/AddBook.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/book/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/book/additional/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/main/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/MainPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/main/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/additional/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/registration/RegistrationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/registration/RegistrationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/registration/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/registration/additional/service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/user/UserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/user/UserPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/user/additional/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/user/additional/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/user/userActionTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userActionTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/user/userActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/user/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/user/userReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/admin/admin.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/admin/admin.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/admin/admin.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/admin/admin.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/constant/jwt.constant.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/constant/jwt.constant.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/jwt/jwt.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/jwt/jwt.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/jwt/jwt.strategy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/jwt/jwt.strategy.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/login.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/login.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/login.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/auth/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/auth/login.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/book/book.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/book/book.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/book/book.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/book/book.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/book/book.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/book/book.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/entity/book.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/entity/book.entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/entity/user.entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/entity/user.entity.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/middleware/admin.middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/middleware/admin.middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/user.controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/user/user.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/user.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/modules/book/book.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/book/book.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/modules/user/user.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/user.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/modules/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/user.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +124,7 @@
       <workItem from="1619013360813" duration="6001000" />
       <workItem from="1619177199031" duration="55169000" />
       <workItem from="1619609458591" duration="8785000" />
-      <workItem from="1619965451109" duration="5260000" />
+      <workItem from="1619965451109" duration="15691000" />
     </task>
     <servers />
   </component>
@@ -193,10 +160,10 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="310" y="139" key="EditFileWatcherDialog/0.0.1280.720@0.0.1280.720" timestamp="1615238381664" />
-    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1619615359120">
+    <state x="421" y="116" key="FileChooserDialogImpl" timestamp="1619975304912">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1619615359120" />
+    <state x="421" y="116" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1619975304912" />
     <state width="1259" height="176" key="GridCell.Tab.0.bottom" timestamp="1614107288357">
       <screen x="0" y="0" width="1280" height="720" />
     </state>

@@ -1,9 +1,10 @@
 import React from 'react';
-import {Skeleton, Card, Avatar, Tooltip, } from 'antd';
+import {Skeleton, Card, Avatar, Tooltip, Button,} from 'antd';
 import {CheckCircleOutlined} from '@ant-design/icons';
 import {UserInterface} from '../../../types/types';
 import './books.styles.scss';
 import {ImageItem} from "../images/ImageItem";
+import {UserModal} from "../modal/UserModal";
 
 const {Meta} = Card;
 
@@ -19,6 +20,7 @@ type BookCardProps = {
     genre:string
     description:string,
     views:number
+    handleOrderBook?: () => void
 }
 
 export const BookCard:React.FC<BookCardProps> = ({
@@ -32,7 +34,8 @@ export const BookCard:React.FC<BookCardProps> = ({
     views,
     avatar,
     owner,
-    isLogged
+    isLogged,
+    handleOrderBook
 }) => {
     return (
         <>
@@ -42,13 +45,20 @@ export const BookCard:React.FC<BookCardProps> = ({
                 actions={[
                     <Tooltip placement="bottom" title={"Хочу отримати!"}>
                         {isLogged && !isMine &&
-                             <CheckCircleOutlined/>
+                            <Button onClick={handleOrderBook}>
+                                Запросити
+                                <CheckCircleOutlined/>
+                            </Button>
                         }
                     </Tooltip>
                 ]}>
                 <Skeleton loading={false} avatar active>
                     <Meta
-                        avatar={ <Avatar src={avatar}/> }
+                        avatar={
+                            <UserModal
+                            avatar={avatar}
+                            name={owner}
+                        />}
                         title={owner}
                     />
                     <ImageItem

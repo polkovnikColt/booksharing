@@ -1,20 +1,22 @@
 import React from 'react';
 import {Col, Divider, Layout, Row} from "antd";
-import { useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AddBook} from "./additional/AddBook";
 import {RootState} from "../../store/store";
-import {loadAllBooks} from "../../store/user/userActions";
+import {loadAllBooks, orderBook} from "../../store/user/userActions";
 import {ReadOutlined} from "@ant-design/icons";
 import {getUserByID} from "./additional/service";
 import {BookCard} from "../../components/additionalComponents/books/BookCard";
 import {useWidth} from "../../hooks/useDimension";
 import {usePreload} from "../../hooks/usePreload";
 import "../../components/mainStyles.scss";
+import {useDispatchFunc} from "../../hooks/useDispatchFunction";
 
 const {Content} = Layout;
 
 export const BookPage: React.FC = () => {
 
+    const handleOrderBook = useDispatchFunc(orderBook);
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
 
@@ -36,9 +38,10 @@ export const BookPage: React.FC = () => {
                     gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     {user.allBooks.map((book) =>
                         <Col
-                            className="mx-auto my-3"
-                            span={width > 500 ? 10 : 21}>
+                            className="mx-auto m-1"
+                            span={width < 700  ?width < 430 ? 21 : 12 : 8}>
                             <BookCard
+                                handleOrderBook={handleOrderBook(book.id)}
                                 isMine={user.credentials?.id === book.user}
                                 photo={book.preview}
                                 isLogged={!!user.credentials}

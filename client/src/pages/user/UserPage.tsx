@@ -9,15 +9,16 @@ import {OneTab} from "../../components/additionalComponents/tabs/OneTab";
 import {RootState} from "../../store/store";
 import {loadBooks, updateUser} from "../../store/user/userActions";
 import {MyBooks} from "./additional/user-component/MyBooks";
-import {BookInterface, UserInterface} from "../../types/types";
+import {usePreload} from "../../hooks/usePreload";
 
 const {Content} = Layout;
 
 export const UserPage: React.FC = () => {
 
-    const dispatch = useDispatch();
     const width = useWidth(window.innerWidth);
     const user = useSelector((store: RootState) => store.user);
+
+    usePreload(loadBooks,user.credentials.id)
 
     return (
         <Layout>
@@ -30,10 +31,10 @@ export const UserPage: React.FC = () => {
                     </span>
                 </Divider>
                 <NavTab items={[
-                    {title: "Отримання", counter:0},
+                    {title: "Отримання", counter: 0},
                     {title: "Відправлення", counter: 0},
-                    {title:"Повідомлення", counter:0},
-                    {title:"Мої книги", counter:user.books.length}]}>
+                    {title: "Повідомлення", counter: 0},
+                    {title: "Мої книги", counter: user.books.length}]}>
                     <OneTab>
                         <div>123</div>
                     </OneTab>

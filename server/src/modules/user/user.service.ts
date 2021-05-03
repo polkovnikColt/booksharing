@@ -31,4 +31,8 @@ export class UserService {
     async updateUser(id: number, body): Promise<UserInterface> {
         return await this.manager.update(CommonUser, {id: id}, body);
     }
+
+    async orderBook(id:number): Promise<void> {
+
+    }
 }

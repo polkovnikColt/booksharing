@@ -15,6 +15,12 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
+    @Get(':id')
+    orderBook(@Param("id") id) {
+        return
+    }
+
+    @UseGuards(AuthGuard('jwt'))
     @Delete(':id')
     deleteUser(@Param("id") id):Promise<UserInterface>{
         return this.userService.deleteUser(id);

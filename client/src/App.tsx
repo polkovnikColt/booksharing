@@ -12,18 +12,13 @@ import {ProtectedRoute} from "./components/additionalComponents/routes/Protected
 import {AdminPage} from "./pages/admin/AdminPage";
 import {RulesPage} from "./pages/rules/RulesPage";
 import {RegistrationPage} from "./pages/registration/RegistrationPage";
-import {loginOnLoad} from "./store/user/userActions";
 
 const App: React.FC = () => {
 
     const user = useSelector((store: RootState) => store.user);
     const dispatch = useDispatch();
 
-    // console.log(user);
-
-    useEffect(() => {
-        dispatch(loginOnLoad())
-    },[])
+     console.log(user);
 
     return (
         <HashRouter>

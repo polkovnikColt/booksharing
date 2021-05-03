@@ -31,7 +31,7 @@ export class Book {
     @ManyToOne(type => CommonUser, user => user.books,
         {onDelete:"CASCADE"})
     // @JoinColumn({ referencedColumnName: "user_id" })
-    commonUser: CommonUser
+    user: CommonUser
 
 
 }

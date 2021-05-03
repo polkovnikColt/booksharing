@@ -13,13 +13,20 @@ export class BookService {
         this.manager = getManager();
     }
 
-    async getAllBooks():Promise<BookInterface[]>{
+    // async getAllBooks():Promise<BookInterface[]>{
+    //     return await this.manager
+    //         .createQueryBuilder()
+    //         .select('book')
+    //         .from(Book,'book')
+    //         // .innerJoin(CommonUser, 'user')
+    //         .getMany()
+    // }
+
+    async getAllBooks():Promise<any>{
         return await this.manager
-            .createQueryBuilder()
-            .select('book')
-            .from(Book,'book')
-            // .innerJoin(CommonUser, 'user')
-            .getMany()
+            .createQueryBuilder(Book, 'book')
+            .leftJoinAndSelect(CommonUser,'user','user.id = book.user')
+            .getMany();
     }
 
     async getBookById(id:number):Promise<BookInterface[]>{

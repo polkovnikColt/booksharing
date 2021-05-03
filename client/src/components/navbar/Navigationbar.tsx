@@ -7,18 +7,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {unlog} from "../../store/user/userActions";
 import {UserOutlined} from "@ant-design/icons";
+import {useDispatchFunc} from "../../hooks/useDispatchFunction";
 
 const {Header} = Layout;
 
 export const Navigationbar: React.FunctionComponent = () => {
 
     const width = useWidth(window.innerWidth);
-    const dispatch = useDispatch();
     const user = useSelector((store: RootState) => store.user);
-
-    const handleUnlog = () => {
-        dispatch(unlog());
-    }
+    const handleUnlog = useDispatchFunc(unlog);
 
     return (
         <Layout>
@@ -41,7 +38,7 @@ export const Navigationbar: React.FunctionComponent = () => {
                         style={{display: width < 500 ? "none" : "inherit"}}
                         className="gutter-row" span={4}>
                         <Button
-                            onClick={handleUnlog}
+                            onClick={handleUnlog()}
                             style={{margin: "17px 0 0 auto"}}
                             type="primary" ghost>
                             Вийти
@@ -49,7 +46,7 @@ export const Navigationbar: React.FunctionComponent = () => {
                     </Col>}
                     <Col span={width > 500 ? 3 : 4}>
                         <div
-                            onClick={handleUnlog}
+                            onClick={handleUnlog()}
                         >
                             {!!user?.credentials || user?.credentials?.avatar ?
                                 <Avatar
