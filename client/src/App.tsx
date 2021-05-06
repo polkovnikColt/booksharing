@@ -38,7 +38,7 @@ const App: React.FC = () => {
                         <ProtectedRoute
                             component={AdminPage}
                             path={'/admin'}
-                            isAuth={user.credentials?.role === 'admin'}
+                            isAuth={true}
                         />
                     </Switch>
                 </Row>

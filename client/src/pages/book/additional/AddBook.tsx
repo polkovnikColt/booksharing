@@ -19,8 +19,7 @@ export const AddBook: React.FC = () => {
         changeHandler,
         uploadHandler
     } = useFormHandler({
-        ownerName: user.credentials.name,
-        user: user.credentials.id,
+        user: [user.credentials],
         views: 0
     }, 'preview');
 

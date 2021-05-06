@@ -1,6 +1,6 @@
 import {
     ADD_BOOK,
-    DELETE_BOOK,
+    DELETE_BOOK, DISORDER_BOOK,
     LOAD_ALL_BOOKS,
     LOAD_ALL_USERS,
     LOAD_BOOKS,
@@ -46,7 +46,7 @@ export const userReducer = (state = initState, action: ActionsType) => {
         case LOAD_ALL_BOOKS:
             return {
                 ...state,
-                allBooks:action.payload
+                allBooks: action.payload
             }
         case LOAD_ALL_USERS:
             return {
@@ -56,6 +56,52 @@ export const userReducer = (state = initState, action: ActionsType) => {
         case ORDER_BOOK:
             return {
                 ...state,
+                allBooks: state.allBooks.map(book => {
+                    if (book.id === action.payload.bookId) {
+                        return {
+                            ...book,
+                            isOrdered: true,
+                            views: action.payload.views + 1
+                        };
+                    }
+                    return book;
+                }),
+                credentials: {
+                    ...state.credentials,
+                    booksToGetId: [...state.credentials.booksToGetId, action.payload.bookId]
+                },
+                allUsers: state.allUsers.map(user => {
+                    if (user.id === action.payload.userGetId) {
+                        return {...user, booksToSendId: action.payload.bookId};
+                    }
+                    return user;
+                })
+            }
+        case DISORDER_BOOK:
+            return {
+                ...state,
+                allBooks: state.allBooks.map(book => {
+                    if (book.id === action.payload.bookId) {
+                        return {
+                            ...book,
+                            isOrdered: false,
+                        };
+                    }
+                    return book;
+                }),
+                credentials: {
+                    ...state.credentials,
+                    booksToGetId: state.credentials.booksToGetId
+                        .filter(id => id !== action.payload.bookId)
+                },
+                allUsers: state.allUsers.map(user => {
+                    if (user.id === action.payload.userGetId) {
+                        const booksToSend = user.booksToSendId
+                            .filter(id => id !== action.payload.bookId);
+                        return {...user, booksToSendId: booksToSend};
+                    }
+                    return user;
+                })
             }
         case ADD_BOOK:
             return {
@@ -66,7 +112,7 @@ export const userReducer = (state = initState, action: ActionsType) => {
             return {
                 ...state,
                 books: state.books.map(book => {
-                    if(book.id === action.payload.id){
+                    if (book.id === action.payload.id) {
                         return {...book, ...action.payload};
                     }
                     return book;

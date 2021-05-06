@@ -13,17 +13,31 @@ export interface AdminInterface {
     id:number,
     email:string,
     password:string,
+
+}
+
+export interface UserToBookInterface {
+    id:number,
+    email:string,
+    name:string,
+    avatar:string,
 }
 
 export interface BookInterface{
     id:number
-    commonUser:number
+    user: UserToBookInterface | null
     name:string
     author:string
     preview:string
-    ownerName:string
     description:string
     views:number
+}
+
+export interface PreferenceInterface {
+    id: number,
+    genre: string[]
+    author: string[]
+    user: UserInterface
 }
 
 export type LoginResponseType = {

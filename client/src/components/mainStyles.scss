@@ -1,5 +1,5 @@
 $primary-color: #1890ff;
-
+$white-font: #ffffff;
 
 .my-3 {
   margin-top: 3% !important;
@@ -47,6 +47,13 @@ $primary-color: #1890ff;
 
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
+}
+
+.font-white{
+  color: $white-font;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 1%;
 }
 
 .custom-file-input::before {

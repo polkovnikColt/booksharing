@@ -2,7 +2,8 @@ $delete-color: red;
 $update-color: green;
 
 @mixin btn-mixin {
-  margin: 1% auto;
+  margin: 3% 10%;
+  width: 90px;
 }
 
 .btn-delete {

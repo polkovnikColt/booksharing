@@ -16,11 +16,11 @@ export class Book {
     @Column()
     genre: string
 
-    @Column()
-    ownerName:string
-
     @Column({default:""})
     preview:string
+
+    @Column({default:false})
+    isOrdered: boolean
 
     @Column()
     description: string
@@ -30,8 +30,6 @@ export class Book {
 
     @ManyToOne(type => CommonUser, user => user.books,
         {onDelete:"CASCADE"})
-    // @JoinColumn({ referencedColumnName: "user_id" })
-    user: CommonUser
-
+    user: any
 
 }

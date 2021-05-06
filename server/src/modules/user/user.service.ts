@@ -19,6 +19,39 @@ export class UserService {
             .getMany();
     }
 
+    async orderBook (id:number, body:any):Promise<void> {
+        const userGet = await this.manager.findOne(CommonUser, {
+            where: {
+                id:id
+            }
+        });
+        const userSend = await this.manager.findOne(CommonUser, {
+            where: {
+                id: body.userGetId
+            }
+        });
+        userGet.booksToGetId.push(body.bookId);
+        userSend.booksToSendId.push(body.bookId);
+       await this.manager.save(userGet);
+       await this.manager.save(userSend);
+    }
+
+    async disorderBook (id:number, body:any):Promise<void> {
+        const userGet = await this.manager.findOne(CommonUser, {
+            where: {
+                id: id
+            }
+        });
+        const userSend = await this.manager.findOne(CommonUser, {
+            where: {
+                id: body.userGetId
+            }
+        });
+        userGet.booksToGetId = userGet.booksToGetId.filter(id => id !== body.bookId);
+        userSend.booksToSendId = userSend.booksToSendId.filter(id => id !== body.bookId);
+        await this.manager.save(userGet);
+        await this.manager.save(userSend);
+    }
     async createUser(body: UserInterface): Promise<UserInterface> {
         return await this.manager
             .insert(CommonUser, body);
@@ -32,7 +65,4 @@ export class UserService {
         return await this.manager.update(CommonUser, {id: id}, body);
     }
 
-    async orderBook(id:number): Promise<void> {
-
-    }
 }

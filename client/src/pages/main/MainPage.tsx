@@ -1,32 +1,36 @@
-import React, { useState} from "react";
+import React from "react";
 import {Divider, Layout, Col, Row} from "antd";
 import {GeneralForm} from "../../components/additionalComponents/forms/GeneralForm";
-import {formData} from "./additional/service";
-import {useDispatch, useSelector} from "react-redux";
-import {loadAllUsers, login} from "../../store/user/userActions";
+import {formData, message} from "./additional/service";
+import { useSelector} from "react-redux";
+import {loadAllBooks, loadAllUsers, login} from "../../store/user/userActions";
 import {RootState} from "../../store/store";
 import './mainPage.styles.scss';
 import {useWidth} from "../../hooks/useDimension";
 import {GlobalOutlined} from "@ant-design/icons";
 import {Greetings} from "../../components/additionalComponents/labels/Grettings";
 import {useFormHandler} from "../../hooks/useFormHandler";
+import {AutoCompleteSearch} from "../../components/additionalComponents/forms/AutoCompleteSearch";
+import {usePreload} from "../../hooks/usePreload";
+import {useDispatchFunc} from "../../hooks/useDispatchFunction";
+import {BookCard} from "../../components/additionalComponents/books/BookCard";
+import {AlertMessage} from "../../components/additionalComponents/alert/AlertMessage";
 
 const {Content} = Layout;
 
 export const MainPage: React.FC = () => {
 
-
-    const dispatch = useDispatch();
+    const handleLogin = useDispatchFunc(login);
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
-    const [isLoading, setLoading] = useState(false);
-    const {object, changeHandler} = useFormHandler({})
+    const {object, changeHandler, reload, onSelect} = useFormHandler({})
+
+    usePreload(loadAllBooks);
+    usePreload(loadAllUsers)
 
     const handleSubmit = (): void => {
-        setLoading(prevState => !prevState)
-        dispatch(login(object));
-        dispatch(loadAllUsers())
-        setLoading(prevState => !prevState)
+        handleLogin(object)();
+        reload("");
     }
 
     return (
@@ -39,9 +43,26 @@ export const MainPage: React.FC = () => {
                         <GlobalOutlined/>
                     </span>
                 </Divider>
-                <Greetings
-                    isLogged={!!user.credentials}
-                />
+            <div className = "main-title">Вітаємо у КНИГООБМІНІ</div>
+                {!!user.credentials ?
+                    <>
+                        <AlertMessage
+                            type="info"
+                            message={message}
+                        />
+                        <AutoCompleteSearch
+                            books={user.allBooks}
+                            users={user.allUsers}
+                            onSelect={onSelect}
+                        />
+                        <Divider orientation="center">
+                            {object.length ? <h3>Результати пошуку: </h3> : <h3>Рекомендації: </h3>}
+                        </Divider>
+                    </>
+                    :
+                    <Greetings/>
+                }
+
                 <Row
                     className="m-0"
                     style={{width: width}}
@@ -61,9 +82,12 @@ export const MainPage: React.FC = () => {
                                 formData={formData}
                                 inputHandler={changeHandler}
                                 submitHandler={handleSubmit}
-                                isLoading={isLoading}
                             />
                         </Col>}
+                        {object.length ?
+                            null :
+                            null
+                        }
                     </div>
                 </Row>
             </Content>

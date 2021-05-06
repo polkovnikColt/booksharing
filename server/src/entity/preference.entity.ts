@@ -1,19 +1,20 @@
-import {Column, OneToOne, PrimaryGeneratedColumn} from "typeorm/index";
+import {Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm/index";
 import {CommonUser} from "./user.entity";
 
+@Entity()
 export class Preference{
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column({type:'string', default:''})
-    genre:string
+    @Column( "text",{ array: true,default: ()=>'array[]::text[]'} )
+    genre:string[]
 
-    @Column({type:'string', default:''})
-    author: string
+    @Column( "text",{ array: true,default: ()=>'array[]::text[]'})
+    author: string[]
 
-    @Column("int", { array: true,default: ()=>'array[]::integer[]'})
-    usersId: number
+    // @Column("int", { array: true,default: ()=>'array[]::integer[]'})
+    // usersId: number
 
-    @OneToOne(() => CommonUser)
+    @OneToOne(() => CommonUser, user => user.preference)
     user: CommonUser
 }

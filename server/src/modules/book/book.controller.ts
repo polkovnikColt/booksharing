@@ -2,6 +2,7 @@ import {Controller, Delete, Get, Param, Post, Put, Req, UseGuards} from '@nestjs
 import {BookService} from "./book.service";
 import {BookInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
+import {Book} from "../../entity/book.entity";
 
 
 

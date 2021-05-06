@@ -23,7 +23,7 @@ export const UploaderItem: React.FC<UploaderItemProps> = (
                    onChange={uploadHandler}
             />
             <ImageItem
-                widthInPer={width < 500 ? 100 : 50}
+                widthInPer={width < 500 ? 100 : 70}
                 base64={file}/>
         </div>
     )

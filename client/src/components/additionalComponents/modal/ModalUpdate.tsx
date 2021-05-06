@@ -1,9 +1,10 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, { useState} from 'react';
 import {Button, Modal} from "antd";
 import {useDispatch} from "react-redux";
 import {BookInterface, FormDataInterface} from "../../../types/types";
 import {GeneralForm} from "../forms/GeneralForm";
 import {useFormHandler} from "../../../hooks/useFormHandler";
+import './modal.styles.scss'
 
 type ModalItemProps = {
     buttonText: string,
@@ -38,7 +39,7 @@ export const ModalUpdate: React.FC<ModalItemProps> = (
 
     return (
         <>
-            <Button type="primary" onClick={showModal}>
+            <Button type="primary" onClick={showModal} ghost>
                 {buttonText}
             </Button>
             <Modal

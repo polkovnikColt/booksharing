@@ -20,7 +20,7 @@ export const BookPage: React.FC = () => {
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
 
-    usePreload(loadAllBooks);
+    usePreload(loadAllBooks)
 
     return (
         <Layout>
@@ -30,23 +30,30 @@ export const BookPage: React.FC = () => {
                     Книги
                     <span
                         className="mx-1">
-                        <ReadOutlined />
+                        <ReadOutlined/>
                     </span>
                 </Divider>
                 {user.credentials && <AddBook/>}
-                <Row className ="m-0"
-                    gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
+                <Row className="m-0"
+                     gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     {user.allBooks.map((book) =>
                         <Col
                             className="mx-auto m-1"
-                            span={width < 700  ?width < 430 ? 21 : 12 : 8}>
+                            span={width < 700 ? width < 430 ? 21 : 12 : 8}>
                             <BookCard
-                                handleOrderBook={handleOrderBook(book.id)}
-                                isMine={user.credentials?.id === book.user}
+                                handleOrderBook={book.isOrdered ? null : handleOrderBook(
+                                    {
+                                        bookId: book.id,
+                                        userId: user.credentials?.id,
+                                        userGetId: book.user[0].id,
+                                        views: book.views
+                                    }
+                                )}
+                                isOrdered = {book.isOrdered}
+                                isMine={user.credentials?.id === book.user[0].id}
                                 photo={book.preview}
                                 isLogged={!!user.credentials}
-                                avatar={user.credentials?.avatar}
-                                owner={book.ownerName}
+                                user = {book.user}
                                 name={book.name}
                                 author={book.author}
                                 genre={book.genre}

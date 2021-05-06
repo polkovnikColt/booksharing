@@ -1,12 +1,12 @@
 import React from 'react';
 import {Button} from "antd";
-import {useDispatch} from "react-redux";
 import './manipulators.styles.scss';
-import {BookInterface, UserInterface} from "../../../types/types";
+import {BookInterface, OrderBookInterface, UserInterface} from "../../../types/types";
+import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 
 type ButtonManipulateProps = {
     dispatchFunction:any,
-    object: UserInterface | BookInterface,
+    object: UserInterface | BookInterface | OrderBookInterface,
     text: string,
     type: "update" | "delete"
 
@@ -21,17 +21,13 @@ export const ButtonManipulate: React.FC<ButtonManipulateProps> = (
     }
 ) => {
 
-    const dispatch = useDispatch();
-
-    const submitHandler = () => {
-        dispatch(dispatchFunction(object));
-    }
+    const submitHandler = useDispatchFunc(dispatchFunction)
 
     return (
         <Button
             className ={`btn-${type}`}
             ghost
-            onClick={submitHandler}>
+            onClick={submitHandler(object)}>
             {text}
         </Button>
     )

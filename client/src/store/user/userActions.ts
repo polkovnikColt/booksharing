@@ -1,8 +1,8 @@
-import {BookInterface, UserInterface} from "../../types/types";
+import {BookInterface, OrderBookInterface, UserInterface} from "../../types/types";
 import {Dispatch} from "redux";
 import {
     AddBookType,
-    DeleteBookType,
+    DeleteBookType, DisorderBookType,
     LoadAllBooksType,
     LoadBooksType,
     LoadingAllUsersType,
@@ -18,6 +18,7 @@ export const LOAD_BOOKS = "LOAD_BOOKS";
 export const LOAD_ALL_BOOKS = "LOAD_ALL_BOOKS";
 export const LOAD_ALL_USERS = "LOAD_ALL_USERS";
 export const ORDER_BOOK = "ORDER_BOOK";
+export const DISORDER_BOOK = "DISORDER_BOOK";
 export const ADD_BOOK = "ADD_BOOK";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const UPDATE_USER = "UPDATE_USER";
@@ -57,12 +58,12 @@ export const unlog = () => {
 
 export const registration = (user) => {
     return async (dispatch: Dispatch<LoginType>) => {
-        console.log(user);
         try {
             const res = await axios.post('/login/registration', user);
+            localStorage.setItem('token',res.data.token);
             dispatch({
                 type: LOGIN,
-                payload: res.data
+                payload: res.data.user
             })
         } catch (e) {
             alert("Something went wrong")
@@ -71,12 +72,20 @@ export const registration = (user) => {
 }
 
 export const addBook = (book) => {
+    console.log(book);
     return async (dispatch: Dispatch<AddBookType>) => {
-        await axios.post('/book', book);
-        dispatch({
-            type: ADD_BOOK,
-            payload: book
-        })
+        const user = book.user;
+        book.user = book.user[0].id;
+        try {
+            await axios.post('/book', book);
+            book.user = user;
+            dispatch({
+                type: ADD_BOOK,
+                payload: book
+            });
+        } catch (e) {
+
+        }
     }
 }
 
@@ -112,22 +121,49 @@ export const loadAllBooks = () => {
 export const loadAllUsers = () => {
 
     return async (dispatch: Dispatch<LoadingAllUsersType>) => {
-        const res = await axios.get('/user');
-        dispatch({
-            type: LOAD_ALL_USERS,
-            payload: res.data
-        });
+        try{
+            const res = await axios.get('/user');
+            dispatch({
+                type: LOAD_ALL_USERS,
+                payload: res.data
+            });
+        } catch (e) {
+
+        }
     };
 }
 
-export const orderBook = (bookId: number) => {
-    console.log(bookId)
+export const orderBook = (order: OrderBookInterface) => {
     return async (dispatch: Dispatch<OrderBookType>) => {
-        dispatch({
-            type: ORDER_BOOK,
-            payload: bookId
-        });
+        try {
+            const resUser = await axios.put(`user/order/${order.userId}`, order);
+            const resBook = await axios.put(`book/${order.bookId}`,
+                {isOrdered:true, views: order.views + 1});
+            dispatch({
+                type: ORDER_BOOK,
+                payload: order
+            });
+        } catch (e) {
+
+        }
     };
+}
+
+export const disorderBook = (order: OrderBookInterface) => {
+    return async (dispatch: Dispatch<DisorderBookType>) => {
+        try {
+            const resUser = await axios.put(`user/disorder/${order.userId}`, order);
+            const resBook = await axios.put(`book/${order.bookId}`,
+                {isOrdered:false});
+            console.log(resUser,resBook);
+            dispatch({
+                type: DISORDER_BOOK,
+                payload: order
+            })
+        } catch (e) {
+
+        }
+    }
 }
 
 export const updateBook = (book: BookInterface) => {

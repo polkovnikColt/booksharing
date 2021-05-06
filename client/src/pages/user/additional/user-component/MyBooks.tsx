@@ -6,6 +6,8 @@ import {ButtonManipulate} from "../../../../components/additionalComponents/mani
 import {deleteBook, updateBook} from "../../../../store/user/userActions";
 import {formData} from "../service";
 import {ModalUpdate} from "../../../../components/additionalComponents/modal/ModalUpdate";
+import {ColumnWrapper} from "../../../../components/additionalComponents/wrappers/ColumnWrapper";
+import {GeneralForm} from "../../../../components/additionalComponents/forms/GeneralForm";
 
 type MyBooksProps = {
     books: BookInterface[],
@@ -13,7 +15,7 @@ type MyBooksProps = {
     width: number
 }
 
-export const MyBooks:React.FC<MyBooksProps> = (
+export const MyBooks: React.FC<MyBooksProps> = (
     {
         books,
         user,
@@ -21,45 +23,56 @@ export const MyBooks:React.FC<MyBooksProps> = (
     }
 ) => {
 
-    return(
-       <>
+    return (
+        <>
             {books.map((book: BookInterface) => {
                 return (
-                    <Col
-                        className="mx-auto my-3"
-                        span={24}>
-                        <Row>
-                        <BookCard
-                            widthInPx={width < 500 ? 300 : 350}
-                            isMine={true}
-                            avatar={user.avatar}
-                            isLogged={!!user}
-                            owner={book.ownerName}
-                            name={book.name}
-                            photo={book.preview}
-                            author={book.author}
-                            genre={book.genre}
-                            description={book.description}
-                            views={book.views}
-                        />
-                        <Row>
-                           <ModalUpdate
-                               buttonText="Оновити"
-                               book={book}
-                               title="Оновити книгу"
-                               formData={formData}
-                               dispatchFunction={updateBook}
-                           />
-                        <ButtonManipulate
-                            dispatchFunction={deleteBook}
-                            object={book}
-                            type="delete"
-                            text="Видалити"/>
-                        </Row>
-                        </Row>
-                    </Col>
+                    <Row className="mx-1 my-3">
+                        <Col span={width < 500 ? 24 : 10}>
+                            <BookCard
+                                widthInPx={width < 500 ? 400 : 300}
+                                isMine={true}
+                                isLogged={!!user}
+                                user={book.user}
+                                name={book.name}
+                                photo={book.preview}
+                                author={book.author}
+                                genre={book.genre}
+                                description={book.description}
+                                views={book.views}
+                            />
+                        </Col>
+                        <Col
+                            span={width < 500 ? 24 : 14}>
+                            <ColumnWrapper>
+                                {width < 500 ? <ModalUpdate
+                                        buttonText="Оновити"
+                                        book={book}
+                                        title="Оновити книгу"
+                                        formData={formData}
+                                        dispatchFunction={updateBook}
+                                    /> :
+                                    <GeneralForm
+                                        buttonText="Оновити"
+                                        formData={formData}
+                                        inputHandler={null}
+                                        submitHandler={null}
+                                        uploaderHandler={null}
+                                        hasSelector={false}
+                                        hasCheckbox={false}
+                                        hasUploader={true}
+                                    />
+                                }
+                                <ButtonManipulate
+                                    dispatchFunction={deleteBook}
+                                    object={book}
+                                    type="delete"
+                                    text="Видалити"/>
+                            </ColumnWrapper>
+                        </Col>
+                    </Row>
                 )
             })}
-       </>
+        </>
     )
 }

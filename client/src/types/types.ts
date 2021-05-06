@@ -21,12 +21,12 @@ export interface CardInterface {
 
 export interface BookInterface{
     id:number,
-    user:number,
+    user:any ,
     preview?:string,
     name:string,
-    ownerName:string
     author:string,
     genre:string,
+    isOrdered: boolean,
     description:string,
     views:number
 }
@@ -35,6 +35,9 @@ export interface UserInterface {
     id:number,
     name: string,
     avatar?: string,
+    city?:string,
+    phoneNumber?:string,
+    info?:string,
     email:string,
     password:string,
     booksToGetId?:number[],
@@ -44,6 +47,7 @@ export interface UserInterface {
 
 export type ToolsState = {
     loading: boolean
+    main:boolean
 }
 
 export interface FormDataInterface{
@@ -51,4 +55,11 @@ export interface FormDataInterface{
     name:string,
     message?:string,
     inputComponent: typeof Component | ForwardRefExoticComponent<any>
+}
+
+export interface OrderBookInterface {
+    userId: number
+    bookId: number
+    userGetId: number
+    views?:number
 }

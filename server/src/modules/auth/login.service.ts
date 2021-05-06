@@ -2,8 +2,9 @@ import {CommonUser} from "../../entity/user.entity";
 import {LoginResponseType, UserInterface} from "../../types/types";
 import {getManager} from "typeorm/index";
 import {JwtService} from "@nestjs/jwt";
-import {ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";
+import {BadRequestException, ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";
 import * as bcrypt from 'bcrypt';
+import {jwtconst} from "./constant/jwt.constant";
 
 @Injectable()
 export class LoginService {
@@ -14,40 +15,41 @@ export class LoginService {
     }
 
     private async validateUser(user: UserInterface): Promise<UserInterface | null> {
-       const candidate = await this.manager.findOne(CommonUser,{email: user.email});
-       if(!candidate){
-           return null;
-       }
-       if(candidate.password === user.password){
-           return candidate;
-       }
-       return null;
+        const candidate = await this.manager.findOne(CommonUser, {email: user.email});
+        if (!candidate) {
+            return null;
+        }
+        const isMatch = await bcrypt.compare(user.password, candidate.password);
+        if (isMatch) {
+            return candidate;
+        }
+        return null;
     }
 
     async login(body: UserInterface): Promise<LoginResponseType> {
-        const user:UserInterface = await this.validateUser(body);
-        if(user){
+        const user: UserInterface = await this.validateUser(body);
+        if (user) {
             return {
-                token: this.jwtService.sign({user:user.id}),
-                user:user
+                token: this.jwtService.sign({user: user.id}),
+                user: user
             }
-        }
-        else{
+        } else {
             throw new UnauthorizedException();
         }
     }
 
     async registration(user: UserInterface): Promise<LoginResponseType> {
         const candidate = await this.manager.findOne(CommonUser, {email: user.email});
-        if(candidate){
-            throw new ForbiddenException();
-        }
-        else{
-            await this.manager.insert(CommonUser,user);
-            return{
-                token: this.jwtService.sign({user:user.id}),
+        if (!candidate) {
+            const hash = await bcrypt.hash(user.password, jwtconst.salt)
+            user.password = hash;
+            await this.manager.insert(CommonUser, user);
+            return {
+                token: this.jwtService.sign({user: user.id}),
                 user: user
             }
+        } else {
+            throw new BadRequestException();
         }
     }
 

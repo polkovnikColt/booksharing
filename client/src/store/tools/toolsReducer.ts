@@ -1,10 +1,11 @@
 import {ActionsType} from "./toolsActionsType";
 import {ToolsState} from "../../types/types";
-import {LOADING} from "./toolsActions";
+import {CLOSE_MAIN, LOADING} from "./toolsActions";
 
 
 const initState: ToolsState = {
-    loading:false
+    main: true,
+    loading: false
 }
 
 export const toolsReducer = (state = initState, action: ActionsType) => {
@@ -13,6 +14,11 @@ export const toolsReducer = (state = initState, action: ActionsType) => {
             return {
                 ...state,
                 loading: action.payload
+            }
+        case CLOSE_MAIN:
+            return {
+                ...state,
+                main: action.payload
             }
         default:
             return state;

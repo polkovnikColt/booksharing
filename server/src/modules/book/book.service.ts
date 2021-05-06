@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {BookInterface} from "../../types/types";
-import {getManager} from "typeorm/index";
+import {getConnection, getManager} from "typeorm/index";
 import {Book} from "../../entity/book.entity";
 import {CommonUser} from "../../entity/user.entity";
 
@@ -13,39 +13,37 @@ export class BookService {
         this.manager = getManager();
     }
 
-    // async getAllBooks():Promise<BookInterface[]>{
-    //     return await this.manager
-    //         .createQueryBuilder()
-    //         .select('book')
-    //         .from(Book,'book')
-    //         // .innerJoin(CommonUser, 'user')
-    //         .getMany()
-    // }
-
-    async getAllBooks():Promise<any>{
-        return await this.manager
-            .createQueryBuilder(Book, 'book')
-            .leftJoinAndSelect(CommonUser,'user','user.id = book.user')
-            .getMany();
+    async getAllBooks(): Promise<BookInterface[]> {
+        const books = await getConnection().manager.find(Book);
+        const result: BookInterface[] = [];
+        for (const book of books) {
+            book.user = await getConnection()
+                .createQueryBuilder()
+                .relation(Book, "user")
+                .of(book)
+                .loadMany();
+            result.push(book);
+        }
+        return result;
     }
 
-    async getBookById(id:number):Promise<BookInterface[]>{
+    async getBookById(id: number): Promise<BookInterface[]> {
         return await this.manager.find(Book, {
-            where:{
+            where: {
                 user: id
             }
         });
     }
 
-    async createBook(body:BookInterface):Promise<BookInterface>{
-        return this.manager.insert(Book,body);
+    async createBook(body: BookInterface): Promise<BookInterface> {
+        return this.manager.insert(Book, body);
     }
 
-    async deleteBook(id:number):Promise<BookInterface>{
-        return this.manager.delete(Book,{id:id});
+    async deleteBook(id: number): Promise<BookInterface> {
+        return this.manager.delete(Book, {id: id});
     }
 
-    async updateBook(id:number,body:BookInterface):Promise<BookInterface>{
-        return this.manager.update(Book,{id:id}, body);
+    async updateBook(id: number, body: BookInterface): Promise<BookInterface> {
+        return this.manager.update(Book, {id: id}, body);
     }
 }

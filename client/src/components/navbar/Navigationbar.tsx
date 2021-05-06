@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Menu, Button, Row, Col, Avatar} from 'antd';
+import {Layout, Menu, Button, Row, Col, Avatar, Tooltip} from 'antd';
 import {getLinks} from "./additional/service";
 import {useWidth} from "../../hooks/useDimension";
 import {useDispatch, useSelector} from "react-redux";
@@ -32,31 +32,16 @@ export const Navigationbar: React.FunctionComponent = () => {
                             ))}
                         </Menu>
                     </Col>
-                    {!!user.credentials &&
-
-                    <Col
-                        style={{display: width < 500 ? "none" : "inherit"}}
-                        className="gutter-row" span={4}>
-                        <Button
-                            onClick={handleUnlog()}
-                            style={{margin: "17px 0 0 auto"}}
-                            type="primary" ghost>
-                            Вийти
-                        </Button>
-                    </Col>}
-                    <Col span={width > 500 ? 3 : 4}>
-                        <div
-                            onClick={handleUnlog()}
-                        >
-                            {!!user?.credentials || user?.credentials?.avatar ?
-                                <Avatar
-                                    src={user.credentials.avatar}/>
-                                    :
-                                <Avatar
-                                size="large"
-                                icon={<UserOutlined/>}
-                            />}
-                        </div>
+                    <Col span={width > 500 ? 7 : 4}>
+                        <Row>
+                            {!!user.credentials &&
+                            <div
+                                onClick={handleUnlog()}>
+                                <h3 className="font-white">
+                                   <span>{user.credentials?.name}</span>
+                                </h3>
+                            </div>}
+                        </Row>
                     </Col>
                 </Row>
             </Header>

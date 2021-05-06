@@ -1,6 +1,6 @@
 import {
     ADD_BOOK,
-    DELETE_BOOK,
+    DELETE_BOOK, DISORDER_BOOK,
     LOAD_ALL_BOOKS,
     LOAD_ALL_USERS,
     LOAD_BOOKS,
@@ -8,7 +8,7 @@ import {
     ORDER_BOOK,
     UNLOG, UPDATE_BOOK, UPDATE_USER
 } from "./userActions";
-import {BookInterface, UserInterface} from "../../types/types";
+import {BookInterface, OrderBookInterface, UserInterface} from "../../types/types";
 
 
 export type DeleteBookType = {
@@ -43,7 +43,7 @@ export type LoadingAllUsersType ={
 
 export type OrderBookType = {
     type: typeof ORDER_BOOK
-    payload: number
+    payload: OrderBookInterface
 }
 
 export type AddBookType = {
@@ -61,7 +61,12 @@ export type UpdateUserType = {
     payload: UserInterface
 }
 
+export type DisorderBookType = {
+    type: typeof DISORDER_BOOK
+    payload: OrderBookInterface
+}
+
 export type ActionsType = DeleteBookType | LoginType
     | UnlogType | LoadBooksType
     | LoadAllBooksType | LoadingAllUsersType
-    | OrderBookType | AddBookType | UpdateBook | UpdateUserType;
+    | OrderBookType | AddBookType | UpdateBook | UpdateUserType | DisorderBookType;

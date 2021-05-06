@@ -1,4 +1,4 @@
-import {FormDataInterface} from "../../../types/types";
+import {BookInterface, FormDataInterface} from "../../../types/types";
 import {Input} from "antd";
 
 export const formData: FormDataInterface[] = [
@@ -31,3 +31,13 @@ export const userFormData:FormDataInterface[] = [
         inputComponent: Input
     },
 ]
+
+export const messageFormData:FormDataInterface[] = [{
+    name: 'massage',
+    label:'',
+    inputComponent: Input.TextArea
+}]
+
+export const getBooks = (allBooks:BookInterface[], booksToGetIds:number[]) => {
+    return booksToGetIds.map(id => allBooks.find(book => book.id === id));
+}

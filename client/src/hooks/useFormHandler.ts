@@ -3,7 +3,7 @@ import imageCompression from "browser-image-compression";
 
 const compressImage = async (file:File):Promise<File> => {
     const options = {
-        maxSizeMB: 2,
+        maxSizeMB: 1,
         maxWidthOrHeight: 300,
         useWebWorker: true
     }
@@ -28,5 +28,13 @@ export const useFormHandler = (initState,uploaderField:string = '') => {
         setObject({...object, [name]: value});
     }
 
-    return {object, uploadHandler, changeHandler}
+    const onSelect = (value:string) => {
+        setObject(value);
+    }
+
+    const reload = (state = {}) => {
+        setObject(state);
+    }
+
+    return {object, uploadHandler, changeHandler,reload, onSelect}
 }

@@ -26,6 +26,12 @@ export const formData: FormDataInterface[] = [
 
 ];
 
+export const messageFormData:FormDataInterface[] = [{
+    name: 'massage',
+    label:'',
+    inputComponent: Input.TextArea
+}]
+
 export const getUserByID = (id: number, allUsers: UserInterface[]) => {
     return allUsers.filter((user:UserInterface) => user.id === id)[0];
 }

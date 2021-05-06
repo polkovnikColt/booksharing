@@ -3,6 +3,8 @@ import {BookModule} from "./modules/book/book.module";
 import {UserModule} from "./modules/user/user.module";
 import {LoginModule} from "./modules/auth/login.module";
 import {AdminModule} from "./modules/admin/admin.module";
+import {PreferenceModule} from "./modules/preference/preferece.module";
+import {MessageModule} from "./modules/messages/message.module";
 
 
 @Module({
@@ -10,7 +12,9 @@ import {AdminModule} from "./modules/admin/admin.module";
         BookModule,
         UserModule,
         LoginModule,
-        AdminModule
+        AdminModule,
+        PreferenceModule,
+        MessageModule
     ],
     controllers: [],
     providers: [],
