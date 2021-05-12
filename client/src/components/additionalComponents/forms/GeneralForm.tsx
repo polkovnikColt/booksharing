@@ -13,7 +13,7 @@ type GeneralFormProps = {
     formData: FormDataInterface[]
     inputHandler: (name: string, value: string) => void
     submitHandler: () => void
-    selectorHandler?: () => void
+    selectorHandler?: (name:string, value: string) => void
     checkboxHandler?: () => void
     uploaderHandler?: (e: ChangeEvent<HTMLInputElement>) => void
     file?: string

@@ -6,6 +6,11 @@ $white-font: #ffffff;
   margin-bottom: 3% !important;
 }
 
+.my-8 {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+
 .mx-2 {
   margin: 0 5px;
 }
@@ -40,16 +45,33 @@ $white-font: #ffffff;
   font-weight: bold;
 }
 
-.form-padding{
+.form-padding {
   padding: 10%;
 }
 
+.ant-btn-group {
+  border: 1px solid #1890ff;
+  border-radius: 10px;
+  button {
+    background-color: transparent;
+    color: #1890ff;
+    border: none;
+    &:active {
+      background-color: transparent;
+      color: #e3e3e3;
+    }
+    &:focus {
+      background-color: transparent;
+      color: #e3e3e3;
+    }
+  }
+}
 
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
 
-.font-white{
+.font-white {
   color: $white-font;
   margin-left: 2%;
   margin-right: 2%;
@@ -82,17 +104,17 @@ $white-font: #ffffff;
   }
 }
 
-.ant-form-item-label{
-  label{
+.ant-form-item-label {
+  label {
     width: 100px;
   }
 }
 
-@media screen and (max-width: 400px){
-  .form-padding{
+@media screen and (max-width: 400px) {
+  .form-padding {
     padding: 1%;
   }
-  .ant-drawer-body{
+  .ant-drawer-body {
     padding: 3%;
   }
 }

@@ -35,3 +35,9 @@ export const messageFormData:FormDataInterface[] = [{
 export const getUserByID = (id: number, allUsers: UserInterface[]) => {
     return allUsers.filter((user:UserInterface) => user.id === id)[0];
 }
+
+export const rules:string[] = [
+    "Червоними маркерами позначені ваші книги",
+    "Зірочка - додати в улюблені в особистому кабінеті",
+    "Для замовлення необхідно натиснути на обкладинку книги",
+]

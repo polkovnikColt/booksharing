@@ -1,14 +1,14 @@
 import {
-    ADD_BOOK,
-    DELETE_BOOK, DISORDER_BOOK,
+    ADD_BOOK, ADD_COMMENT, ADD_FAVORITE,
+    DELETE_BOOK, DELETE_FAVORITE, DISORDER_BOOK,
     LOAD_ALL_BOOKS,
     LOAD_ALL_USERS,
-    LOAD_BOOKS,
+    LOAD_BOOKS, LOAD_USER_COMMENTS,
     LOGIN,
     ORDER_BOOK,
     UNLOG, UPDATE_BOOK, UPDATE_USER
 } from "./userActions";
-import {BookInterface, OrderBookInterface, UserInterface} from "../../types/types";
+import {BookInterface, CommentInterface, FavoriteInterface, OrderBookInterface, UserInterface} from "../../types/types";
 
 
 export type DeleteBookType = {
@@ -66,7 +66,29 @@ export type DisorderBookType = {
     payload: OrderBookInterface
 }
 
+export type LoadUserCommentsType = {
+    type: typeof LOAD_USER_COMMENTS
+    payload: CommentInterface[]
+}
+
+export type AddCommentType = {
+    type: typeof ADD_COMMENT
+    payload: CommentInterface
+}
+
+export type AddFavoriteType = {
+    type: typeof ADD_FAVORITE,
+    payload: FavoriteInterface
+}
+
+export type DeleteFavoriteType = {
+    type: typeof DELETE_FAVORITE,
+    payload: FavoriteInterface
+}
+
 export type ActionsType = DeleteBookType | LoginType
     | UnlogType | LoadBooksType
     | LoadAllBooksType | LoadingAllUsersType
-    | OrderBookType | AddBookType | UpdateBook | UpdateUserType | DisorderBookType;
+    | OrderBookType | AddBookType | UpdateBook
+    | UpdateUserType | DisorderBookType | LoadUserCommentsType
+    | AddCommentType | AddFavoriteType | DeleteFavoriteType;

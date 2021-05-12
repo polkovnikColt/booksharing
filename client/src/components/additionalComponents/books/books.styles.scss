@@ -4,13 +4,13 @@
   width: inherit;
 }
 
-.ant-card{
+.ant-card {
   margin: 0;
 }
 
 .book-description {
   min-width: 100%;
-  min-height: 200px;
+  height: 230px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -35,4 +35,28 @@
 .rotated {
   transform: rotateY(45deg);
   background-color: pink;
+}
+
+.mine {
+  position: absolute;
+  z-index: 100;
+  padding: 10px;
+  width: 0;
+  height: 0;
+  border-top: 50px solid #fb3640;
+  border-left: 50px solid transparent;
+  right: 0;
+  top: 0;
+}
+
+.star {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  padding: 3%;
+}
+
+.link-more {
+  margin: auto 0;
 }

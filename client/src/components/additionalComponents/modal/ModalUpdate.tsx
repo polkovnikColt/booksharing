@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import {Button, Modal} from "antd";
 import {useDispatch} from "react-redux";
-import {BookInterface, FormDataInterface} from "../../../types/types";
+import {BookInterface, FormDataInterface, UserInterface} from "../../../types/types";
 import {GeneralForm} from "../forms/GeneralForm";
 import {useFormHandler} from "../../../hooks/useFormHandler";
 import './modal.styles.scss'
@@ -9,9 +9,10 @@ import './modal.styles.scss'
 type ModalItemProps = {
     buttonText: string,
     title:string,
-    book:BookInterface,
+    book:BookInterface | UserInterface,
     formData: FormDataInterface[],
-    dispatchFunction
+    dispatchFunction:any,
+    photoName:string
 
 }
 
@@ -21,12 +22,13 @@ export const ModalUpdate: React.FC<ModalItemProps> = (
         dispatchFunction,
         book,
         formData,
-        title
+        title,
+        photoName
     }
 ) => {
     const dispatch = useDispatch();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const {object,changeHandler, uploadHandler} = useFormHandler(book,'preview');
+    const {object,changeHandler, uploadHandler} = useFormHandler(book,photoName);
 
     const showModal = () => {
         setIsModalVisible(true);

@@ -14,6 +14,17 @@ export class UserController {
         return this.userService.getAllUser();
     }
 
+    @UseGuards(AuthGuard('jwt'))
+    @Put('favorite/add')
+    addToFavorite(@Req() req):Promise<void>{
+       return this.userService.addToFavorite(req.body);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Put('favorite/delete')
+    deleteFromFavorite(@Req() req):Promise<void>{
+        return this.userService.deleteFromFavorite(req.body);
+    }
 
     @UseGuards(AuthGuard('jwt'))
     @Put('order/:id')
@@ -35,7 +46,7 @@ export class UserController {
 
     @UseGuards(AuthGuard('jwt'))
     @Put(':id')
-    updateUser(@Param(":id") id, @Req() req): Promise<UserInterface> {
+    updateUser(@Param("id") id, @Req() req): Promise<UserInterface> {
         return this.userService.updateUser(id, req.body);
     }
 }

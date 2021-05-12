@@ -38,14 +38,14 @@ export const MyBooks: React.FC<MyBooksProps> = (
                                 photo={book.preview}
                                 author={book.author}
                                 genre={book.genre}
-                                description={book.description}
-                                views={book.views}
                             />
                         </Col>
                         <Col
                             span={width < 500 ? 24 : 14}>
                             <ColumnWrapper>
-                                {width < 500 ? <ModalUpdate
+                                {width < 500 ?
+                                    <ModalUpdate
+                                        photoName="preview"
                                         buttonText="Оновити"
                                         book={book}
                                         title="Оновити книгу"

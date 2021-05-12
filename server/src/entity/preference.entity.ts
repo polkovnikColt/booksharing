@@ -6,10 +6,10 @@ export class Preference{
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column( "text",{ array: true,default: ()=>'array[]::text[]'} )
+    @Column( {type:'text', array:true, default:() => "array[]::text[]"})
     genre:string[]
 
-    @Column( "text",{ array: true,default: ()=>'array[]::text[]'})
+    @Column( {type:'text', array:true,default:() => "array[]::text[]"})
     author: string[]
 
     // @Column("int", { array: true,default: ()=>'array[]::integer[]'})

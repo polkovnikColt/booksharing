@@ -10,6 +10,8 @@ export const RulesPage: React.FC = () => {
         <Content style={{minHeight: window.innerHeight}}>
             <Rules
                 rules={rules}
+                header="Правила сайту"
+                footer="Виникло запитання? Зверніться до адміністрації"
             />
         </Content>
     )

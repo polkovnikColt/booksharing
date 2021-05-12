@@ -1,5 +1,28 @@
-.alert-message{
+$info-color: #1890ff;
+$success-color: green;
+
+@mixin alert {
+  border-radius: 2px;
+}
+
+.alert-message {
   padding: 1%;
   margin: 3%;
 }
 
+.info {
+  @include alert;
+  background: #e6f7ff;
+  border: solid 1px $info-color;
+}
+
+.success {
+  @include alert;
+  background-color: #f6ffed;
+  border: solid 1px $success-color;
+}
+
+.close {
+  display: none;
+  transition: 1s;
+}

@@ -3,8 +3,16 @@ import {Component, ForwardRefExoticComponent} from "react";
 export type UserState = {
     credentials: UserInterface
     books: BookInterface[]
+    comments:CommentInterface[]
     allBooks: BookInterface[]
     allUsers: UserInterface[]
+}
+
+export interface CommentInterface {
+    id:number
+    text:string
+    to:number
+    user:UserInterface
 }
 
 export interface LinkInterface {
@@ -40,9 +48,15 @@ export interface UserInterface {
     info?:string,
     email:string,
     password:string,
-    booksToGetId?:number[],
-    booksToSendId?:number[],
+    favorite:number[]
+    // booksToGetId?:number[],
+    // booksToSendId?:number[],
     role:string
+}
+
+export interface FavoriteInterface {
+    userId: number
+    bookId: number
 }
 
 export type ToolsState = {

@@ -4,6 +4,8 @@ import {OneTab} from "../../components/additionalComponents/tabs/OneTab";
 import {NavTab} from "../../components/additionalComponents/tabs/NavTab";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
+import {UserCard} from "../../components/additionalComponents/user-components/UserCard";
+import {messageFormData} from "./additional/service";
 
 const {Content} = Layout;
 
@@ -33,7 +35,16 @@ export const AdminPage:React.FC = () => {
                     1
                 </OneTab>
                 <OneTab>
-                    2
+                    {user.allUsers.map(user => (
+                        <UserCard
+                            userId={user.id}
+                            name={user.name}
+                            avatar={user.avatar}
+                            phoneNumber={user.phoneNumber}
+                            city={user.city}
+                            info={user.info}
+                        />
+                    ))}
                 </OneTab>
                 <OneTab>
                     3

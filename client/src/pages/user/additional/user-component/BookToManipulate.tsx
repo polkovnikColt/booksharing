@@ -4,13 +4,12 @@ import {Col, Row} from "antd";
 import {BookCard} from "../../../../components/additionalComponents/books/BookCard";
 import {ButtonManipulate} from "../../../../components/additionalComponents/manipulators/ButtonManipulate";
 import {UserCard} from "../../../../components/additionalComponents/user-components/UserCard";
-import {messageFormData} from "../service";
 
 type BooksToGetProps = {
     books: BookInterface[],
     userId: number,
     dispatchFunc: any[2] | any,
-    type: 'toGet' | 'toSend',
+    type: 'favorite' | 'toSend',
     width: number
 }
 
@@ -29,34 +28,33 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
                 return (
                     <Row className ="mx-1 my-3">
                         <Col span = {24}>
-                                {type === 'toGet' ?
+                                {type === 'favorite' ?
                                     <>
                                         <BookCard
+                                            bookId={book.id}
                                             widthInPx={300}
-                                            isMine={true}
+                                            isMine={false}
                                             isLogged={true}
                                             user={book.user}
                                             name={book.name}
                                             photo={book.preview}
                                             author={book.author}
                                             genre={book.genre}
-                                            description={book.description}
-                                            views={book.views}
                                         />
                                     <ButtonManipulate
                                         dispatchFunction={dispatchFunc}
                                         object={{
                                             userId: userId,
                                             bookId: book.id,
-                                            userGetId: book.user[0].id
                                         }}
                                         type="delete"
-                                        text="Відмінити"
+                                        text="Прибрати"
                                     />
                                     </>
                                     :
                                     <>
                                         <UserCard
+                                            userId={book.user[0].id}
                                             bookPreview={book.preview}
                                             name={book.user[0].name}
                                             avatar={book.user[0].avatar}
@@ -64,7 +62,6 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
                                             phoneNumber={book.user[0].phoneNumber}
                                             city={book.user[0].city}
                                             info={book.user[0].info}
-                                            formData={messageFormData}
                                             />
                                     <Row>
                                         <ButtonManipulate
@@ -72,7 +69,6 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
                                             object={{
                                                 userId: userId,
                                                 bookId: book.id,
-                                                userGetId: book.user[0].id
                                             }}
                                             type="update"
                                             text="Прийняти"
@@ -82,7 +78,6 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
                                             object={{
                                                 userId: userId,
                                                 bookId: book.id,
-                                                userGetId: book.user[0].id
                                             }}
                                             type="delete"
                                             text="Відхилити"/>

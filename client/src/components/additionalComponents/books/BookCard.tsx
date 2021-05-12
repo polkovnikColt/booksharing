@@ -1,98 +1,101 @@
 import React from 'react';
-import {Skeleton, Card, Tooltip, Button,} from 'antd';
-import {CheckCircleOutlined, DownOutlined, UpOutlined} from '@ant-design/icons';
+import {Skeleton, Card, Tooltip, Button, Avatar,} from 'antd';
+import {StarOutlined} from '@ant-design/icons';
 import './books.styles.scss';
 import {ImageItem} from "../images/ImageItem";
-import {UserModal} from "../modal/UserModal";
-import {cut} from "./additional/service";
-import {useVisibility} from "../../../hooks/useVisibility";
 import {UserInterface} from "../../../types/types";
-import {messageFormData} from "../../../pages/book/additional/service";
+import {AvatarLink} from "../user-components/AvatarLink";
+import {LabelItem} from "../labels/LabelItem";
+import {BookOrderModal} from "../modal/BookOrderModal";
 
 const {Meta} = Card;
 
 type BookCardProps = {
+    bookId?: number
     name: string,
     isLogged: boolean,
     isMine: boolean,
     widthInPx?: number,
     isOrdered?: boolean,
-    user?: UserInterface,
+    user?: UserInterface | UserInterface[],
+    addToFavorite?: any
     photo: string,
     author: string,
     genre: string
-    description: string,
-    views: number
+    userPage?: boolean
     handleOrderBook?: () => void
 }
 
 export const BookCard: React.FC<BookCardProps> = (
     {
+        bookId,
         isOrdered,
         author,
-        description,
         isMine,
         photo,
         name,
         widthInPx,
         genre,
-        views,
         user,
         isLogged,
-        handleOrderBook
+        handleOrderBook,
+        userPage,
+        addToFavorite
     }
 ) => {
-
-    const {visible, show} = useVisibility(false);
-
     return (
         <>
             <Card
                 style={{maxWidth: widthInPx}}
-                className="book-card-size m-0"
+                className="book-card-size my-3"
             >
+                {isMine && user ?
+                    <div className="mine"/> :
+                    <div
+                        onClick={addToFavorite}
+                        className="star">
+                        <StarOutlined size={100}/>
+                    </div>
+                }
                 <Skeleton loading={false} avatar active>
                     {!!user && <Meta
                         avatar={
-                            <UserModal
-                                formData={messageFormData}
-                                city={user[0].city}
-                                info={user[0].info}
-                                phoneNumber={user[0].phoneNumber}
-                                dispatchFunc={() => {
-                                }}
-                                avatar={user[0].avatar}
-                                name={user[0].name}
-                            />}
+                            !user[0] ? null : <AvatarLink
+                                isMine={isMine}
+                                userId={user[0].id}
+                                userAvatar={user[0].avatar}
+                            />
+                        }
                         title={user[0].name}
                     />
                     }
-                    <div onClick={isLogged && !isMine ? handleOrderBook : null}>
-                        <ImageItem
-                            isOrdered={isOrdered}
-                            label="Замовлена"
-                            widthInPer={100}
-                            base64={photo}
-                        />
-                    </div>
+                    { user === undefined ? <ImageItem
+                        isOrdered={isOrdered && isLogged}
+                        label="Зарезервовано"
+                        widthInPer={100}
+                        base64={photo}
+                    /> :
+                        <BookOrderModal
+                        handleOrder={isLogged && !isMine ? handleOrderBook : null}
+                        photo={photo}
+                        bookName={name}
+                        userId={user[0].id}
+                        isLogged={isLogged}
+                        isOrdered={isOrdered}
+                        isMine={isMine}
+                        />}
                     <div className="book-description">
                         <h2>{name}</h2>
                         <h3>Автор: {author}</h3>
                         <h3>Жанр: {genre}</h3>
-                        <h3>{visible ? description : cut(description)}</h3>
-                        <div className="w-100">
-                            {visible ?
-                                <div className="mx-auto"
-                                     onClick={show}>
-                                    <UpOutlined/>
-                                </div> :
-                                <div className="mx-auto"
-                                     onClick={show}>
-                                    <DownOutlined/>
-                                </div>
-                            }
-                        </div>
-                        <h5>Бажаючі отримати: {views}</h5>
+
+                        {!userPage && <LabelItem
+                            className="link-more"
+                            isLink={true}
+                            path={`book/current/${bookId}`}
+                        >
+                            Докладніше
+                        </LabelItem>}
                     </div>
                 </Skeleton>
             </Card>

@@ -1,11 +1,11 @@
-import {BookInterface, OrderBookInterface, UserInterface} from "../../types/types";
+import {BookInterface, CommentInterface, FavoriteInterface, OrderBookInterface, UserInterface} from "../../types/types";
 import {Dispatch} from "redux";
 import {
-    AddBookType,
-    DeleteBookType, DisorderBookType,
+    AddBookType, AddCommentType, AddFavoriteType,
+    DeleteBookType, DeleteFavoriteType, DisorderBookType,
     LoadAllBooksType,
     LoadBooksType,
-    LoadingAllUsersType,
+    LoadingAllUsersType, LoadUserCommentsType,
     LoginType,
     OrderBookType, UpdateBook, UpdateUserType
 } from "./userActionTypes";
@@ -22,6 +22,10 @@ export const DISORDER_BOOK = "DISORDER_BOOK";
 export const ADD_BOOK = "ADD_BOOK";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const UPDATE_USER = "UPDATE_USER";
+export const LOAD_USER_COMMENTS = "LOAD_USER_COMMENTS";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const ADD_FAVORITE = "ADD_FAVORITE";
+export const DELETE_FAVORITE = "DELETE_FAVORITE";
 
 export const deleteBook = (book: BookInterface) => {
     return async (dispatch: Dispatch<DeleteBookType>) => {
@@ -60,7 +64,7 @@ export const registration = (user) => {
     return async (dispatch: Dispatch<LoginType>) => {
         try {
             const res = await axios.post('/login/registration', user);
-            localStorage.setItem('token',res.data.token);
+            localStorage.setItem('token', res.data.token);
             dispatch({
                 type: LOGIN,
                 payload: res.data.user
@@ -72,7 +76,6 @@ export const registration = (user) => {
 }
 
 export const addBook = (book) => {
-    console.log(book);
     return async (dispatch: Dispatch<AddBookType>) => {
         const user = book.user;
         book.user = book.user[0].id;
@@ -121,7 +124,7 @@ export const loadAllBooks = () => {
 export const loadAllUsers = () => {
 
     return async (dispatch: Dispatch<LoadingAllUsersType>) => {
-        try{
+        try {
             const res = await axios.get('/user');
             dispatch({
                 type: LOAD_ALL_USERS,
@@ -135,34 +138,34 @@ export const loadAllUsers = () => {
 
 export const orderBook = (order: OrderBookInterface) => {
     return async (dispatch: Dispatch<OrderBookType>) => {
-        try {
-            const resUser = await axios.put(`user/order/${order.userId}`, order);
-            const resBook = await axios.put(`book/${order.bookId}`,
-                {isOrdered:true, views: order.views + 1});
-            dispatch({
-                type: ORDER_BOOK,
-                payload: order
-            });
-        } catch (e) {
-
-        }
+        // try {
+        //     const resUser = await axios.put(`user/order/${order.userId}`, order);
+        //     const resBook = await axios.put(`book/${order.bookId}`,
+        //         {isOrdered: true, views: order.views + 1});
+        //     dispatch({
+        //         type: ORDER_BOOK,
+        //         payload: order
+        //     });
+        // } catch (e) {
+        //
+        // }
     };
 }
 
 export const disorderBook = (order: OrderBookInterface) => {
     return async (dispatch: Dispatch<DisorderBookType>) => {
-        try {
-            const resUser = await axios.put(`user/disorder/${order.userId}`, order);
-            const resBook = await axios.put(`book/${order.bookId}`,
-                {isOrdered:false});
-            console.log(resUser,resBook);
-            dispatch({
-                type: DISORDER_BOOK,
-                payload: order
-            })
-        } catch (e) {
-
-        }
+        // try {
+        //     const resUser = await axios.put(`user/disorder/${order.userId}`, order);
+        //     const resBook = await axios.put(`book/${order.bookId}`,
+        //         {isOrdered: false});
+        //     console.log(resUser, resBook);
+        //     dispatch({
+        //         type: DISORDER_BOOK,
+        //         payload: order
+        //     })
+        // } catch (e) {
+        //
+        // }
     }
 }
 
@@ -194,3 +197,62 @@ export const updateUser = (user: UserInterface) => {
     }
 }
 
+export const loadUserComments = (id: number) => {
+    return async (dispatch: Dispatch<LoadUserCommentsType>) => {
+        try {
+            const res = await axios.get(`comment/${id}`);
+            console.log(res)
+            dispatch({
+                type: LOAD_USER_COMMENTS,
+                payload: res.data
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const addComment = (comment: CommentInterface) => {
+    return async (dispatch: Dispatch<AddCommentType>) => {
+        const user = comment.user;
+        comment.user = comment.user[0].id;
+        try {
+            const res = await axios.post('/comment', comment);
+            comment.user = user;
+            dispatch({
+                type: ADD_COMMENT,
+                payload: comment
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const addToFavorite = (favorite: FavoriteInterface) => {
+    return async (dispatch: Dispatch<AddFavoriteType>) => {
+        try {
+            const res = await axios.put('user/favorite/add', favorite);
+            dispatch({
+                type: ADD_FAVORITE,
+                payload: favorite
+            });
+        } catch (e) {
+
+        }
+    }
+}
+
+export const deleteFromFavorite = (favorite: FavoriteInterface) => {
+    return async (dispatch: Dispatch<DeleteFavoriteType>) => {
+        try {
+            const res = await axios.put('user/favorite/delete', favorite);
+            dispatch({
+                type: DELETE_FAVORITE,
+                payload: favorite
+            })
+        } catch (e) {
+
+        }
+    }
+}

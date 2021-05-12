@@ -1,5 +1,5 @@
-import {Injectable} from '@nestjs/common';
-import {UserInterface} from "../../types/types";
+import {BadRequestException, Injectable} from '@nestjs/common';
+import {FavoriteInterface, OrderInterface, UserInterface} from "../../types/types";
 import {getManager} from "typeorm";
 import {CommonUser} from "../../entity/user.entity";
 
@@ -19,10 +19,44 @@ export class UserService {
             .getMany();
     }
 
-    async orderBook (id:number, body:any):Promise<void> {
+    async createOrder():Promise<OrderInterface>{
+        return null;
+    }
+
+    async deleteFromFavorite(body:FavoriteInterface):Promise<void> {
+        const candidate:UserInterface = await this.manager.findOne(CommonUser, {
+            where: {
+                id: body.userId
+            }
+        });
+        if(candidate){
+            candidate.favorite = candidate.favorite
+                .filter(id => id !== body.bookId);
+
+            await this.manager.save(candidate);
+        } else {
+            throw new BadRequestException();
+        }
+    }
+
+    async addToFavorite(body: FavoriteInterface): Promise<void> {
+        const candidate:UserInterface = await this.manager.findOne(CommonUser, {
+            where: {
+                id: body.userId
+            }
+        });
+        if(candidate){
+            candidate.favorite.push(body.bookId);
+            await this.manager.save(candidate);
+        } else {
+            throw new BadRequestException();
+        }
+    }
+
+    async orderBook(id: number, body: any): Promise<void> {
         const userGet = await this.manager.findOne(CommonUser, {
             where: {
-                id:id
+                id: id
             }
         });
         const userSend = await this.manager.findOne(CommonUser, {
@@ -32,11 +66,11 @@ export class UserService {
         });
         userGet.booksToGetId.push(body.bookId);
         userSend.booksToSendId.push(body.bookId);
-       await this.manager.save(userGet);
-       await this.manager.save(userSend);
+        await this.manager.save(userGet);
+        await this.manager.save(userSend);
     }
 
-    async disorderBook (id:number, body:any):Promise<void> {
+    async disorderBook(id: number, body: any): Promise<void> {
         const userGet = await this.manager.findOne(CommonUser, {
             where: {
                 id: id
@@ -52,6 +86,7 @@ export class UserService {
         await this.manager.save(userGet);
         await this.manager.save(userSend);
     }
+
     async createUser(body: UserInterface): Promise<UserInterface> {
         return await this.manager
             .insert(CommonUser, body);

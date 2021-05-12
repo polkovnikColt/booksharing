@@ -1,8 +1,8 @@
 import React from "react";
 import {Divider, Layout, Col, Row} from "antd";
 import {GeneralForm} from "../../components/additionalComponents/forms/GeneralForm";
-import {formData, message} from "./additional/service";
-import { useSelector} from "react-redux";
+import {formData, rules} from "./additional/service";
+import {useSelector} from "react-redux";
 import {loadAllBooks, loadAllUsers, login} from "../../store/user/userActions";
 import {RootState} from "../../store/store";
 import './mainPage.styles.scss';
@@ -15,6 +15,10 @@ import {usePreload} from "../../hooks/usePreload";
 import {useDispatchFunc} from "../../hooks/useDispatchFunction";
 import {BookCard} from "../../components/additionalComponents/books/BookCard";
 import {AlertMessage} from "../../components/additionalComponents/alert/AlertMessage";
+import {useSearch} from "../../hooks/useSearch";
+import {UserCard} from "../../components/additionalComponents/user-components/UserCard";
+import {messageFormData} from "../book/additional/service";
+import {Rules} from "../../components/additionalComponents/labels/Rules";
 
 const {Content} = Layout;
 
@@ -24,6 +28,7 @@ export const MainPage: React.FC = () => {
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
     const {object, changeHandler, reload, onSelect} = useFormHandler({})
+    const {type, result} = useSearch(object, user.allBooks, user.allUsers);
 
     usePreload(loadAllBooks);
     usePreload(loadAllUsers)
@@ -43,13 +48,12 @@ export const MainPage: React.FC = () => {
                         <GlobalOutlined/>
                     </span>
                 </Divider>
-            <div className = "main-title">Вітаємо у КНИГООБМІНІ</div>
+                <div className="main-title">Вітаємо у КНИГООБМІНІ</div>
                 {!!user.credentials ?
                     <>
-                        <AlertMessage
-                            type="info"
-                            message={message}
-                        />
+                        <AlertMessage type="success">
+                           <Rules rules={rules} header="Підказа #1"/>
+                        </AlertMessage>
                         <AutoCompleteSearch
                             books={user.allBooks}
                             users={user.allUsers}
@@ -84,9 +88,42 @@ export const MainPage: React.FC = () => {
                                 submitHandler={handleSubmit}
                             />
                         </Col>}
-                        {object.length ?
-                            null :
-                            null
+                        {!!user.credentials &&
+                        <Row>
+                            <Col
+                                className = "mx-auto"
+                                span={width < 500 ? 22 : 12}>
+                                {type === "user" ?
+                                    result.map(user => (
+                                        <div className="mx-auto">
+                                            <UserCard
+                                                userId={user.id}
+                                                name={user.name}
+                                                avatar={user.avatar}
+                                                phoneNumber={user.phoneNumber}
+                                                city={user.city}
+                                                info={user.info}
+                                            />
+                                        </div>
+                                    )) :
+                                    result.map(book =>
+                                        <div className="mx-auto">
+                                            <BookCard
+                                                bookId={book.id}
+                                                isOrdered={book.isOrdered}
+                                                user={book.user}
+                                                name={book.name}
+                                                isLogged={true}
+                                                isMine={book.id === book.user[0].id}
+                                                photo={book.preview}
+                                                author={book.author}
+                                                genre={book.genre}
+                                            />
+                                        </div>
+                                    )
+                                }
+                            </Col>
+                        </Row>
                         }
                     </div>
                 </Row>

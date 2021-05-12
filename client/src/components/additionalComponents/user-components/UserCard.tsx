@@ -1,18 +1,21 @@
 import React from 'react';
-import {Skeleton, Card} from 'antd';
-import {UserModal} from "../modal/UserModal";
+import {Skeleton, Card, Avatar, Row, Space} from 'antd';
 import {FormDataInterface} from "../../../types/types";
-import {ImageItem} from "../images/ImageItem";
+import {GeneralForm} from "../forms/GeneralForm";
+import {useFormHandler} from "../../../hooks/useFormHandler";
+import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
+import './user.styles.scss';
+import {AvatarLink} from "./AvatarLink";
 
 type UserCardProps = {
+    userId:number
     name: string,
     avatar: string
-    bookName: string
+    bookName?: string
     phoneNumber: string,
     bookPreview?: string,
     city: string
     info: string
-    formData: FormDataInterface[]
 
 }
 
@@ -20,16 +23,19 @@ const {Meta} = Card;
 
 export const UserCard: React.FC<UserCardProps> = (
     {
+        userId,
         avatar,
         name,
         bookName,
         phoneNumber,
-        bookPreview,
         city,
         info,
-        formData
     }
 ) => {
+
+    const {object, changeHandler} = useFormHandler({});
+    const submitHandler = useDispatchFunc(() => {
+    });
 
     return (
         <>
@@ -45,33 +51,21 @@ export const UserCard: React.FC<UserCardProps> = (
                 <Skeleton loading={false} avatar active>
                     <Meta
                         avatar={
-                            <UserModal
-                                dispatchFunc={null}
-                                phoneNumber={phoneNumber}
-                                info={info}
-                                city={city}
-                                formData={formData}
-                                name={name}
-                                avatar={avatar}
-
-                            />
+                            <AvatarLink
+                                isMine={false}
+                                userId={userId}
+                                userAvatar={avatar}
+                                />
                         }
                         title={name}
                     />
-                    <ImageItem
-                        base64={bookPreview}
-                        widthInPer={100}
-                    />
-                    <h2>
-                        <div className="mx-1">
-                            {bookName}
-                        </div>
-                    </h2>
-                    <h3>Користувач проживає у:
-                        <div className="mx-1">
-                            {city ? city : "Місто не вказане"}
-                        </div>
-                    </h3>
+                    <Row>
+                        <h3 className="flex-start">
+                            {bookName && <div>Хоче отримати: {bookName}</div>}
+                            <div>Телефон: {phoneNumber}</div>
+                            <div>Місто: {city ? city : "Місто не вказане"}</div>
+                        </h3>
+                    </Row>
                 </Skeleton>
             </Card>
         </>

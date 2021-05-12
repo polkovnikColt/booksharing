@@ -1,9 +1,11 @@
 import {
     ADD_BOOK,
-    DELETE_BOOK, DISORDER_BOOK,
+    ADD_COMMENT, ADD_FAVORITE,
+    DELETE_BOOK, DELETE_FAVORITE,
+    DISORDER_BOOK,
     LOAD_ALL_BOOKS,
     LOAD_ALL_USERS,
-    LOAD_BOOKS,
+    LOAD_BOOKS, LOAD_USER_COMMENTS,
     LOGIN,
     ORDER_BOOK,
     UNLOG,
@@ -11,13 +13,14 @@ import {
     UPDATE_USER
 } from "./userActions";
 import {ActionsType} from "./userActionTypes";
-import {BookInterface, UserInterface, UserState} from "../../types/types";
+import {BookInterface, CommentInterface, UserInterface, UserState} from "../../types/types";
 
 const initState: UserState = {
     credentials: null,
     books: [] as BookInterface[],
     allBooks: [] as BookInterface[],
     allUsers: [] as UserInterface[],
+    comments: [] as CommentInterface[]
 }
 
 export const userReducer = (state = initState, action: ActionsType) => {
@@ -53,56 +56,66 @@ export const userReducer = (state = initState, action: ActionsType) => {
                 ...state,
                 allUsers: action.payload
             }
-        case ORDER_BOOK:
+        case LOAD_USER_COMMENTS:
             return {
                 ...state,
-                allBooks: state.allBooks.map(book => {
-                    if (book.id === action.payload.bookId) {
-                        return {
-                            ...book,
-                            isOrdered: true,
-                            views: action.payload.views + 1
-                        };
-                    }
-                    return book;
-                }),
-                credentials: {
-                    ...state.credentials,
-                    booksToGetId: [...state.credentials.booksToGetId, action.payload.bookId]
-                },
-                allUsers: state.allUsers.map(user => {
-                    if (user.id === action.payload.userGetId) {
-                        return {...user, booksToSendId: action.payload.bookId};
-                    }
-                    return user;
-                })
+                comments: action.payload
             }
-        case DISORDER_BOOK:
+        case ADD_COMMENT:
             return {
                 ...state,
-                allBooks: state.allBooks.map(book => {
-                    if (book.id === action.payload.bookId) {
-                        return {
-                            ...book,
-                            isOrdered: false,
-                        };
-                    }
-                    return book;
-                }),
-                credentials: {
-                    ...state.credentials,
-                    booksToGetId: state.credentials.booksToGetId
-                        .filter(id => id !== action.payload.bookId)
-                },
-                allUsers: state.allUsers.map(user => {
-                    if (user.id === action.payload.userGetId) {
-                        const booksToSend = user.booksToSendId
-                            .filter(id => id !== action.payload.bookId);
-                        return {...user, booksToSendId: booksToSend};
-                    }
-                    return user;
-                })
+                comments: [...state.comments, action.payload]
             }
+        // case ORDER_BOOK:
+            // return {
+            //     ...state,
+            //     allBooks: state.allBooks.map(book => {
+            //         if (book.id === action.payload.bookId) {
+            //             return {
+            //                 ...book,
+            //                 isOrdered: true,
+            //                 views: action.payload.views + 1
+            //             };
+            //         }
+            //         return book;
+            //     }),
+            //     credentials: {
+            //         ...state.credentials,
+            //         booksToGetId: [...state.credentials.booksToGetId, action.payload.bookId]
+            //     },
+            //     allUsers: state.allUsers.map(user => {
+            //         if (user.id === action.payload.userGetId) {
+            //             return {...user, booksToSendId: action.payload.bookId};
+            //         }
+            //         return user;
+            //     })
+            // }
+        // case DISORDER_BOOK:
+            // return {
+            //     ...state,
+            //     allBooks: state.allBooks.map(book => {
+            //         if (book.id === action.payload.bookId) {
+            //             return {
+            //                 ...book,
+            //                 isOrdered: false,
+            //             };
+            //         }
+            //         return book;
+            //     }),
+            //     credentials: {
+            //         ...state.credentials,
+            //         booksToGetId: state.credentials.booksToGetId
+            //             .filter(id => id !== action.payload.bookId)
+            //     },
+            //     allUsers: state.allUsers.map(user => {
+            //         if (user.id === action.payload.userGetId) {
+            //             const booksToSend = user.booksToSendId
+            //                 .filter(id => id !== action.payload.bookId);
+            //             return {...user, booksToSendId: booksToSend};
+            //         }
+            //         return user;
+            //     })
+            // }
         case ADD_BOOK:
             return {
                 ...state,
@@ -122,6 +135,24 @@ export const userReducer = (state = initState, action: ActionsType) => {
             return {
                 ...state,
                 credentials: {...state.credentials, ...action.payload}
+            }
+        case ADD_FAVORITE:
+            return {
+                ...state,
+                credentials: {
+                    ...state.credentials,
+                    favorite: [...state.credentials.favorite, action.payload.bookId]
+                }
+            }
+        case DELETE_FAVORITE:
+            return {
+                ...state,
+                credentials: {
+                    ...state.credentials,
+                    favorite: state.credentials
+                        .favorite
+                        .filter(id => id !== action.payload.bookId)
+                }
             }
         default:
             return state;

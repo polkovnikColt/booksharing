@@ -2,7 +2,8 @@ import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeo
 import {Book} from "./book.entity";
 import {Message} from "./message.entity";
 import {Preference} from "./preference.entity";
-
+import {Comment} from "./comment.entity";
+import {Order} from "./order.entity";
 
 @Entity()
 export class CommonUser{
@@ -22,7 +23,7 @@ export class CommonUser{
     avatar:string
 
     @Column({default:""})
-    phone:string
+    phoneNumber:string
 
     @Column({default:""})
     city:string
@@ -30,15 +31,23 @@ export class CommonUser{
     @Column({default: ""})
     info:string
 
-    @Column("int", { array: true,default: ()=>'array[]::integer[]'})
-    booksToGetId:number[]
+    @Column({default: "user"})
+    role:string
 
     @Column("int", { array: true,default: ()=>'array[]::integer[]'})
-    booksToSendId:number[]
+    favorite:number[]
 
     @OneToMany(type => Book,book => book.user,
         {cascade:true})
     books:Book[]
+
+    @OneToMany(type => Comment,
+            comment => comment.user,
+        {cascade:true})
+    comments: Comment[]
+
+    @OneToMany(type => Order, order => order.user)
+    orders:Order[]
 
     @OneToOne(() => Preference, preference => preference.user)
     preference: Preference

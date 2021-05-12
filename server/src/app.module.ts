@@ -5,6 +5,7 @@ import {LoginModule} from "./modules/auth/login.module";
 import {AdminModule} from "./modules/admin/admin.module";
 import {PreferenceModule} from "./modules/preference/preferece.module";
 import {MessageModule} from "./modules/messages/message.module";
+import {CommentModule} from "./modules/comment/comment.module";
 
 
 @Module({
@@ -14,7 +15,8 @@ import {MessageModule} from "./modules/messages/message.module";
         LoginModule,
         AdminModule,
         PreferenceModule,
-        MessageModule
+        MessageModule,
+        CommentModule
     ],
     controllers: [],
     providers: [],

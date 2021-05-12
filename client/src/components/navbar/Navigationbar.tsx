@@ -1,13 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Layout, Menu, Button, Row, Col, Avatar, Tooltip} from 'antd';
-import {getLinks} from "./additional/service";
+import {Layout, Menu, Row, Col, Avatar, Dropdown} from 'antd';
+import {getLinks, updateFormData} from "./additional/service";
 import {useWidth} from "../../hooks/useDimension";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import {unlog} from "../../store/user/userActions";
-import {UserOutlined} from "@ant-design/icons";
+import {unlog, updateUser} from "../../store/user/userActions";
+import {UserOutlined,CrownOutlined} from "@ant-design/icons";
 import {useDispatchFunc} from "../../hooks/useDispatchFunction";
+import {ModalUpdate} from "../additionalComponents/modal/ModalUpdate";
 
 const {Header} = Layout;
 
@@ -23,7 +24,8 @@ export const Navigationbar: React.FunctionComponent = () => {
                 <Row style={{marginLeft: 0, marginRight: 0}}
                      gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
                     <div><Avatar shape="square" size="large" icon={null}/></div>
-                    <Col className="gutter-row" span={15}>
+                    <Col className="gutter-row"
+                         span={width < 500 ? 7: 15}>
                         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
                             {getLinks(user).map((item, index) => (
                                 <Menu.Item key={index}>
@@ -32,15 +34,39 @@ export const Navigationbar: React.FunctionComponent = () => {
                             ))}
                         </Menu>
                     </Col>
-                    <Col span={width > 500 ? 7 : 4}>
+                    <Col span={width > 500 ? 7 : 12}>
                         <Row>
                             {!!user.credentials &&
-                            <div
-                                onClick={handleUnlog()}>
-                                <h3 className="font-white">
-                                   <span>{user.credentials?.name}</span>
-                                </h3>
-                            </div>}
+                            <Dropdown.Button
+                                className = "my-8"
+                                overlay={
+                                <Menu onClick={null}>
+                                <Menu.Item key="1" >
+                                    <ModalUpdate
+                                        photoName="avatar"
+                                        buttonText="Завантижити дані"
+                                        title={user.credentials?.name}
+                                        book={user.credentials}
+                                        formData={updateFormData}
+                                        dispatchFunction={updateUser}
+                                        />
+                                </Menu.Item>
+                                <Menu.Item
+                                    onClick ={handleUnlog()}
+                                    key="2">
+                                    Вийти
+                                </Menu.Item>
+                            </Menu>
+                            }>
+                                <Link to = "/cabinet">
+                                    {user.credentials?.name}
+                                    {user.credentials?.role === "admin" ?
+                                        <UserOutlined/> :
+                                        <CrownOutlined />
+                                    }
+                                </Link>
+                            </Dropdown.Button>
+                            }
                         </Row>
                     </Col>
                 </Row>

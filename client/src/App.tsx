@@ -12,6 +12,8 @@ import {ProtectedRoute} from "./components/additionalComponents/routes/Protected
 import {AdminPage} from "./pages/admin/AdminPage";
 import {RulesPage} from "./pages/rules/RulesPage";
 import {RegistrationPage} from "./pages/registration/RegistrationPage";
+import {OneUser} from "./pages/one-user/OneUser";
+import {OneBook} from "./pages/one-book/OneBook";
 
 const App: React.FC = () => {
 
@@ -30,11 +32,17 @@ const App: React.FC = () => {
                         <Route path="/registration" component={RegistrationPage}/>
                         <Route path="/books" component={BookPage}/>
                         <Route path="/rules" component={RulesPage}/>
+                        <Route path="/book/current/:id" component={OneBook}/>
                         <ProtectedRoute
                             component={UserPage}
-                            path={'/user'}
+                            path={'/cabinet'}
                             isAuth={!!user.credentials}
                         />
+                        <ProtectedRoute
+                            component={OneUser}
+                            path={'/user/current/:id'}
+                            isAuth={!!user.credentials}
+                            />
                         <ProtectedRoute
                             component={AdminPage}
                             path={'/admin'}

@@ -3,6 +3,8 @@ import {CommonUser} from "../entity/user.entity";
 import {Book} from "../entity/book.entity";
 import {Preference} from "../entity/preference.entity";
 import {Message} from "../entity/message.entity";
+import {Comment} from "../entity/comment.entity";
+import {Order} from "../entity/order.entity";
 
 export const init = async (): Promise<void> => {
 
@@ -13,7 +15,7 @@ export const init = async (): Promise<void> => {
         username: "postgres",
         password: "root",
         database: "booksharing",
-        entities: [CommonUser, Book, Preference, Message],
+        entities: [CommonUser, Book, Preference, Message, Comment, Order],
         synchronize: true,
     });
 

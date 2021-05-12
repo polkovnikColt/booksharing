@@ -6,6 +6,14 @@
 
 .ant-form-item-label{
   label{
+    width: 120px !important;
+    @media screen and (max-width: 400px){
+      width: 120px;
+    }
+  }
+}
+.ant-form-item-required{
+  label{
     width: 100px;
     @media screen and (max-width: 400px){
       width: 120px;

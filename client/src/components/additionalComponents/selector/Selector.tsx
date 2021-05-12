@@ -2,6 +2,7 @@ import React from 'react';
 import {Select} from "antd";
 import {SelectValue} from "antd/es/select";
 import {Key} from "antd/es/table/interface";
+import './selector.styles.scss';
 
 type SelectProps = {
     message?: string,
@@ -10,12 +11,13 @@ type SelectProps = {
     changeHandler: (name: string, value: string) => void;
 }
 
-export const Selector: React.FC<SelectProps> = ({
-                                                    message,
-                                                    values,
-                                                    name,
-                                                    changeHandler
-                                                }) => {
+export const Selector: React.FC<SelectProps> = (
+    {
+        message,
+        values,
+        name,
+        changeHandler
+    }) => {
 
     const handleChange = (e: SelectValue): void => {
         changeHandler(name, e.toString());
@@ -23,13 +25,13 @@ export const Selector: React.FC<SelectProps> = ({
 
     return (
         <div
-            className="mx-auto selector-width ">
+            className="w-100">
             {message &&
             <span style={{margin: '10'}}>
                 {message}
             </span>}
             <Select
-                className="m-1 selector-width"
+                className="mx-auto selector"
                 onChange={handleChange}
                 defaultValue="none"
             >

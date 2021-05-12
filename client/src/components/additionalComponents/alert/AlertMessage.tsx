@@ -8,38 +8,26 @@ import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 
 type AlertProps = {
     type: "success" | "info" | "warning" | "error",
-    message: string
 }
 
 export const AlertMessage: React.FC<AlertProps> = (
     {
         type,
-        message,
+        children,
     }
 ) => {
 
-    const tools = useSelector((store:RootState) => store.tools);
-    console.log(tools)
+    const tools = useSelector((store: RootState) => store.tools);
     const onClose = useDispatchFunc(closeMain);
 
     return (
         <div
-            style ={{display: tools.main ? "inherit" : "none"}}
-            className="alert-message">
-            <Alert
-                message={message}
-                type={type}
-                showIcon
-                action={
-                    <Button
-                        onClick={onClose()}
-                        size="small"
-                        type="text"
-                    >
-                        Закрити
-                    </Button>
-                }
-            />
+            // style={{display: tools.main ? "inherit" : "none"}}
+             className={`alert-message ${type} ${tools.main ? null : "close"}`}>
+            {children}
+            <div onClick={onClose()}>
+                Закрити
+            </div>
         </div>
     )
 }

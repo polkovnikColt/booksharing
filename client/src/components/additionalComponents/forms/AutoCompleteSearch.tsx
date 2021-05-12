@@ -51,7 +51,7 @@ const searchResult = (query: string, users: UserInterface[], books: BookInterfac
         .join('.')
         .split('.')
         .map((_, index) => {
-            const result = concat[index].id + "" + concat[index].name;
+            const result = concat[index].id + " " + concat[index].name;
             return {
                 value: result,
                 label: (
@@ -66,6 +66,9 @@ const searchResult = (query: string, users: UserInterface[], books: BookInterfac
                     </span>
                         <span className="mx-1">
                             {concat[index]?.author}
+                         <span className = "mx-1">
+                             {concat[index]?.user ? concat[index]?.user[0].name :null}
+                         </span>
                         </span>
                     </div>
                 ),

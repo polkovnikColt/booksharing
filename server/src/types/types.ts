@@ -4,16 +4,23 @@ export interface UserInterface {
     email:string,
     password:string,
     name:string,
-    avatar:string,
-    booksToGetId:number[],
-    booksToSendId:number[]
+    avatar?:string,
+    phoneNumber?:string
+    favorite: number[]
+    // booksToGetId:number[],
+    // booksToSendId:number[]
 }
 
-export interface AdminInterface {
-    id:number,
-    email:string,
-    password:string,
+export interface FavoriteInterface {
+    userId: number
+    bookId: number
+}
 
+export interface CommentInterface {
+    id:number
+    text:string
+    to:number
+    user: UserInterface
 }
 
 export interface UserToBookInterface {
@@ -40,7 +47,24 @@ export interface PreferenceInterface {
     user: UserInterface
 }
 
+export interface PreferenceInputInterface {
+    genre: string
+    author: string
+    user: UserInterface
+}
+
+export interface OrderInterface {
+    to:number
+    bookId:number
+    user:UserInterface
+}
+
 export type LoginResponseType = {
     token: string,
     user: UserInterface,
+}
+
+export interface MessageInterface {
+    text:string,
+
 }

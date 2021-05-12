@@ -9,4 +9,8 @@ export class MessageService {
         this.manager = getManager();
     }
 
+    async gelAllUserMessage(id:number):Promise<void> {
+
+    }
+
 }
