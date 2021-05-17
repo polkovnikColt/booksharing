@@ -32,17 +32,51 @@ export class PreferenceService {
 
 
     async addToPreference(id: number, body: PreferenceInputInterface): Promise<void> {
-        const pref: PreferenceInterface = this.manager.findOne(Preference, {
+        const pref: PreferenceInterface = await this.manager.findOne(Preference, {
             where: {
-                user: id
+                user: body.user
             }
         });
         if (pref) {
+            if(pref.author.length >= 10 || pref.genre.length >= 10 ) {
+                const authorCut = [];
+                const genreCut = [];
+                for ( let i = pref.author.length - 3; i > 0; i--) {
+                    authorCut.push(pref.author[i]);
+                    genreCut.push(pref.author[i]);
+                }
+                pref.author = authorCut;
+                pref.genre = genreCut;
+            }
             pref.author.push(body.author);
-            pref.genre.push(body.genre)
+            pref.genre.push(body.genre);
             await this.manager.save(pref);
         } else {
             throw new BadRequestException();
         }
+    }
+
+    async getPreference(id:number):Promise<PreferenceInterface> {
+        const allPreference:PreferenceInterface[] = await this.manager
+            .find(Preference);
+        const myPreference:PreferenceInterface = await this.manager
+            .findOne(Preference, {where: {user: id}});
+        console.log(allPreference)
+       let res:PreferenceInterface = {id: 0, author: [], genre: [] , user: id};
+        for(let i = 0; i < allPreference.length; i++) {
+           for(let j = 0; j < allPreference[i].author.length; j++){
+               console.log(allPreference[i].author)
+               if(!res.author.includes(allPreference[i].author[j])){
+                   res.author.push(allPreference[i].author[j]);
+               }
+               if(!res.genre.includes(allPreference[i].genre[j])) {
+                   res.genre.push(allPreference[i].genre[j]);
+               }
+           }
+        }
+        res.author.concat(myPreference.author);
+        res.genre.concat(myPreference.genre);
+        console.log(res);
+        return res;
     }
 }

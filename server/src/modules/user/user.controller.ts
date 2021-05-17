@@ -1,6 +1,6 @@
 import {Controller, Delete, Get, Param, Post, Put, Req, UseGuards} from '@nestjs/common';
 import {UserService} from "./user.service";
-import {UserInterface} from "../../types/types";
+import {OrderInterface, UserInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
 
 @Controller('user')
@@ -16,26 +16,38 @@ export class UserController {
 
     @UseGuards(AuthGuard('jwt'))
     @Put('favorite/add')
-    addToFavorite(@Req() req):Promise<void>{
-       return this.userService.addToFavorite(req.body);
+    addToFavorite(@Req() req): Promise<void> {
+        return this.userService.addToFavorite(req.body);
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Put('favorite/delete')
-    deleteFromFavorite(@Req() req):Promise<void>{
+    deleteFromFavorite(@Req() req): Promise<void> {
         return this.userService.deleteFromFavorite(req.body);
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Put('order/:id')
-    orderBook(@Param("id") id, @Req() req):Promise<void> {
-        return this.userService.orderBook(id, req.body);
+    @Get('order/all/')
+    getAllUserOrders():Promise<OrderInterface[]> {
+        return this.userService.loadAllOrders();
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Put('disorder/:id')
-    disorderBook(@Param("id") id, @Req() req):Promise<void> {
-        return this.userService.disorderBook(id,req.body);
+    @Post('order')
+    orderBook(@Req() req): Promise<OrderInterface> {
+        return this.userService.orderBook(req.body);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Delete('order/:id')
+    disorderBook(@Param("id") id): Promise<OrderInterface> {
+        return this.userService.disorderBook(id);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Put('order/approve')
+    approveOrder(@Req() req):Promise<OrderInterface>{
+        return this.userService.approveOrder(req.body);
     }
 
     @UseGuards(AuthGuard('jwt'))

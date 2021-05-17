@@ -6,7 +6,7 @@ import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 
 type ButtonManipulateProps = {
     dispatchFunction:any,
-    object: UserInterface | BookInterface | FavoriteInterface,
+    object: UserInterface | BookInterface | FavoriteInterface | OrderBookInterface,
     text: string,
     type: "update" | "delete"
 

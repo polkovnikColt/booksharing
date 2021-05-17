@@ -5,13 +5,18 @@ import {NavTab} from "../../components/additionalComponents/tabs/NavTab";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {UserCard} from "../../components/additionalComponents/user-components/UserCard";
-import {messageFormData} from "./additional/service";
+import {findBookById, messageFormData} from "./additional/service";
+import {AllUser} from "./additional/AllUsers";
+import {AllBooks} from "./additional/AllBooks";
+import {useWidth} from "../../hooks/useDimension";
+import {OrderCard} from "../../components/additionalComponents/order/OrderCard";
 
 const {Content} = Layout;
 
 export const AdminPage:React.FC = () => {
 
     const user = useSelector((store:RootState) => store.user);
+    const width = useWidth(window.innerWidth);
 
     return(
         <Content
@@ -28,26 +33,30 @@ export const AdminPage:React.FC = () => {
                     counter: user.allUsers.length
                 },
                 {
-                    title: "Всі повідомлення",
-                    counter: 0
+                    title: "Всі обміни",
+                    counter: user.orders.length
                 }]}>
                 <OneTab>
-                    1
+                   <AllBooks
+                       user={user.credentials}
+                       books={user.allBooks}
+                       width={width}
+                   />
                 </OneTab>
                 <OneTab>
-                    {user.allUsers.map(user => (
-                        <UserCard
-                            userId={user.id}
-                            name={user.name}
-                            avatar={user.avatar}
-                            phoneNumber={user.phoneNumber}
-                            city={user.city}
-                            info={user.info}
+                    <AllUser allUsers={user.allUsers}/>
+                </OneTab>
+                <OneTab>
+                    {user.orders.map(order => (
+                        <OrderCard
+                            userName={order.user[0].name}
+                            userId={order.user[0].id}
+                            avatar={order.user[0].avatar}
+                            isFinished={order.isFinished}
+                            bookSendName={findBookById(user.allBooks,order.bookSendId)}
+                            bookGetName={findBookById(user.allBooks,order.bookGetId)}
                         />
                     ))}
-                </OneTab>
-                <OneTab>
-                    3
                 </OneTab>
             </NavTab>
             </div>

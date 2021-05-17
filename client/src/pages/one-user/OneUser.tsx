@@ -16,8 +16,8 @@ export const OneUser: React.FC = () => {
     const path = window.location.href.split('/');
 
     const width = useWidth(window.innerWidth)
-    const user = useSelector((store:RootState) => store.user);
-    const {currentUser,userBooks} = useStateParams(path[path.length - 1]);
+    const user = useSelector((store: RootState) => store.user);
+    const {currentUser, userBooks} = useStateParams(path[path.length - 1], "");
 
     usePreload(loadUserComments, currentUser.id);
 
@@ -43,36 +43,39 @@ export const OneUser: React.FC = () => {
                     <h3>
                         <Space>
                             Контакти:
-                        <span>{currentUser.email}</span>
-                        <span>{currentUser.phoneNumber}</span>
+                            <span>{currentUser.email}</span>
+                            <span>{currentUser.phoneNumber}</span>
                         </Space>
                     </h3>
                     <h3>{currentUser.info}</h3>
                 </Col>
             </Row>
             <Divider
-                className = "mx-1"
+                className="mx-1"
                 orientation='center'>
                 Книги користувача
             </Divider>
-            <Row className = "form-padding">
-                {userBooks.map(book => (
-                    <Col
-                        className = 'mx-auto my-3'
-                        span = {width > 500 ? 10 : 22} >
-                        <BookCard
-                            userPage={true}
-                            bookId={book.id}
-                            name={book.name}
-                            isLogged={true}
-                            isMine={false}
-                            photo={book.preview}
-                            author={book.author}
-                            genre={book.genre}
-                            isOrdered={book.isOrdered}
+            <Row className="form-padding">
+                {userBooks.map(book => {
+                    return !book.isExchanged ? (<Col
+                            className='mx-auto my-3'
+                            span={width > 500 ? 10 : 22}>
+                            <BookCard
+                                user={book.user}
+                                canAdd={true}
+                                userPage={true}
+                                bookId={book.id}
+                                name={book.name}
+                                isLogged={true}
+                                isMine={false}
+                                photo={book.preview}
+                                author={book.author}
+                                genre={book.genre}
+                                isOrdered={book.isOrdered}
                             />
-                    </Col>
-                ))}
+                        </Col>
+                    ) : null
+                })}
             </Row>
             <Divider orientation="center">
                 Відгуки на користувача
@@ -83,7 +86,7 @@ export const OneUser: React.FC = () => {
                     formData={commentFormData}
                     user={user.credentials}
                     currentUserId={currentUser.id}
-                    />
+                />
             </Row>
         </Content>
     )

@@ -5,7 +5,9 @@ export const usePreload = (dispatchFunction,credentials = null):void => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(credentials ? dispatchFunction(credentials) : dispatchFunction());
+        dispatch(credentials ?
+            dispatchFunction(credentials) :
+            dispatchFunction());
     },[])
 
 }

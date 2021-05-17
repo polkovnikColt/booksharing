@@ -18,7 +18,6 @@ const {Content} = Layout;
 
 export const BookPage: React.FC = () => {
 
-    const handleOrderBook = useDispatchFunc(orderBook);
     const handleAddToFavorite = useDispatchFunc(addToFavorite);
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
@@ -45,35 +44,28 @@ export const BookPage: React.FC = () => {
                 {user.credentials && <AddBook/>}
                 <Row className="m-0"
                      gutter={{xs: 8, sm: 16, md: 24, lg: 35}}>
-                    {user.allBooks.map((book) =>
-                        <Col
+                    {user.allBooks.map((book) => {
+                        return !book.isExchanged ? (<Col
                             className="mx-auto m-1"
                             span={width < 700 ? width < 430 ? 21 : 12 : 8}>
                             <BookCard
-                                handleOrderBook={book.isOrdered ? null : handleOrderBook(
-                                    {
-                                        bookId: book.id,
-                                        userId: user.credentials?.id,
-                                        userGetId: book.user[0].id,
-                                        views: book.views
-                                    }
-                                )}
-                                addToFavorite={addToFavorite({
+                                canAdd={true}
+                                addToFavorite={handleAddToFavorite({
                                     bookId: book.id,
                                     userId: user.credentials?.id
                                 })}
                                 bookId={book.id}
-                                isOrdered = {book.isOrdered}
+                                isOrdered={book.isOrdered}
                                 isMine={user.credentials?.id === book.user[0].id}
                                 photo={book.preview}
                                 isLogged={!!user.credentials}
-                                user = {book.user}
+                                user={book.user}
                                 name={book.name}
                                 author={book.author}
                                 genre={book.genre}
                             />
-                        </Col>
-                    )}
+                        </Col>) : null
+                    })}
                 </Row>
             </Content>
         </Layout>

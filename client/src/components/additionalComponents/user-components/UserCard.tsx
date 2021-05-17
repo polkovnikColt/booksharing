@@ -6,6 +6,7 @@ import {useFormHandler} from "../../../hooks/useFormHandler";
 import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 import './user.styles.scss';
 import {AvatarLink} from "./AvatarLink";
+import {useWidth} from "../../../hooks/useDimension";
 
 type UserCardProps = {
     userId:number
@@ -33,20 +34,13 @@ export const UserCard: React.FC<UserCardProps> = (
     }
 ) => {
 
-    const {object, changeHandler} = useFormHandler({});
-    const submitHandler = useDispatchFunc(() => {
-    });
+    const width = useWidth(window.innerWidth);
 
     return (
         <>
             <Card
                 className="mx-auto"
-                style={{width: 400, marginTop: 16}}
-                // actions={[
-                //     <SettingOutlined key="setting" />,
-                //     <EditOutlined key="edit" />,
-                //     <EllipsisOutlined key="ellipsis" />,
-                // ]}
+                style={{width:"100%", marginTop: 16}}
             >
                 <Skeleton loading={false} avatar active>
                     <Meta

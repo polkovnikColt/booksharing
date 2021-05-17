@@ -7,27 +7,34 @@ import {UserInterface} from "../../../types/types";
 import {AvatarLink} from "../user-components/AvatarLink";
 import {LabelItem} from "../labels/LabelItem";
 import {BookOrderModal} from "../modal/BookOrderModal";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store/store";
+import {addToPreference, orderBook} from "../../../store/user/userActions";
+import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 
 const {Meta} = Card;
 
 type BookCardProps = {
     bookId?: number
+    canAdd: boolean
     name: string,
     isLogged: boolean,
     isMine: boolean,
     widthInPx?: number,
+    isExchanged?:boolean,
     isOrdered?: boolean,
-    user?: UserInterface | UserInterface[],
+    user?: UserInterface,
     addToFavorite?: any
     photo: string,
     author: string,
     genre: string
     userPage?: boolean
-    handleOrderBook?: () => void
 }
 
 export const BookCard: React.FC<BookCardProps> = (
     {
+        isExchanged,
+        canAdd,
         bookId,
         isOrdered,
         author,
@@ -38,11 +45,23 @@ export const BookCard: React.FC<BookCardProps> = (
         genre,
         user,
         isLogged,
-        handleOrderBook,
         userPage,
         addToFavorite
     }
 ) => {
+
+    const currentUser = useSelector((store: RootState) => store.user);
+    const addPref = useDispatchFunc(addToPreference);
+
+    const onAdd = () => {
+        addToFavorite();
+        addPref({
+            genre:genre,
+            author:author,
+            user: currentUser.credentials.id
+        })();
+    }
+
     return (
         <>
             <Card
@@ -51,11 +70,15 @@ export const BookCard: React.FC<BookCardProps> = (
             >
                 {isMine && user ?
                     <div className="mine"/> :
+                    null
+                }
+                {canAdd && !isMine ?
                     <div
-                        onClick={addToFavorite}
+                        onClick={onAdd}
                         className="star">
                         <StarOutlined size={100}/>
                     </div>
+                    : null
                 }
                 <Skeleton loading={false} avatar active>
                     {!!user && <Meta
@@ -69,20 +92,22 @@ export const BookCard: React.FC<BookCardProps> = (
                         title={user[0].name}
                     />
                     }
-                    { user === undefined ? <ImageItem
-                        isOrdered={isOrdered && isLogged}
-                        label="Зарезервовано"
-                        widthInPer={100}
-                        base64={photo}
-                    /> :
+                    {!user || isExchanged || isMine  ? <ImageItem
+                            isOrdered={isOrdered && isLogged}
+                            label={isExchanged ? "Обміняна" :"Зарезервовано"}
+                            widthInPer={100}
+                            base64={photo}
+                        /> :
                         <BookOrderModal
-                        handleOrder={isLogged && !isMine ? handleOrderBook : null}
-                        photo={photo}
-                        bookName={name}
-                        userId={user[0].id}
-                        isLogged={isLogged}
-                        isOrdered={isOrdered}
-                        isMine={isMine}
+                            bookUser={user[0].id}
+                            bookId={bookId}
+                            handleOrder={isLogged && !isMine ? orderBook : null}
+                            photo={photo}
+                            bookName={name}
+                            userId={currentUser.credentials?.id}
+                            isLogged={isLogged}
+                            isOrdered={isOrdered}
+                            isMine={isMine}
                         />}
                     <div className="book-description">
                         <h2>{name}</h2>

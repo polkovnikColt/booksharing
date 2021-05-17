@@ -29,10 +29,11 @@ export const MyBooks: React.FC<MyBooksProps> = (
     return (
         <>
             {books.map((book: BookInterface) => {
-                return (
+                return !book.isExchanged ? (
                     <Row className="mx-1 my-3">
                         <Col span={width < 500 ? 24 : 10}>
                             <BookCard
+                                canAdd={false}
                                 bookId={book.id}
                                 widthInPx={width < 500 ? 400 : 300}
                                 isMine={false}
@@ -67,7 +68,7 @@ export const MyBooks: React.FC<MyBooksProps> = (
                             </ColumnWrapper>
                         </Col>
                     </Row>
-                )
+                ) : null
             })}
         </>
     )

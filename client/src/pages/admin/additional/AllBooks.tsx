@@ -3,11 +3,10 @@ import React from "react";
 import {Col, Row} from "antd";
 import {BookCard} from "../../../components/additionalComponents/books/BookCard";
 import {ColumnWrapper} from "../../../components/additionalComponents/wrappers/ColumnWrapper";
-import {ModalUpdate} from "../../../components/additionalComponents/modal/ModalUpdate";
-import {formData} from "../../user/additional/service";
-import {deleteBook, updateBook} from "../../../store/user/userActions";
-import {GeneralForm} from "../../../components/additionalComponents/forms/GeneralForm";
+import {deleteBook} from "../../../store/user/userActions";
 import {ButtonManipulate} from "../../../components/additionalComponents/manipulators/ButtonManipulate";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store/store";
 
 type MyBooksProps = {
     books: BookInterface[],
@@ -15,13 +14,15 @@ type MyBooksProps = {
     width: number
 }
 
-export const MyBooks: React.FC<MyBooksProps> = (
+export const AllBooks: React.FC<MyBooksProps> = (
     {
         books,
         user,
         width
     }
 ) => {
+
+    const current = useSelector((store:RootState) => store.user);
 
     return (
         <>
@@ -30,8 +31,10 @@ export const MyBooks: React.FC<MyBooksProps> = (
                     <Row className="mx-1 my-3">
                         <Col span={width < 500 ? 24 : 10}>
                             <BookCard
+                                isExchanged={book.isExchanged}
+                                canAdd={false}
                                 widthInPx={width < 500 ? 400 : 300}
-                                isMine={true}
+                                isMine={current.credentials.id === book.user[0].id}
                                 isLogged={!!user}
                                 user={book.user}
                                 name={book.name}
@@ -43,26 +46,6 @@ export const MyBooks: React.FC<MyBooksProps> = (
                         <Col
                             span={width < 500 ? 24 : 14}>
                             <ColumnWrapper>
-                                {width < 500 ?
-                                    <ModalUpdate
-                                        photoName="preview"
-                                        buttonText="Оновити"
-                                        book={book}
-                                        title="Оновити книгу"
-                                        formData={formData}
-                                        dispatchFunction={updateBook}
-                                    /> :
-                                    <GeneralForm
-                                        buttonText="Оновити"
-                                        formData={formData}
-                                        inputHandler={null}
-                                        submitHandler={null}
-                                        uploaderHandler={null}
-                                        hasSelector={false}
-                                        hasCheckbox={false}
-                                        hasUploader={true}
-                                    />
-                                }
                                 <ButtonManipulate
                                     dispatchFunction={deleteBook}
                                     object={book}

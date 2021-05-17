@@ -1,6 +1,5 @@
 import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm/index";
 import {Book} from "./book.entity";
-import {Message} from "./message.entity";
 import {Preference} from "./preference.entity";
 import {Comment} from "./comment.entity";
 import {Order} from "./order.entity";
@@ -24,6 +23,9 @@ export class CommonUser{
 
     @Column({default:""})
     phoneNumber:string
+
+    @Column({default:""})
+    social:string
 
     @Column({default:""})
     city:string
@@ -52,7 +54,5 @@ export class CommonUser{
     @OneToOne(() => Preference, preference => preference.user)
     preference: Preference
 
-    @OneToMany( type => Message, message => message.user)
-    messages: Message[]
 
 }

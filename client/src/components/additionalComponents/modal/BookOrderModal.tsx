@@ -5,11 +5,17 @@ import {ImageItem} from "../images/ImageItem";
 import {useVisibility} from "../../../hooks/useVisibility";
 import {useFormHandler} from "../../../hooks/useFormHandler";
 import {useStateParams} from "../../../hooks/useStateParams";
+import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
+import {getBookIdByName} from "./service";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store/store";
 
 type BookOrderModalProps = {
+    bookUser:number
     handleOrder: any
     photo: string
     bookName: string
+    bookId: number
     userId: number
     isLogged: boolean
     isOrdered: boolean
@@ -18,18 +24,22 @@ type BookOrderModalProps = {
 
 export const BookOrderModal: React.FC<BookOrderModalProps> = (
     {
+        bookUser,
         bookName,
         photo,
         handleOrder,
         userId,
         isOrdered,
         isLogged,
-        isMine
+        isMine,
+        bookId
     }) => {
 
     const {userBooks} = useStateParams(`${userId}`);
+    const user = useSelector((store:RootState) => store.user);
+    const submitHandler = useDispatchFunc(handleOrder);
     const {show,visible} = useVisibility(false);
-    const {changeHandler,object} = useFormHandler({});
+    const {changeHandler,object} = useFormHandler('');
 
     return (
         <Col>
@@ -51,11 +61,18 @@ export const BookOrderModal: React.FC<BookOrderModalProps> = (
                 <GeneralForm
                     buttonText="Запропонувати"
                     formData={[]}
-                    selectorName="Мої книги"
+                    selectorName="name"
                     inputHandler={null}
-                    values={userBooks.map(book => book.name)}
+                    values={userBooks
+                        .filter(book => book.isOrdered === false)
+                        .map(book => book.name)}
                     selectorHandler={changeHandler}
-                    submitHandler={null}
+                    submitHandler={isLogged ? submitHandler({
+                        to: bookUser,
+                        bookSendId: object ? getBookIdByName(userBooks, object) : 0,
+                        bookGetId: bookId,
+                        user: [user.credentials]
+                    }) : null}
                     hasSelector={true}
                     hasCheckbox={false}
                     hasUploader={false}

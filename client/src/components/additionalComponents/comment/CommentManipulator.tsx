@@ -35,7 +35,8 @@ export const CommentManipulator: React.FC<CommentManipulatorProps> = (
         <Col
         className ="p-3 mx-auto"
             span={24}>
-            {comments.map(comment => (<CommentItem
+            {comments.map(comment => (
+                <CommentItem
                     avatar={comment.user[0].avatar}
                     userName={comment.user[0].name}
                     userId={comment.user[0].id}

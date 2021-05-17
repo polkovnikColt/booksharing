@@ -14,6 +14,7 @@ import {RulesPage} from "./pages/rules/RulesPage";
 import {RegistrationPage} from "./pages/registration/RegistrationPage";
 import {OneUser} from "./pages/one-user/OneUser";
 import {OneBook} from "./pages/one-book/OneBook";
+import {HomePage} from "./pages/homepage/HomePage";
 
 const App: React.FC = () => {
 
@@ -28,7 +29,10 @@ const App: React.FC = () => {
                 <Navigationbar/>
                 <Row>
                     <Switch>
-                        <Route path="/" component={MainPage} exact={true}/>
+                        {!!user.credentials ?
+                            <Route path="/" component={MainPage} exact={true}/> :
+                            <Route path="/" component={HomePage} exact={true}/>
+                        }
                         <Route path="/registration" component={RegistrationPage}/>
                         <Route path="/books" component={BookPage}/>
                         <Route path="/rules" component={RulesPage}/>
@@ -46,7 +50,7 @@ const App: React.FC = () => {
                         <ProtectedRoute
                             component={AdminPage}
                             path={'/admin'}
-                            isAuth={true}
+                            isAuth={user.credentials?.role === "admin"}
                         />
                     </Switch>
                 </Row>

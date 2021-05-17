@@ -30,9 +30,20 @@ export class BookService {
     async getBookById(id: number): Promise<BookInterface[]> {
         return await this.manager.find(Book, {
             where: {
-                user: id
+                user: id,
+                isExchanged: false
             }
         });
+    }
+
+    async orderBooks(body):Promise<void> {
+        await this.manager.update(Book, {id: body.bookGetId}, {isOrdered: true});
+        await this.manager.update(Book, {id: body.bookSendId}, {isOrdered: true})
+    }
+
+    async disorderBooks(body):Promise<void> {
+        await this.manager.update(Book, {id: body.bookGetId}, {isOrdered: false});
+        await this.manager.update(Book, {id: body.bookSendId}, {isOrdered: false})
     }
 
     async createBook(body: BookInterface): Promise<BookInterface> {

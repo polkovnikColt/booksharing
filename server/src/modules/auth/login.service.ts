@@ -5,6 +5,7 @@ import {JwtService} from "@nestjs/jwt";
 import {BadRequestException, ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";
 import * as bcrypt from 'bcrypt';
 import {jwtconst} from "./constant/jwt.constant";
+import {Preference} from "../../entity/preference.entity";
 
 @Injectable()
 export class LoginService {
@@ -44,6 +45,8 @@ export class LoginService {
             const hash = await bcrypt.hash(user.password, jwtconst.salt)
             user.password = hash;
             await this.manager.insert(CommonUser, user);
+            const current = await this.manager.findOne(CommonUser, {where: {email: user.email}});
+            await this.manager.insert(Preference, {author: [], genre: [], user: current.id});
             return {
                 token: this.jwtService.sign({user: user.id}),
                 user: user

@@ -10,7 +10,7 @@ export const getLinks = (user: UserState): LinkInterface[] => {
             return [
                 {title: "Головна", href: "/"},
                 {title: "Книги", href: "/books"},
-                {title: "Кабінет", href: "/user"},
+                {title: "Кабінет", href: "/cabinet"},
                 {title: "Адміністратор", href: "/admin"},
             ]
         }
@@ -40,6 +40,11 @@ export const updateFormData: FormDataInterface[] = [
     {
         label: "Телефон",
         name: "phoneNumber",
+        inputComponent: Input
+    },
+    {
+        label:"Соціальні мережі",
+        name:"social",
         inputComponent: Input
     },
     {

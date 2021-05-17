@@ -17,7 +17,7 @@ export class PreferenceController {
     @UseGuards(AuthGuard('jwt'))
     @Get(':id')
     getUserPreference(@Param("id") id): Promise<PreferenceInterface> {
-        return this.preferenceService.getUserPreference(id);
+        return this.preferenceService.getPreference(id);
     }
 
     @UseGuards(AuthGuard('jwt'))

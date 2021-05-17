@@ -4,7 +4,6 @@ import {UserModule} from "./modules/user/user.module";
 import {LoginModule} from "./modules/auth/login.module";
 import {AdminModule} from "./modules/admin/admin.module";
 import {PreferenceModule} from "./modules/preference/preferece.module";
-import {MessageModule} from "./modules/messages/message.module";
 import {CommentModule} from "./modules/comment/comment.module";
 
 
@@ -15,7 +14,6 @@ import {CommentModule} from "./modules/comment/comment.module";
         LoginModule,
         AdminModule,
         PreferenceModule,
-        MessageModule,
         CommentModule
     ],
     controllers: [],

@@ -6,9 +6,8 @@ export interface UserInterface {
     name:string,
     avatar?:string,
     phoneNumber?:string
+    social:string
     favorite: number[]
-    // booksToGetId:number[],
-    // booksToSendId:number[]
 }
 
 export interface FavoriteInterface {
@@ -35,6 +34,8 @@ export interface BookInterface{
     user: UserToBookInterface | null
     name:string
     author:string
+    isOrdered:boolean
+    isExchanged: boolean
     preview:string
     description:string
     views:number
@@ -44,7 +45,7 @@ export interface PreferenceInterface {
     id: number,
     genre: string[]
     author: string[]
-    user: UserInterface
+    user: number
 }
 
 export interface PreferenceInputInterface {
@@ -54,8 +55,11 @@ export interface PreferenceInputInterface {
 }
 
 export interface OrderInterface {
+    id:number
     to:number
-    bookId:number
+    isFinished: boolean
+    bookSendId:number
+    bookGetId:number
     user:UserInterface
 }
 

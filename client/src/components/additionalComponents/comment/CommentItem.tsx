@@ -20,7 +20,7 @@ export const CommentItem: React.FC<CommentItemProps> = (
     return (
         <div><Comment
             actions={[]}
-            author={{userName}}
+            author={userName}
             avatar={
                 <AvatarLink
                     isMine={false}

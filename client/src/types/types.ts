@@ -6,6 +6,8 @@ export type UserState = {
     comments:CommentInterface[]
     allBooks: BookInterface[]
     allUsers: UserInterface[]
+    orders: OrderBookInterface[]
+    preference: PreferenceInterface
 }
 
 export interface CommentInterface {
@@ -33,6 +35,7 @@ export interface BookInterface{
     preview?:string,
     name:string,
     author:string,
+    isExchanged:true,
     genre:string,
     isOrdered: boolean,
     description:string,
@@ -45,13 +48,26 @@ export interface UserInterface {
     avatar?: string,
     city?:string,
     phoneNumber?:string,
+    social?:string,
     info?:string,
     email:string,
     password:string,
     favorite:number[]
-    // booksToGetId?:number[],
-    // booksToSendId?:number[],
     role:string
+}
+
+export interface PreferenceInterface  {
+    id: number
+    author: string[]
+    genre: string[]
+    user: UserInterface
+}
+
+export interface PreferenceInputInterface {
+    id: number
+    author: string
+    genre: string
+    user: number
 }
 
 export interface FavoriteInterface {
@@ -72,8 +88,10 @@ export interface FormDataInterface{
 }
 
 export interface OrderBookInterface {
-    userId: number
-    bookId: number
-    userGetId: number
-    views?:number
+    id:number
+    to:number
+    isFinished:boolean
+    bookSendId:number
+    bookGetId:number
+    user:UserInterface
 }

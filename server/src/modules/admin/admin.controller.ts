@@ -8,22 +8,16 @@ export class AdminController {
 
     constructor(private readonly adminService: AdminService) {
     }
-    //
-    // @UseGuards(AuthGuard('jwt'))
-    // @Delete('book/:id')
-    // deleteBook(@Param('id') id): Promise<BookInterface> {
-    //     return this.adminService.deleteBook(id);
-    // }
-    //
-    // @UseGuards(AuthGuard('jwt'))
-    // @Delete('user/:id')
-    // deleteUser(@Param('id') id): Promise<UserInterface> {
-    //     return this.adminService.deleteUser(id);
-    // }
-    //
-    // @UseGuards(AuthGuard('jwt'))
-    // @Post('create')
-    // createAdmin(@Req() req): Promise<AdminInterface> {
-    //     return this.adminService.createAdmin(req.body);
-    // }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Delete(':id')
+    deleteUser(@Param('id') id):Promise<void> {
+        return this.adminService.deleteUser(id);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Delete(':id')
+    deleteComment(@Param("id") id):Promise<void> {
+        return this.adminService.deleteComment(id);
+    }
 }

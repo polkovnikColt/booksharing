@@ -11,8 +11,14 @@ export class Order {
     @Column()
     to: number
 
+    @Column({default:false})
+    isFinished: boolean
+
     @Column()
-    bookId: number
+    bookGetId: number
+
+    @Column()
+    bookSendId: number
 
     @ManyToOne(type => CommonUser, user => user.orders)
     user: CommonUser

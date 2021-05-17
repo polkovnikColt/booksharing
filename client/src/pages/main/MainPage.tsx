@@ -1,42 +1,30 @@
 import React from "react";
 import {Divider, Layout, Col, Row} from "antd";
-import {GeneralForm} from "../../components/additionalComponents/forms/GeneralForm";
-import {formData, rules} from "./additional/service";
+import { getBooksByPreference, rules} from "./additional/service";
 import {useSelector} from "react-redux";
-import {loadAllBooks, loadAllUsers, login} from "../../store/user/userActions";
+import {loadPreference} from "../../store/user/userActions";
 import {RootState} from "../../store/store";
 import './mainPage.styles.scss';
 import {useWidth} from "../../hooks/useDimension";
 import {GlobalOutlined} from "@ant-design/icons";
-import {Greetings} from "../../components/additionalComponents/labels/Grettings";
 import {useFormHandler} from "../../hooks/useFormHandler";
 import {AutoCompleteSearch} from "../../components/additionalComponents/forms/AutoCompleteSearch";
 import {usePreload} from "../../hooks/usePreload";
-import {useDispatchFunc} from "../../hooks/useDispatchFunction";
 import {BookCard} from "../../components/additionalComponents/books/BookCard";
 import {AlertMessage} from "../../components/additionalComponents/alert/AlertMessage";
 import {useSearch} from "../../hooks/useSearch";
 import {UserCard} from "../../components/additionalComponents/user-components/UserCard";
-import {messageFormData} from "../book/additional/service";
 import {Rules} from "../../components/additionalComponents/labels/Rules";
 
 const {Content} = Layout;
 
 export const MainPage: React.FC = () => {
-
-    const handleLogin = useDispatchFunc(login);
     const user = useSelector((store: RootState) => store.user);
     const width = useWidth(window.innerWidth);
-    const {object, changeHandler, reload, onSelect} = useFormHandler({})
+    const {object, onSelect} = useFormHandler("")
     const {type, result} = useSearch(object, user.allBooks, user.allUsers);
 
-    usePreload(loadAllBooks);
-    usePreload(loadAllUsers)
-
-    const handleSubmit = (): void => {
-        handleLogin(object)();
-        reload("");
-    }
+    usePreload(loadPreference, user.credentials?.id)
 
     return (
         <Layout>
@@ -49,10 +37,10 @@ export const MainPage: React.FC = () => {
                     </span>
                 </Divider>
                 <div className="main-title">Вітаємо у КНИГООБМІНІ</div>
-                {!!user.credentials ?
+                {!!user.credentials &&
                     <>
                         <AlertMessage type="success">
-                           <Rules rules={rules} header="Підказа #1"/>
+                            <Rules rules={rules} header="Підказка #1"/>
                         </AlertMessage>
                         <AutoCompleteSearch
                             books={user.allBooks}
@@ -63,8 +51,6 @@ export const MainPage: React.FC = () => {
                             {object.length ? <h3>Результати пошуку: </h3> : <h3>Рекомендації: </h3>}
                         </Divider>
                     </>
-                    :
-                    <Greetings/>
                 }
 
                 <Row
@@ -74,28 +60,37 @@ export const MainPage: React.FC = () => {
                     <div
                         className="w-100"
                     >
-                        {!user.credentials &&
-                        <Col
-                            className="mx-auto"
-                            span={width < 500 ? 22 : 12}>
-                            <GeneralForm
-                                hasUploader={false}
-                                hasSelector={false}
-                                hasCheckbox={false}
-                                buttonText='Увійти'
-                                formData={formData}
-                                inputHandler={changeHandler}
-                                submitHandler={handleSubmit}
-                            />
-                        </Col>}
+                        {!object
+                        && user.credentials
+                        && !(Object.keys(user.preference).length === 0)
+                        && getBooksByPreference(user.preference, user.allBooks)
+                            .map(book => {
+                                return !book.isExchanged &&
+                                !book.isOrdered ? (
+                                    <Col
+                                        className = "mx-auto"
+                                        span = {12}>
+                                    <BookCard
+                                        user={book.user}
+                                        canAdd={true}
+                                        name={book.name}
+                                        isLogged={!!user.credentials}
+                                        isMine={false}
+                                        photo={book.preview}
+                                        author={book.author}
+                                        genre={book.genre}
+                                    />
+                                    </Col>
+                                ) : null
+                            })
+                        }
                         {!!user.credentials &&
                         <Row>
-                            <Col
-                                className = "mx-auto"
-                                span={width < 500 ? 22 : 12}>
                                 {type === "user" ?
                                     result.map(user => (
-                                        <div className="mx-auto">
+                                        <Col
+                                            span = {width < 500 ? 22:12}
+                                            className="mx-auto">
                                             <UserCard
                                                 userId={user.id}
                                                 name={user.name}
@@ -104,11 +99,14 @@ export const MainPage: React.FC = () => {
                                                 city={user.city}
                                                 info={user.info}
                                             />
-                                        </div>
+                                        </Col>
                                     )) :
                                     result.map(book =>
-                                        <div className="mx-auto">
+                                        <Col
+                                            span = {width < 500 ? 22: 12}
+                                            className="mx-auto">
                                             <BookCard
+                                                canAdd={true}
                                                 bookId={book.id}
                                                 isOrdered={book.isOrdered}
                                                 user={book.user}
@@ -119,10 +117,9 @@ export const MainPage: React.FC = () => {
                                                 author={book.author}
                                                 genre={book.genre}
                                             />
-                                        </div>
+                                        </Col>
                                     )
                                 }
-                            </Col>
                         </Row>
                         }
                     </div>

@@ -22,6 +22,9 @@ export class Book {
     @Column({default:false})
     isOrdered: boolean
 
+    @Column({default:false})
+    isExchanged:boolean
+
     @Column()
     description: string
 

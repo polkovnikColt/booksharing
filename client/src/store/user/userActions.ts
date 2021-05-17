@@ -1,11 +1,18 @@
-import {BookInterface, CommentInterface, FavoriteInterface, OrderBookInterface, UserInterface} from "../../types/types";
+import {
+    BookInterface,
+    CommentInterface,
+    FavoriteInterface,
+    OrderBookInterface, PreferenceInputInterface,
+    PreferenceInterface,
+    UserInterface
+} from "../../types/types";
 import {Dispatch} from "redux";
 import {
-    AddBookType, AddCommentType, AddFavoriteType,
+    AddBookType, AddCommentType, AddFavoriteType, AddToPreferenceType, ApproveOrderType,
     DeleteBookType, DeleteFavoriteType, DisorderBookType,
-    LoadAllBooksType,
+    LoadAllBooksType, LoadAllOrdersType,
     LoadBooksType,
-    LoadingAllUsersType, LoadUserCommentsType,
+    LoadingAllUsersType, LoadPreferenceType, LoadUserCommentsType,
     LoginType,
     OrderBookType, UpdateBook, UpdateUserType
 } from "./userActionTypes";
@@ -26,6 +33,10 @@ export const LOAD_USER_COMMENTS = "LOAD_USER_COMMENTS";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const ADD_FAVORITE = "ADD_FAVORITE";
 export const DELETE_FAVORITE = "DELETE_FAVORITE";
+export const LOAD_ALL_ORDERS = "LOAD_ALL_ORDERS";
+export const APPROVE_ORDER = "APPROVE_ORDER";
+export const ADD_TO_PREFERENCE = "ADD_TO_PREFERENCE";
+export const LOAD_PREFERENCE = "LOAD_PREFERENCE";
 
 export const deleteBook = (book: BookInterface) => {
     return async (dispatch: Dispatch<DeleteBookType>) => {
@@ -45,6 +56,7 @@ export const login = (user) => {
     return async (dispatch: Dispatch<LoginType>) => {
         try {
             const res = await axios.post('/login', user);
+            console.log(res.data)
             localStorage.setItem("token", res.data.token);
             dispatch({
                 type: LOGIN,
@@ -122,7 +134,6 @@ export const loadAllBooks = () => {
 }
 
 export const loadAllUsers = () => {
-
     return async (dispatch: Dispatch<LoadingAllUsersType>) => {
         try {
             const res = await axios.get('/user');
@@ -138,34 +149,48 @@ export const loadAllUsers = () => {
 
 export const orderBook = (order: OrderBookInterface) => {
     return async (dispatch: Dispatch<OrderBookType>) => {
-        // try {
-        //     const resUser = await axios.put(`user/order/${order.userId}`, order);
-        //     const resBook = await axios.put(`book/${order.bookId}`,
-        //         {isOrdered: true, views: order.views + 1});
-        //     dispatch({
-        //         type: ORDER_BOOK,
-        //         payload: order
-        //     });
-        // } catch (e) {
-        //
-        // }
+        const user = order.user;
+        order.user = user[0].id;
+        try {
+            const res = await axios.post('user/order', order);
+            await axios.put('book/order', order);
+            order.user = user;
+            dispatch({
+                type: ORDER_BOOK,
+                payload: order
+            })
+        } catch (e) {
+
+        }
     };
 }
 
 export const disorderBook = (order: OrderBookInterface) => {
     return async (dispatch: Dispatch<DisorderBookType>) => {
-        // try {
-        //     const resUser = await axios.put(`user/disorder/${order.userId}`, order);
-        //     const resBook = await axios.put(`book/${order.bookId}`,
-        //         {isOrdered: false});
-        //     console.log(resUser, resBook);
-        //     dispatch({
-        //         type: DISORDER_BOOK,
-        //         payload: order
-        //     })
-        // } catch (e) {
-        //
-        // }
+        try {
+            const res = await axios.delete(`user/order/${order.id}`);
+            await axios.put('book/disorder', order);
+            dispatch({
+                type: DISORDER_BOOK,
+                payload: order
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const approveOrder = (order: OrderBookInterface) => {
+    return async (dispatch: Dispatch<ApproveOrderType>) => {
+        try {
+            const res = await axios.put('user/order/approve', order);
+            dispatch({
+                type: APPROVE_ORDER,
+                payload: order
+            })
+        } catch (e) {
+
+        }
     }
 }
 
@@ -201,7 +226,6 @@ export const loadUserComments = (id: number) => {
     return async (dispatch: Dispatch<LoadUserCommentsType>) => {
         try {
             const res = await axios.get(`comment/${id}`);
-            console.log(res)
             dispatch({
                 type: LOAD_USER_COMMENTS,
                 payload: res.data
@@ -233,6 +257,7 @@ export const addToFavorite = (favorite: FavoriteInterface) => {
     return async (dispatch: Dispatch<AddFavoriteType>) => {
         try {
             const res = await axios.put('user/favorite/add', favorite);
+            console.log(res);
             dispatch({
                 type: ADD_FAVORITE,
                 payload: favorite
@@ -250,6 +275,59 @@ export const deleteFromFavorite = (favorite: FavoriteInterface) => {
             dispatch({
                 type: DELETE_FAVORITE,
                 payload: favorite
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const deleteUser = (user: UserInterface) => {
+    return async (dispatch) => {
+        try {
+
+        } catch (e) {
+
+        }
+    }
+}
+
+export const loadAllOrders = () => {
+    return async (dispatch: Dispatch<LoadAllOrdersType>) => {
+        try {
+            const res = await axios.get(`user/order/all`);
+            dispatch({
+                type: LOAD_ALL_ORDERS,
+                payload: res.data
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const addToPreference = (pref:PreferenceInputInterface) => {
+    return async (dispatch:Dispatch<AddToPreferenceType>) => {
+        try {
+            const res = await axios.put(`preference/${pref.user}`, pref);
+            dispatch({
+                type: ADD_TO_PREFERENCE,
+                payload:pref
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const loadPreference = (id:number) => {
+    return async (dispatch:Dispatch<LoadPreferenceType>) => {
+        try {
+            const res = await axios.get(`preference/${id}`);
+            console.log(res.data)
+            dispatch({
+                type:LOAD_PREFERENCE,
+                payload: res.data
             })
         } catch (e) {
 

@@ -1,15 +1,13 @@
 import React from 'react';
-import {BookInterface, OrderBookInterface} from "../../../../types/types";
+import {BookInterface} from "../../../../types/types";
 import {Col, Row} from "antd";
 import {BookCard} from "../../../../components/additionalComponents/books/BookCard";
 import {ButtonManipulate} from "../../../../components/additionalComponents/manipulators/ButtonManipulate";
-import {UserCard} from "../../../../components/additionalComponents/user-components/UserCard";
 
 type BooksToGetProps = {
     books: BookInterface[],
     userId: number,
-    dispatchFunc: any[2] | any,
-    type: 'favorite' | 'toSend',
+    dispatchFunc: any,
     width: number
 }
 
@@ -17,7 +15,6 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
     {
         books,
         dispatchFunc,
-        type,
         userId,
         width,
     }
@@ -25,12 +22,12 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
     return (
         <>
             {books.map((book: BookInterface) => {
-                return (
+                return !book.isExchanged ? (
                     <Row className ="mx-1 my-3">
                         <Col span = {24}>
-                                {type === 'favorite' ?
                                     <>
                                         <BookCard
+                                            canAdd={false}
                                             bookId={book.id}
                                             widthInPx={300}
                                             isMine={false}
@@ -51,42 +48,9 @@ export const BooksToManipulate: React.FC<BooksToGetProps> = (
                                         text="Прибрати"
                                     />
                                     </>
-                                    :
-                                    <>
-                                        <UserCard
-                                            userId={book.user[0].id}
-                                            bookPreview={book.preview}
-                                            name={book.user[0].name}
-                                            avatar={book.user[0].avatar}
-                                            bookName={book.name}
-                                            phoneNumber={book.user[0].phoneNumber}
-                                            city={book.user[0].city}
-                                            info={book.user[0].info}
-                                            />
-                                    <Row>
-                                        <ButtonManipulate
-                                            dispatchFunction={dispatchFunc[0]}
-                                            object={{
-                                                userId: userId,
-                                                bookId: book.id,
-                                            }}
-                                            type="update"
-                                            text="Прийняти"
-                                        />
-                                        <ButtonManipulate
-                                            dispatchFunction={dispatchFunc[1]}
-                                            object={{
-                                                userId: userId,
-                                                bookId: book.id,
-                                            }}
-                                            type="delete"
-                                            text="Відхилити"/>
-                                    </Row>
-                                    </>
-                                }
                         </Col>
                     </Row>
-                )
+                ) : null
             })}
         </>
     )

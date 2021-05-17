@@ -21,5 +21,10 @@ export const formData:FormDataInterface[] = [
         label:"Ім'я користувача",
         name:"name",
         inputComponent: Input
+    },
+    {
+        label:"Соціальні мережі",
+        name:"social",
+        inputComponent: Input
     }
 ]
