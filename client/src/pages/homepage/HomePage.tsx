@@ -1,7 +1,6 @@
 import React from 'react';
 import {Col, Layout, Row} from "antd";
 import {GeneralForm} from "../../components/additionalComponents/forms/GeneralForm";
-import {useSelector} from "react-redux";
 import {useWidth} from "../../hooks/useDimension";
 import {useFormHandler} from "../../hooks/useFormHandler";
 import {useDispatchFunc} from "../../hooks/useDispatchFunction";

@@ -1,12 +1,20 @@
 import React from 'react';
 import {Button} from "antd";
 import './manipulators.styles.scss';
-import {BookInterface, FavoriteInterface, OrderBookInterface, UserInterface} from "../../../types/types";
+import {
+    BookInterface,
+    CommentInterface,
+    FavoriteInterface,
+    OrderBookInterface,
+    UserInterface
+} from "../../../types/types";
 import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
 
 type ButtonManipulateProps = {
     dispatchFunction:any,
-    object: UserInterface | BookInterface | FavoriteInterface | OrderBookInterface,
+    object: UserInterface | BookInterface
+        | FavoriteInterface | OrderBookInterface
+        | CommentInterface,
     text: string,
     type: "update" | "delete"
 

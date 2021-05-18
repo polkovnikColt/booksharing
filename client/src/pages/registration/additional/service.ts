@@ -13,11 +13,6 @@ export const formData:FormDataInterface[] = [
         inputComponent: Input.Password
     },
     {
-        label:"Повторіть пароль",
-        name:"passwordRepeat",
-        inputComponent: Input.Password
-    },
-    {
         label:"Ім'я користувача",
         name:"name",
         inputComponent: Input

@@ -1,12 +1,12 @@
 import {
     ADD_BOOK, ADD_COMMENT, ADD_FAVORITE, ADD_TO_PREFERENCE, APPROVE_ORDER,
-    DELETE_BOOK, DELETE_FAVORITE, DISORDER_BOOK,
+    DELETE_BOOK, DELETE_COMMENT, DELETE_FAVORITE, DELETE_USER, DISORDER_BOOK,
     LOAD_ALL_BOOKS, LOAD_ALL_ORDERS,
     LOAD_ALL_USERS,
     LOAD_BOOKS, LOAD_PREFERENCE, LOAD_USER_COMMENTS,
     LOGIN,
     ORDER_BOOK,
-    UNLOG, UPDATE_BOOK, UPDATE_USER
+    UNLOG, UPDATE_BOOK, UPDATE_USER, UPDATE_USER_TO_ADMIN
 } from "./userActions";
 import {
     BookInterface,
@@ -43,7 +43,7 @@ export type LoadAllBooksType = {
     payload: BookInterface[]
 }
 
-export type LoadingAllUsersType ={
+export type LoadingAllUsersType = {
     type: typeof LOAD_ALL_USERS
     payload: UserInterface[]
 }
@@ -113,6 +113,21 @@ export type LoadPreferenceType = {
     payload: PreferenceInterface
 }
 
+export type DeleteUserType = {
+    type: typeof DELETE_USER,
+    payload: number
+}
+
+export type UpdateUserToAdminType = {
+    type: typeof UPDATE_USER_TO_ADMIN,
+    payload: number
+}
+
+export type DeleteCommentType = {
+    type: typeof DELETE_COMMENT,
+    payload: number
+}
+
 export type ActionsType = DeleteBookType | LoginType
     | UnlogType | LoadBooksType
     | LoadAllBooksType | LoadingAllUsersType
@@ -120,4 +135,5 @@ export type ActionsType = DeleteBookType | LoginType
     | UpdateUserType | DisorderBookType | LoadUserCommentsType
     | AddCommentType | AddFavoriteType | DeleteFavoriteType
     | LoadAllOrdersType | ApproveOrderType | AddToPreferenceType
-    | LoadPreferenceType;
+    | LoadPreferenceType | UpdateUserToAdminType | DeleteCommentType
+    | DeleteUserType;

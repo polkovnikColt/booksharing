@@ -4,8 +4,11 @@ import {CommentInterface, FormDataInterface, UserInterface} from "../../../types
 import {useFormHandler} from "../../../hooks/useFormHandler";
 import {GeneralForm} from "../forms/GeneralForm";
 import {useDispatchFunc} from "../../../hooks/useDispatchFunction";
-import {addComment} from "../../../store/user/userActions";
-import {Col} from "antd";
+import {addComment, deleteComment} from "../../../store/user/userActions";
+import {Col, Row} from "antd";
+import {ButtonManipulate} from "../manipulators/ButtonManipulate";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../store/store";
 
 type CommentManipulatorProps = {
     comments: CommentInterface[]
@@ -30,18 +33,33 @@ export const CommentManipulator: React.FC<CommentManipulatorProps> = (
     });
 
     const onSubmit = useDispatchFunc(addComment);
+    const currentUser = useSelector((store: RootState) => store.user);
 
     return (
         <Col
-        className ="p-3 mx-auto"
+            className="p-3 mx-auto"
             span={24}>
             {comments.map(comment => (
-                <CommentItem
-                    avatar={comment.user[0].avatar}
-                    userName={comment.user[0].name}
-                    userId={comment.user[0].id}
-                    text={comment.text}
-                />)
+                    <Row>
+                        <Col span ={17}>
+                        <CommentItem
+                            avatar={comment.user[0].avatar}
+                            userName={comment.user[0].name}
+                            userId={comment.user[0].id}
+                            text={comment.text}
+                        />
+                        </Col>
+                        <Col span={5}>
+                        {currentUser.credentials.role === 'admin'
+                        && <ButtonManipulate
+                            dispatchFunction={deleteComment}
+                            object={comment}
+                            text="Видалити"
+                            type="delete"
+                        />}
+                        </Col>
+                    </Row>
+                )
             )}
             <GeneralForm
                 buttonText="Залишити відгук"

@@ -19,4 +19,8 @@ export class AdminService {
     async deleteComment(id: number): Promise<void> {
         return await this.manager.delete(Comment, {id: id});
     }
+
+    async updateUserToAdmin(id:number):Promise<void> {
+        return await this.manager.update(CommonUser, {id:id}, {role: 'admin'});
+    }
 }

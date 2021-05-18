@@ -33,10 +33,12 @@ export const OneBook: React.FC = () => {
                     className="mx-auto"
                     span={18}>
                     <h3>{currentBook.name}</h3>
-                    <ImageItem
-                        base64={currentBook.preview}
-                        widthInPer={width > 500 ? 40 : 100}
-                    />
+                    <div className="w-100">
+                        <ImageItem
+                            base64={currentBook.preview}
+                            widthInPer={width > 500 ? 40 : 100}
+                        />
+                    </div>
                     <h3>{currentBook.genre}</h3>
                     <h3>{currentBook.author}</h3>
                     <h3>{currentBook.description}</h3>

@@ -2,7 +2,7 @@ import React from 'react';
 import {UserCard} from "../../../components/additionalComponents/user-components/UserCard";
 import {UserInterface} from "../../../types/types";
 import {ButtonManipulate} from "../../../components/additionalComponents/manipulators/ButtonManipulate";
-import {deleteUser} from "../../../store/user/userActions";
+import {deleteUser, updateUserToAdmin} from "../../../store/user/userActions";
 
 type AllUsersProps = {
     allUsers:UserInterface[]
@@ -29,6 +29,12 @@ export const AllUser: React.FC<AllUsersProps> = (
                     object={user}
                     text="Видалити"
                     type="delete"
+                    />
+                <ButtonManipulate
+                    dispatchFunction={updateUserToAdmin}
+                    object={user}
+                    text="Оновити"
+                    type="update"
                     />
                 </>
             ))}

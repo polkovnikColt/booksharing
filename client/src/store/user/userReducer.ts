@@ -5,7 +5,7 @@ import {
     ADD_TO_PREFERENCE,
     APPROVE_ORDER,
     DELETE_BOOK,
-    DELETE_FAVORITE,
+    DELETE_FAVORITE, DELETE_USER,
     DISORDER_BOOK,
     LOAD_ALL_BOOKS,
     LOAD_ALL_ORDERS,
@@ -17,7 +17,7 @@ import {
     ORDER_BOOK,
     UNLOG,
     UPDATE_BOOK,
-    UPDATE_USER
+    UPDATE_USER, UPDATE_USER_TO_ADMIN
 } from "./userActions";
 import {ActionsType} from "./userActionTypes";
 import {
@@ -119,10 +119,24 @@ export const userReducer = (state = initState, action: ActionsType) => {
                 orders: action.payload
             }
         case LOAD_PREFERENCE:
-            console.log('reducer', action.payload)
             return {
                 ...state,
                 preference: action.payload
+            }
+        case UPDATE_USER_TO_ADMIN:
+            return {
+                ...state,
+                allUsers: state.allUsers.map(user => {
+                    if(user.id === action.payload){
+                        return {...user, role:'admin'}
+                    }
+                    return user;
+                })
+            }
+        case DELETE_USER:
+            return {
+                ...state,
+                allUsers: state.allUsers.filter(user => user.id !== action.payload)
             }
         case LOAD_ALL_USERS:
             return {

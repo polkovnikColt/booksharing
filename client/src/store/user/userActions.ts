@@ -37,6 +37,9 @@ export const LOAD_ALL_ORDERS = "LOAD_ALL_ORDERS";
 export const APPROVE_ORDER = "APPROVE_ORDER";
 export const ADD_TO_PREFERENCE = "ADD_TO_PREFERENCE";
 export const LOAD_PREFERENCE = "LOAD_PREFERENCE";
+export const DELETE_USER = "DELETE_USER";
+export const UPDATE_USER_TO_ADMIN = "UPDATE_USER_TO_ADMIN";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export const deleteBook = (book: BookInterface) => {
     return async (dispatch: Dispatch<DeleteBookType>) => {
@@ -56,7 +59,6 @@ export const login = (user) => {
     return async (dispatch: Dispatch<LoginType>) => {
         try {
             const res = await axios.post('/login', user);
-            console.log(res.data)
             localStorage.setItem("token", res.data.token);
             dispatch({
                 type: LOGIN,
@@ -257,7 +259,6 @@ export const addToFavorite = (favorite: FavoriteInterface) => {
     return async (dispatch: Dispatch<AddFavoriteType>) => {
         try {
             const res = await axios.put('user/favorite/add', favorite);
-            console.log(res);
             dispatch({
                 type: ADD_FAVORITE,
                 payload: favorite
@@ -276,16 +277,6 @@ export const deleteFromFavorite = (favorite: FavoriteInterface) => {
                 type: DELETE_FAVORITE,
                 payload: favorite
             })
-        } catch (e) {
-
-        }
-    }
-}
-
-export const deleteUser = (user: UserInterface) => {
-    return async (dispatch) => {
-        try {
-
         } catch (e) {
 
         }
@@ -328,6 +319,47 @@ export const loadPreference = (id:number) => {
             dispatch({
                 type:LOAD_PREFERENCE,
                 payload: res.data
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const deleteUser = (user: UserInterface) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.delete(`admin/user/${user.id}`);
+            dispatch({
+                type: DELETE_USER,
+                payload: user.id
+            })
+        } catch (e) {
+
+        }
+    }
+}
+export const deleteComment = (comment: CommentInterface) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.delete(`admin/comment/${comment.id}`);
+            dispatch({
+                type: DELETE_COMMENT,
+                payload: comment.id
+            })
+        } catch (e) {
+
+        }
+    }
+}
+
+export const updateUserToAdmin = (user: UserInterface) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.put(`admin/user/${user.id}`);
+            dispatch({
+                type: UPDATE_USER_TO_ADMIN,
+                payload: user.id
             })
         } catch (e) {
 

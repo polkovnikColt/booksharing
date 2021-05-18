@@ -19,12 +19,12 @@ export const ImageItem: React.FC<ImageItemProps> = (
     return (
         <div className={isOrdered ? "image-item-disabled" : "image-item-active"}>
             {base64 &&
-            <img
-                className="mx-auto"
-                style={{width: widthInPer + "%"}}
-                src={base64}
-                alt={label}
-            />}
+                <img
+                    style={{width: widthInPer + "%"}}
+                    src={base64}
+                    alt={label}
+                />
+           }
             {label && isOrdered &&
             <span>
                 {label}

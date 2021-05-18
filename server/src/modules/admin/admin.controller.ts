@@ -1,4 +1,4 @@
-import {Controller, Delete, Param, Post, Req, UseGuards} from "@nestjs/common";
+import {Controller, Delete, Param, Post, Put, Req, UseGuards} from "@nestjs/common";
 import {AdminService} from "./admin.service";
 import {BookInterface, UserInterface} from "../../types/types";
 import {AuthGuard} from "@nestjs/passport";
@@ -10,13 +10,19 @@ export class AdminController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Delete(':id')
+    @Delete('user/:id')
     deleteUser(@Param('id') id):Promise<void> {
         return this.adminService.deleteUser(id);
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Delete(':id')
+    @Put('user/update/:id')
+    updateUserToAdmin(@Param('id') id):Promise<void> {
+        return this.adminService.updateUserToAdmin(id);
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Delete('comment/:id')
     deleteComment(@Param("id") id):Promise<void> {
         return this.adminService.deleteComment(id);
     }

@@ -19,9 +19,6 @@ import {HomePage} from "./pages/homepage/HomePage";
 const App: React.FC = () => {
 
     const user = useSelector((store: RootState) => store.user);
-    const dispatch = useDispatch();
-
-     console.log(user);
 
     return (
         <HashRouter>
